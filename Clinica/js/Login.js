@@ -25,7 +25,7 @@ window.addEventListener("load", function () {
             if (tipo === "doctor") window.location.href = "/Clinica/pages/doctor.html";
             else window.location.href = "/Clinica/pages/inicio.html";
         }
-        return; // no ejecutar lógica de navbar en login.html
+        return;
     }
 
     // ── Lógica del navbar (inicio.html, nosotros.html, etc.) ──
@@ -107,22 +107,28 @@ function loginDoctor() {
 }
 
 // ══════════════════════════════════════════════
-//  CERRAR SESIÓN (usado en navbar y doctor.html)
+//  CERRAR SESIÓN PACIENTE
+//  ⚠️ NO borra misCitas — las citas persisten
 // ══════════════════════════════════════════════
 function cerrarSesion() {
     localStorage.removeItem("sesionActiva");
     localStorage.removeItem("usuarioNombre");
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
-    localStorage.removeItem("misCitas");
+    // misCitas y estadosCitas se conservan intencionalmente
     window.location.href = "/Clinica/pages/inicio.html";
 }
 
+// ══════════════════════════════════════════════
+//  CERRAR SESIÓN DOCTOR
+//  ⚠️ NO borra misCitas ni estadosCitas
+// ══════════════════════════════════════════════
 function cerrarSesionDoctor() {
     localStorage.removeItem("sesionActiva");
     localStorage.removeItem("usuarioNombre");
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
+    // misCitas y estadosCitas se conservan intencionalmente
     window.location.href = "/Clinica/pages/login.html";
 }
 

@@ -76,14 +76,11 @@ function abrirEditar(index) {
     document.getElementById("editar-motivo").value         = cita.motivo;
     document.getElementById("editar-doctor-info").textContent = ` ${cita.doctor}  •  🏥 ${cita.especialidad}`;
 
-    // Fecha mínima: 3 días desde hoy
     const minFecha = new Date();
     minFecha.setDate(minFecha.getDate() + 3);
     document.getElementById("editar-fecha").min = minFecha.toISOString().split("T")[0];
 
     actualizarHorasEditar();
-
-    // Preseleccionar hora actual si sigue disponible
     document.getElementById("editar-hora").value = cita.hora;
 
     new bootstrap.Modal(document.getElementById("modalEditar")).show();
@@ -125,33 +122,30 @@ function guardarEdicion() {
 
 // ── ELIMINAR CITA ──
 function eliminarCita(index) {
+    if (!confirm("¿Seguro que deseas cancelar esta cita?")) return;
     const citas = JSON.parse(localStorage.getItem("misCitas") || "[]");
     citas.splice(index, 1);
     localStorage.setItem("misCitas", JSON.stringify(citas));
     location.reload();
 }
 
-// ── CERRAR SESIÓN ──
-function cerrarSesion() {
-    localStorage.removeItem("sesionActiva");
-    localStorage.removeItem("usuarioNombre");
-    localStorage.removeItem("misCitas");
-    window.location.href = "/Clinica/pages/inicio.html";
-}
-
 // ── CARGAR PÁGINA ──
 window.addEventListener("load", function () {
     const sesion = localStorage.getItem("sesionActiva");
+    const tipo   = localStorage.getItem("tipoUsuario");
     const nombre = localStorage.getItem("usuarioNombre");
 
-    if (sesion !== "true") {
+    // Solo pacientes pueden ver mis-citas
+    if (sesion !== "true" || tipo === "doctor") {
         window.location.href = "/Clinica/pages/login.html";
         return;
     }
 
-    document.getElementById("saludo-usuario").classList.remove("d-none");
-    document.getElementById("saludo-usuario").textContent = "👋 Hola, " + nombre;
-    document.getElementById("btn-cerrar-sesion").classList.remove("d-none");
+    const saludo = document.getElementById("saludo-usuario");
+    if (saludo) { saludo.classList.remove("d-none"); saludo.textContent = "👋 Hola, " + nombre; }
+
+    const btnCerrar = document.getElementById("btn-cerrar-sesion");
+    if (btnCerrar) btnCerrar.classList.remove("d-none");
 
     const citas      = JSON.parse(localStorage.getItem("misCitas") || "[]");
     const contenedor = document.getElementById("lista-citas");
@@ -175,14 +169,27 @@ window.addEventListener("load", function () {
         const fechaCita  = new Date(anio, mes - 1, dia);
         const hoy        = new Date();
         hoy.setHours(0, 0, 0, 0);
-        const diffDias    = Math.ceil((fechaCita - hoy) / (1000 * 60 * 60 * 24));
+        const diffDias   = Math.ceil((fechaCita - hoy) / (1000 * 60 * 60 * 24));
         const puedeEditar = diffDias > 2;
+
+        // Obtener estado que el doctor pudo haber cambiado
+        const key    = cita.nombres + "_" + cita.apellidos + "_" + cita.fechaLegible + "_" + cita.hora;
+        const estados = JSON.parse(localStorage.getItem("estadosCitas") || "{}");
+        const estado  = estados[key] || "pendiente";
+
+        const badgeEstado = estado === "confirmada"
+            ? '<span class="badge bg-success ms-1">✅ Confirmada</span>'
+            : estado === "atendida"
+            ? '<span class="badge bg-secondary ms-1">🏁 Atendida</span>'
+            : '<span class="badge bg-warning text-dark ms-1">⏳ Pendiente</span>';
 
         html += `
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-sm h-100 border-0">
-                <div class="card-header text-white fw-semibold" style="background-color: #0E588E;">
-                    🏥 ${cita.especialidad}
+                <div class="card-header text-white fw-semibold d-flex justify-content-between align-items-center"
+                     style="background-color: #0E588E;">
+                    <span>🏥 ${cita.especialidad}</span>
+                    ${badgeEstado}
                 </div>
                 <div class="card-body small">
                     <p class="mb-1"><strong>👤 Paciente:</strong> ${cita.nombres} ${cita.apellidos}</p>
@@ -192,12 +199,17 @@ window.addEventListener("load", function () {
                     <p class="mb-0"><strong>📝 Motivo:</strong> ${cita.motivo}</p>
                 </div>
                 <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
-                    ${puedeEditar
+                    ${puedeEditar && estado !== "atendida"
                         ? `<button class="btn btn-sm btn-outline-primary" onclick="abrirEditar(${index})">✏️ Reprogramar</button>`
+                        : estado === "atendida"
+                        ? `<span class="text-secondary small fw-semibold">Cita finalizada</span>`
                         : `<span class="text-danger small fw-semibold">⛔ No reprogramable<br>
                            <span class="text-muted fw-normal">Quedan ${diffDias} día(s)</span></span>`
                     }
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarCita(${index})">🗑️ Cancelar</button>
+                    ${estado !== "atendida"
+                        ? `<button class="btn btn-sm btn-outline-danger" onclick="eliminarCita(${index})">🗑️ Cancelar</button>`
+                        : ""
+                    }
                 </div>
             </div>
         </div>`;
