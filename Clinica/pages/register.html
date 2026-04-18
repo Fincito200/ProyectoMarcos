@@ -2,54 +2,94 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro Paciente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro – Clínica José Pardo</title>
     <link href="/bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/Clinica/css/styles-register.css">
     <link rel="icon" href="/Clinica/img/3063176.png">
 </head>
 <body>
 
-<div class="card card-register p-4">
-    <h3 class="title">Registro de Paciente</h3>
+<div class="register-wrapper">
 
-    <form action="/js/RegisterServlet.java" method="post">
+    <!-- Logo -->
+    <div class="register-logo">
+        <img src="/Clinica/img/3063176.png" alt="Logo">
+        <h2>Clínica José Pardo</h2>
+        <p>Crea tu cuenta de paciente</p>
+    </div>
+
+    <!-- Card -->
+    <div class="card-register">
+
+        <!-- Alertas -->
+        <div id="alerta-error"   class="alert alert-danger  d-none py-2 small" role="alert"></div>
+        <div id="alerta-exito"   class="alert alert-success d-none py-2 small" role="alert"></div>
+
+        <span class="badge-role badge-paciente">🏥 Nuevo Paciente</span>
+
+        <!-- FORMULARIO -->
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label>Nombres</label>
-                <input type="text" name="nombres" class="form-control" required>
+            <div class="col-6 mb-3">
+                <label class="form-label">Nombres</label>
+                <input type="text" id="reg-nombres" class="form-control" placeholder="Ej: Juan Carlos">
             </div>
+            <div class="col-6 mb-3">
+                <label class="form-label">Apellidos</label>
+                <input type="text" id="reg-apellidos" class="form-control" placeholder="Ej: López Pérez">
+            </div>
+        </div>
 
-            <div class="col-md-6 mb-3">
-                <label>Apellidos</label>
-                <input type="text" name="apellidos" class="form-control" required>
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label">DNI</label>
+                <input type="text" id="reg-dni" class="form-control" placeholder="12345678" maxlength="8">
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label">Teléfono</label>
+                <input type="tel" id="reg-telefono" class="form-control" placeholder="987654321">
             </div>
         </div>
 
         <div class="mb-3">
-            <label>DNI</label>
-            <input type="text" name="dni" class="form-control" required>
+            <label class="form-label">Correo electrónico</label>
+            <input type="email" id="reg-correo" class="form-control" placeholder="juan@gmail.com">
         </div>
 
-        <div class="mb-3">
-            <label>Correo</label>
-            <input type="email" name="correo" class="form-control" required>
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label">Contraseña</label>
+                <div class="input-pass">
+                    <input type="password" id="reg-password" class="form-control" placeholder="••••••••">
+                    <button type="button" class="toggle-pass" onclick="togglePass('reg-password', this)">👁️</button>
+                </div>
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label">Confirmar contraseña</label>
+                <div class="input-pass">
+                    <input type="password" id="reg-password2" class="form-control" placeholder="••••••••">
+                    <button type="button" class="toggle-pass" onclick="togglePass('reg-password2', this)">👁️</button>
+                </div>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label>Contraseña</label>
-            <input type="password" name="password" class="form-control" required>
+        <!-- Indicador de fortaleza -->
+        <div class="pass-strength mb-3">
+            <div class="strength-bar">
+                <div id="strength-fill" class="strength-fill"></div>
+            </div>
+            <span id="strength-label" class="strength-label"></span>
         </div>
 
-        <div class="d-grid">
-            <button type="submit" class="btn btn-clinic">Registrar</button>
-        </div>
-    </form>
+        <button class="btn-register-main" onclick="registrar()">Crear cuenta</button>
 
-    <hr class="my-3">
+        <hr class="divider">
+        <p class="login-link">¿Ya tienes cuenta? <a href="login.html">Iniciar Sesión</a></p>
 
-    <p class="text-center mb-2 text-muted">¿Ya tienes una cuenta?</p>
-    <a href="login.html" class="btn btn-outline-clinic w-100">Iniciar Sesión</a>
+    </div>
 </div>
 
+<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+<script src="/Clinica/js/register.js"></script>
 </body>
 </html>

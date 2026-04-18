@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════
-//  DATOS DE PRUEBA
+//  USUARIOS (prueba fija + registrados dinámicos)
 // ══════════════════════════════════════════════
 const usuarioPrueba = { correo: "juan@gmail.com", password: "1234", nombre: "Juan" };
 
@@ -10,6 +10,15 @@ const doctoresPrueba = [
     { correo: "enrique@clinica.com", password: "doctor123", nombre: "👨‍⚕️ Méd. Enrique" },
     { correo: "aaron@clinica.com",   password: "doctor123", nombre: "👨‍⚕️ Méd. Aaron"   }
 ];
+
+// Busca paciente: primero en registrados, luego en el usuario de prueba
+function buscarPaciente(correo, password) {
+    const registrados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
+    const encontrado  = registrados.find(u => u.correo === correo && u.password === password);
+    if (encontrado) return { correo: encontrado.correo, nombre: encontrado.nombres };
+    if (correo === usuarioPrueba.correo && password === usuarioPrueba.password) return usuarioPrueba;
+    return null;
+}
 
 // ══════════════════════════════════════════════
 //  AL CARGAR LA PÁGINA
@@ -76,10 +85,11 @@ function mostrarError() {
 function loginPaciente() {
     const correo   = document.getElementById("correo-paciente").value.trim();
     const password = document.getElementById("password-paciente").value;
+    const paciente = buscarPaciente(correo, password);
 
-    if (correo === usuarioPrueba.correo && password === usuarioPrueba.password) {
+    if (paciente) {
         localStorage.setItem("sesionActiva",  "true");
-        localStorage.setItem("usuarioNombre", usuarioPrueba.nombre);
+        localStorage.setItem("usuarioNombre", paciente.nombre);
         localStorage.setItem("tipoUsuario",   "paciente");
         window.location.href = "/Clinica/pages/inicio.html";
     } else {
@@ -115,7 +125,6 @@ function cerrarSesion() {
     localStorage.removeItem("usuarioNombre");
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
-    // misCitas y estadosCitas se conservan intencionalmente
     window.location.href = "/Clinica/pages/inicio.html";
 }
 
@@ -128,7 +137,6 @@ function cerrarSesionDoctor() {
     localStorage.removeItem("usuarioNombre");
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
-    // misCitas y estadosCitas se conservan intencionalmente
     window.location.href = "/Clinica/pages/login.html";
 }
 
