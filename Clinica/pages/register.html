@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Paciente</title>
+    <link href="/bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/Clinica/css/styles-register.css">
+    <link rel="icon" href="/Clinica/img/3063176.png">
+</head>
+<body>
+
+<div class="card card-register p-4">
+    <h3 class="title">Registro de Paciente</h3>
+
+    <form action="/js/RegisterServlet.java" method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Nombres</label>
+                <input type="text" name="nombres" class="form-control" required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Apellidos</label>
+                <input type="text" name="apellidos" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label>DNI</label>
+            <input type="text" name="dni" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Correo</label>
+            <input type="email" name="correo" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Contraseña</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-clinic">Registrar</button>
+        </div>
+    </form>
+
+    <hr class="my-3">
+
+    <p class="text-center mb-2 text-muted">¿Ya tienes una cuenta?</p>
+    <a href="login.html" class="btn btn-outline-clinic w-100">Iniciar Sesión</a>
+</div>
+
+</body>
+</html>

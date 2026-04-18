@@ -1,0 +1,123 @@
+/* BANNERCARRUSEL */
+.hero-slide {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-slide-1 {
+    background: linear-gradient(135deg, #0E588E 0%, #29A8EF 50%, #0A3760 100%);
+}
+
+.hero-slide-2 {
+    background: linear-gradient(135deg, #0E588E 0%, #29A8EF 60%, #0A3760 100%);
+}
+
+.hero-slide-3 {
+    background: linear-gradient(135deg, #0E588E 0%, #29A8EF 60%, #0A3760 100%);
+}
+
+.hero-texto-principal {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #ffffff;
+    text-align: right;
+}
+
+.hero-texto-bold {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.hero-separador {
+    width: 2px;
+    height: 80px;
+    background: #ffffff;
+    opacity: 0.4;
+}
+
+.hero-anios {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #193A57;
+}
+
+.hero-anios span {
+    font-size: 1.8rem;
+}
+
+.hero-grupo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.hero-titulo-2 {
+    color: #193A57;
+    font-weight: 700;
+}
+
+.hero-titulo-3 {
+    color: #193A57;
+    font-weight: 700;
+}
+
+.carousel-indicators button {
+    background-color: #2BC4D2 !important;
+}
+
+/*CARDS*/
+
+.seccion-ayuda {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.seccion-ayuda h2 {
+    color: #1a1a2e;
+}
+
+.card-servicio {
+    border: none !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-servicio:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
+}
+
+.card-icono {
+    font-size: 2.5rem;
+    color: #0E588E;
+}
+
+.card-titulo {
+    color: #0E588E;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.card-descripcion {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.btn-naranja {
+    background-color: #29A8EF;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 25px;
+    border: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-naranja:hover {
+    background-color: #0A3760;
+    color: #ffffff;
+}

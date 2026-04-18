@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Citas - Clínica José Pardo</title>
+    <link rel="icon" href="/Clinica/img/3063176.png">
+    <link rel="stylesheet" href="/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/Clinica/css/pages.css">
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
+                <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
+                José Pardo
+            </a>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <a href="/Clinica/pages/inicio.html" class="btn btn-outline-light fw-semibold">
+                ← Volver al Inicio
+            </a>
+            <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
+            <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
+                🚪 Cerrar Sesión
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container py-5">
+    <h2 class="fw-bold mb-1" style="color: #0E588E;">🗓️ Mis Citas Programadas</h2>
+    <p class="text-muted mb-4">Aquí puedes ver todas tus citas médicas registradas.</p>
+    <div id="lista-citas"></div>
+</div>
+
+<!-- MODAL EDITAR CITA -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header text-white" style="background-color: #0E588E;">
+                <h5 class="modal-title">✏️ Reprogramar Cita</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="editar-index">
+
+                <p id="editar-doctor-info" class="fw-semibold text-secondary mb-3"></p>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">📅 Nueva Fecha</label>
+                    <input type="date" id="editar-fecha" class="form-control" onchange="actualizarHorasEditar()">
+                    <small id="editar-aviso-dia" class="text-danger"></small>
+                    <div class="form-text text-muted">Solo puedes reprogramar con al menos 3 días de anticipación.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">⏰ Nueva Hora</label>
+                    <select id="editar-hora" class="form-select">
+                        <option value="" disabled selected>Selecciona una hora</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">📝 Motivo de consulta</label>
+                    <textarea id="editar-motivo" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn text-white fw-semibold"
+                        style="background-color: #0E588E;" onclick="guardarEdicion()">
+                    💾 Guardar cambios
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/Clinica/js/Login.js"></script>
+<script src="/Clinica/js/mis-citas.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+body {
+    background: linear-gradient(to right, #0E588E, #0A3760);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-register {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+}
+
+.title {
+    text-align: center;
+    color: #0E588E;
+    margin-bottom: 20px;
+}
+
+.btn-clinic {
+    background-color: #0E588E;
+    color: white;
+}
+
+.btn-clinic:hover {
+    background-color: #0E588E;
+    color: white;
+}
+
+.btn-outline-clinic {
+    border: 2px solid #0E588E;
+    color: #0A3760;
+    background-color: transparent;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.btn-outline-clinic:hover {
+    background-color: #0E588E;
+    color: white;
+}
