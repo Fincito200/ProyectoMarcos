@@ -10,7 +10,7 @@ const doctores = {
     ],
     cardiologia: [
         { value: "👨‍⚕️ Méd. Ney", nombre: "👨‍⚕️ Méd. Ney" }
-    ],
+    ], 
     pediatria: [
         { value: "👨‍⚕️ Méd. Enrique", nombre: "👨‍⚕️ Méd. Enrique" }
     ],
