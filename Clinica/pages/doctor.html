@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Médico Clínica José Pardo</title>
+    <link rel="icon" href="/Clinica/img/3063176.png">
+    <link rel="stylesheet" href="/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Clinica/css/doctor.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-doctor">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
+            <img src="/Clinica/img/3063176.png" alt="Logo" height="36" class="rounded">
+            José Pardo
+        </a>
+        <div class="d-flex align-items-center gap-3">
+            <span class="badge-doctor-nav">🩺 Panel Médico</span>
+            <span id="nav-nombre-doctor" class="text-white fw-semibold small"></span>
+            <button class="btn btn-outline-light btn-sm fw-semibold" onclick="cerrarSesionDoctor()">🚪 Salir</button>
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<div class="doctor-header">
+    <div class="container">
+        <h1 id="titulo-bienvenida">👨‍⚕️ Panel del Médico</h1>
+        <p>Gestiona tus citas del día y revisa el historial de pacientes</p>
+        <div class="stats-row">
+            <div class="stat-chip"><span id="total-citas">0</span>Total citas</div>
+            <div class="stat-chip"><span id="citas-pendientes">0</span>Pendientes</div>
+            <div class="stat-chip"><span id="citas-confirmadas">0</span>Confirmadas</div>
+            <div class="stat-chip"><span id="citas-atendidas">0</span>Atendidas</div>
+        </div>
+    </div>
+</div>
+
+<!-- FILTROS -->
+<div class="filtros-bar">
+    <div class="container d-flex align-items-center gap-2 flex-wrap">
+        <span class="text-muted small fw-semibold me-1">Filtrar:</span>
+        <button class="btn-filtro active" onclick="filtrarCitas('todas', this)">📋 Todas</button>
+        <button class="btn-filtro" onclick="filtrarCitas('pendiente', this)">⏳ Pendientes</button>
+        <button class="btn-filtro" onclick="filtrarCitas('confirmada', this)">✅ Confirmadas</button>
+        <button class="btn-filtro" onclick="filtrarCitas('atendida', this)">🏁 Atendidas</button>
+        <div class="ms-auto">
+            <input type="text" id="buscar-paciente" class="form-control form-control-sm"
+                    placeholder="🔍 Buscar paciente..." style="min-width:180px;" oninput="renderCitas()">
+        </div>
+    </div>
+</div>
+
+<!-- CITAS -->
+<div class="seccion-citas">
+    <div class="container">
+        <h5 class="citas-titulo">📅 Citas asignadas a tu consulta</h5>
+        <div id="lista-citas-doctor"></div>
+    </div>
+</div>
+
+<!-- MODAL DETALLE PACIENTE -->
+<div class="modal fade" id="modalDetalle" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header text-white modal-header-verde">
+                <h5 class="modal-title">📋 Detalle del Paciente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="detalle-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+<script src="/Clinica/js/doctor.js"></script>
+</body>
+</html>

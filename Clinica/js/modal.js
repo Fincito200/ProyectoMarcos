@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const nombres      = formCita.querySelector("[name='nombres']").value;
         const apellidos    = formCita.querySelector("[name='apellidos']").value;
+        const dni          = formCita.querySelector("[name='dni']").value;
+        const telefono     = formCita.querySelector("[name='telefono']").value;
+        const correo       = formCita.querySelector("[name='correo']").value;
         const especialidad = formCita.querySelector("[name='especialidad'] option:checked")?.text || "";
         const doctor       = formCita.querySelector("[name='doctor'] option:checked")?.text || "";
         const fecha        = formCita.querySelector("[name='fecha']").value;
@@ -16,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const [anio, mes, dia] = fecha.split("-");
         const fechaLegible = `${dia}/${mes}/${anio}`;
 
-        // ── GUARDAR CITA EN LOCALSTORAGE ──
-        const nuevaCita = { nombres, apellidos, especialidad, doctor, fechaLegible, hora, motivo };
+        // ── GUARDAR CITA EN LOCALSTORAGE (incluye datos completos del paciente) ──
+        const nuevaCita = { nombres, apellidos, dni, telefono, correo, especialidad, doctor, fechaLegible, hora, motivo };
         const citasGuardadas = JSON.parse(localStorage.getItem("misCitas") || "[]");
         citasGuardadas.push(nuevaCita);
         localStorage.setItem("misCitas", JSON.stringify(citasGuardadas));

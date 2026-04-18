@@ -1,0 +1,162 @@
+:root {
+    --verde: #1a7a3c;
+    --verde-dark: #0d5c2c;
+    --verde-light: #e8f8ef;
+    --azul: #0E588E;
+    --azul-dark: #0A3760;
+    --gris: #f5f7fa;
+}
+
+body {
+    background: var(--gris);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* NAVBAR */
+.navbar-doctor { background: linear-gradient(135deg, #0d5c2c, #1a7a3c); }
+.navbar-doctor .navbar-brand { font-weight: 800; letter-spacing: 0.5px; }
+.badge-doctor-nav {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* HEADER BIENVENIDA */
+.doctor-header {
+    background: linear-gradient(135deg, var(--verde-dark) 0%, var(--verde) 60%, #2ea55a 100%);
+    color: white;
+    padding: 2rem 0;
+}
+.doctor-header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+.doctor-header p { opacity: 0.85; margin: 0; font-size: 0.95rem; }
+
+.stats-row { margin-top: 1.2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.stat-chip {
+    background: rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+.stat-chip span { font-size: 1.3rem; font-weight: 800; display: block; }
+
+/* FILTROS */
+.filtros-bar {
+    background: #fff;
+    border-bottom: 1.5px solid #e5e9f0;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.btn-filtro {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1.5px solid #dde1e9;
+    background: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-filtro.active,
+.btn-filtro:hover { background: var(--verde); border-color: var(--verde); color: #fff; }
+
+/* CITAS */
+.seccion-citas { padding: 2rem 0 3rem; }
+.citas-titulo { font-weight: 800; color: #1a1a2e; font-size: 1.15rem; margin-bottom: 1.25rem; }
+
+.cita-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1.5px solid #e8ecf3;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1rem;
+}
+.cita-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+
+.cita-card .cita-header {
+    background: var(--verde-light);
+    border-bottom: 1.5px solid #c8ecd6;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cita-card .cita-especialidad { font-weight: 700; color: var(--verde-dark); font-size: 0.9rem; }
+.cita-card .cita-body { padding: 14px 16px; }
+.cita-card .dato { font-size: 0.875rem; color: #444; margin-bottom: 5px; }
+.cita-card .dato strong { color: #1a1a2e; }
+.cita-card .cita-footer {
+    padding: 10px 16px;
+    background: #fafbfd;
+    border-top: 1.5px solid #e8ecf3;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* BADGES DE ESTADO */
+.badge-estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.74rem;
+    font-weight: 700;
+}
+.estado-pendiente  { background: #fff3cd; color: #856404; }
+.estado-confirmada { background: #d1f5df; color: #0d6b32; }
+.estado-atendida   { background: #e2e3e5; color: #383d41; }
+
+/* BOTONES DE ACCIÓN */
+.btn-confirmar {
+    background: var(--verde); color: #fff; border: none;
+    border-radius: 8px; padding: 5px 14px;
+    font-size: 0.82rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+}
+.btn-confirmar:hover { background: var(--verde-dark); }
+
+.btn-atender {
+    background: var(--azul); color: #fff; border: none;
+    border-radius: 8px; padding: 5px 14px;
+    font-size: 0.82rem; font-weight: 700; cursor: pointer;
+}
+.btn-atender:hover { background: var(--azul-dark); }
+
+.btn-cancelar-doc {
+    background: #fff; color: #dc3545;
+    border: 1.5px solid #dc3545;
+    border-radius: 8px; padding: 5px 12px;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+}
+.btn-cancelar-doc:hover { background: #dc3545; color: #fff; }
+
+/* EMPTY STATE */
+.empty-state { text-align: center; padding: 4rem 1rem; color: #aaa; }
+.empty-state .icon { font-size: 3.5rem; }
+.empty-state h5 { color: #888; margin-top: 1rem; }
+
+/* MODAL DETALLE */
+.modal-header-verde {
+    background: linear-gradient(135deg, var(--verde-dark), var(--verde));
+}
+
+/* NOTIF BADGE */
+.notif-badge {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #ff4757; color: white;
+    border-radius: 50%;
+    width: 18px; height: 18px;
+    font-size: 0.65rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+}

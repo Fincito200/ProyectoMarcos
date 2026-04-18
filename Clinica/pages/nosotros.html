@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,260 +10,248 @@
     <link rel="stylesheet" href="/Clinica/css/pages.css">
 </head>
 
-<script src="/Clinica/js/Login.js"></script>
-
 <body>
 
 <!--NAVBAR-->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
-                <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
-                José Pardo
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
+            <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
+            José Pardo
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/Clinica/pages/inicio.html">⚡ Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.instagram.com/_joseph_otto_.py/">🤖 Redes</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            ⌛ Opciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/Clinica/pages/nosotros.html">👨‍💼 Nosotros</a></li>
-                            <li><a class="dropdown-item" href="#">📜 Informacion</a></li>
-                            <li><a class="dropdown-item" href="#">📝 Sobre la empresa</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-<!-- BOTON CITA Y BUSCAR -->
-<div class="d-flex align-items-center gap-2">
-
-    <button type="button" class="btn fw-semibold text-white" 
-        style="background-color: #0E588E; border-color: #0A3760;"
-        onclick="verificarSesionParaCita()">
-    📅 Generar Cita
-    </button>
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-    </form>
-
-    <a id="btn-login" href="/Clinica/pages/login.html" class="btn btn-outline-light fw-semibold d-none">
-        🔐 Iniciar Sesión
-    </a>
-
-    <a id="btn-mis-citas" href="/Clinica/pages/mis-citas.html" 
-    class="btn btn-outline-light fw-semibold d-none">
-    🗓️ Mis Citas
-    </a>
-
-    <!-- SE MUESTRA SOLO SI HAY SESION INICIADA -->
-    <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
-    <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
-        🚪 Cerrar Sesión
-    </button>
-</div>
-
-<!-- MODAL AVISO SIN SESION -->
-<div class="modal fade" id="modalSinSesion" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header text-white" style="background-color: #0E588E;">
-                <h5 class="modal-title">⚠️ Acceso Requerido</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-
-            <div class="modal-body text-center py-4">
-                <p class="fs-5 mb-1">Para generar una cita debes</p>
-                <p class="fs-5 fw-bold mb-4">iniciar sesión o registrarte primero.</p>
-
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="/Clinica/pages/login.html" class="btn btn-primary px-4">
-                        🔐 Iniciar Sesión
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/Clinica/pages/inicio.html">⚡ Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.instagram.com/_joseph_otto_.py/">🤖 Redes</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        ⌛ Opciones
                     </a>
-                    <a href="/Clinica/pages/register.html" class="btn btn-outline-primary px-4">
-                        📝 Registrarse
-                    </a>
-                </div>
-            </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/Clinica/pages/nosotros.html">👨‍💼 Nosotros</a></li>
+                        <li><a class="dropdown-item" href="#">📜 Informacion</a></li>
+                        <li><a class="dropdown-item" href="#">📝 Sobre la empresa</a></li>
+                    </ul>
+                </li>
+            </ul>
 
+            <!-- BOTON CITA Y BUSCAR -->
+            <div class="d-flex align-items-center gap-2">
+
+                <button type="button" class="btn fw-semibold text-white"
+                    style="background-color: #0E588E; border-color: #0A3760;"
+                    onclick="verificarSesionParaCita()">
+                    📅 Generar Cita
+                </button>
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+
+                <!-- SE MUESTRA SI NO HAY SESION INGRESADA -->
+                <a id="btn-login" href="/Clinica/pages/login.html" class="btn btn-outline-light fw-semibold d-none">
+                    🔐 Iniciar Sesión
+                </a>
+
+                <!-- SE MUESTRA SI EL USUARIO TIENE CITAS GUARDADAS -->
+                <a id="btn-mis-citas" href="/Clinica/pages/mis-citas.html"
+                    class="btn btn-outline-light fw-semibold d-none">
+                    🗓️ Mis Citas
+                </a>
+
+                <!-- SE MUESTRA SI HAY SESION ACTIVA -->
+                <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
+                <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
+                    🚪 Cerrar Sesión
+                </button>
+
+            </div>
         </div>
     </div>
-</div>
 
-<!-- MODAL CITA -->
-<div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header text-white" style="background-color: #0E588E;">
-                <h5 class="modal-title" id="modalCitaLabel">📅 Generar Cita Médica</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-
-            <div class="modal-body">
-                <form id="formCita">
-
-<!-- DATOS DEL PACIENTE -->
-                    <h6 class="fw-bold text-secondary mb-3">👤 Datos del Paciente</h6>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Nombres</label>
-                            <input type="text" name="nombres" class="form-control" placeholder="Ej: Juan Carlos" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Apellidos</label>
-                            <input type="text" name="apellidos" class="form-control" placeholder="Ej: López Pérez" required>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">DNI</label>
-                            <input type="text" name="dni" class="form-control" placeholder="Ej: 12345678" maxlength="8" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="tel" name="telefono" class="form-control" placeholder="Ej: 987654321" required>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Correo electrónico</label>
-                        <input type="email" name="correo" class="form-control" placeholder="Ej: juan@gmail.com">
-                    </div>
-
-                    <hr>
-
-<!-- DATOS DE LA CITA -->
-                    <h6 class="fw-bold text-secondary mb-3">🏥 Datos de la Cita</h6>
-                    <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Especialidad</label>
-                            <select id="especialidad" name="especialidad" class="form-select" required>
-                                <option value="" disabled selected>Selecciona una especialidad</option>
-                                <option value="medicina_general">Medicina General</option>
-                                <option value="cardiologia">Cardiología</option>
-                                <option value="pediatria">Pediatría</option>
-                                <option value="ginecologia">Ginecología</option>
-                                <option value="traumatologia">Traumatología</option>
-                                <option value="neurologia">Neurología</option>
-                                <option value="oftalmologia">Oftalmología</option>
-                                <option value="dermatologia">Dermatología</option>
-                            </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Médico</label>
-                        <select id="doctor" name="doctor" class="form-select" required>
-                            <option value="" disabled selected>Selecciona un Médico</option>
-                        </select>
-                    </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Fecha de la cita</label>
-                            <input type="date" id="fecha" name="fecha" class="form-control" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Hora</label>
-                            <select id="hora" name="hora" class="form-select" required>
-                                <option value="" disabled selected>Selecciona una hora</option>
-                            </select>
-                            <div id="hora-ayuda" class="form-text text-muted mt-1">
-                                Selecciona médico y fecha para ver horarios disponibles.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Motivo de consulta</label>
-                        <textarea name="motivo" class="form-control" rows="3" 
-                                placeholder="Describe brevemente el motivo de tu consulta..." required></textarea>
-                    </div>
-
-                    <div class="modal-footer px-0 pb-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn text-white fw-semibold" 
-                                style="background-color: #0E588E;">Confirmar Cita</button>
-                    </div>
-                                </form>
-                            </div>
-                        </div>
+    <!-- MODAL AVISO SIN SESION -->
+    <div class="modal fade" id="modalSinSesion" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #0E588E;">
+                    <h5 class="modal-title">⚠️ Acceso Requerido</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <p class="fs-5 mb-1">Para generar una cita debes</p>
+                    <p class="fs-5 fw-bold mb-4">iniciar sesión o registrarte primero.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="/Clinica/pages/login.html" class="btn btn-primary px-4">🔐 Iniciar Sesión</a>
+                        <a href="/Clinica/pages/register.html" class="btn btn-outline-primary px-4">📝 Registrarse</a>
                     </div>
                 </div>
-<!---->
             </div>
         </div>
-    
-<!-- MODAL CITA REGISTRADA -->
-<div class="modal fade" id="modalCitaExito" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #0E588E;">
-                <h5 class="modal-title">✅ Cita Registrada</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+    </div>
+
+    <!-- MODAL CITA -->
+    <div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #0E588E;">
+                    <h5 class="modal-title" id="modalCitaLabel">📅 Generar Cita Médica</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formCita">
+
+                        <!-- DATOS DEL PACIENTE -->
+                        <h6 class="fw-bold text-secondary mb-3">👤 Datos del Paciente</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nombres</label>
+                                <input type="text" name="nombres" class="form-control" placeholder="Ej: Juan Carlos" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Apellidos</label>
+                                <input type="text" name="apellidos" class="form-control" placeholder="Ej: López Pérez" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">DNI</label>
+                                <input type="text" name="dni" class="form-control" placeholder="Ej: 12345678" maxlength="8" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="tel" name="telefono" class="form-control" placeholder="Ej: 987654321" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correo electrónico</label>
+                            <input type="email" name="correo" class="form-control" placeholder="Ej: juan@gmail.com">
+                        </div>
+
+                        <hr>
+
+                        <!-- DATOS DE LA CITA -->
+                        <h6 class="fw-bold text-secondary mb-3">🏥 Datos de la Cita</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Especialidad</label>
+                                <select id="especialidad" name="especialidad" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una especialidad</option>
+                                    <option value="medicina_general">Medicina General</option>
+                                    <option value="cardiologia">Cardiología</option>
+                                    <option value="pediatria">Pediatría</option>
+                                    <option value="ginecologia">Ginecología</option>
+                                    <option value="traumatologia">Traumatología</option>
+                                    <option value="neurologia">Neurología</option>
+                                    <option value="oftalmologia">Oftalmología</option>
+                                    <option value="dermatologia">Dermatología</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Médico</label>
+                                <select id="doctor" name="doctor" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona un Médico</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Fecha de la cita</label>
+                                <input type="date" id="fecha" name="fecha" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Hora</label>
+                                <select id="hora" name="hora" class="form-select" required>
+                                    <option value="" disabled selected>Selecciona una hora</option>
+                                </select>
+                                <div id="hora-ayuda" class="form-text text-muted mt-1">
+                                    Selecciona médico y fecha para ver horarios disponibles.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Motivo de consulta</label>
+                            <textarea name="motivo" class="form-control" rows="3"
+                                placeholder="Describe brevemente el motivo de tu consulta..." required></textarea>
+                        </div>
+
+                        <div class="modal-footer px-0 pb-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn text-white fw-semibold"
+                                style="background-color: #0E588E;">Confirmar Cita</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="modal-body text-center py-4">
-                <div style="font-size:3.5rem;">🎉</div>
-                <h4 class="fw-bold mt-2 mb-1">¡Tu cita ha sido registrada!</h4>
-                <p class="text-muted mb-3">Nos pondremos en contacto contigo para confirmar los detalles.</p>
-                <div id="resumen-cita" class="text-start bg-light rounded p-3 mb-3 small"></div>
-                <button type="button" class="btn text-white fw-semibold px-5" 
+        </div>
+    </div>
+
+    <!-- MODAL CITA REGISTRADA -->
+    <div class="modal fade" id="modalCitaExito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-white" style="background-color: #0E588E;">
+                    <h5 class="modal-title">✅ Cita Registrada</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div style="font-size:3.5rem;">🎉</div>
+                    <h4 class="fw-bold mt-2 mb-1">¡Tu cita ha sido registrada!</h4>
+                    <p class="text-muted mb-3">Nos pondremos en contacto contigo para confirmar los detalles.</p>
+                    <div id="resumen-cita" class="text-start bg-light rounded p-3 mb-3 small"></div>
+                    <button type="button" class="btn text-white fw-semibold px-5"
                         style="background-color: #0E588E;"
                         data-bs-dismiss="modal">Aceptar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="/Clinica/js/modal.js"></script>
+
+    <script src="/Clinica/js/modal.js"></script>
 </nav>
 
-<!-- BANNER-->
+<!-- BANNER -->
 <div id="Banner" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-    <div class="carousel-item active">
-        <div class="hero-slide hero-slide-1">
-        <div class="d-flex align-items-center gap-4">
-            <div class="hero-texto-principal">
-            Creer es
-            <div class="hero-texto-bold">crecer</div>
+        <div class="carousel-item active">
+            <div class="hero-slide hero-slide-1">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="hero-texto-principal">
+                        Creer es
+                        <div class="hero-texto-bold">crecer</div>
+                    </div>
+                    <div class="hero-separador"></div>
+                    <div class="text-center">
+                        <div class="hero-anios">35<span>años</span></div>
+                        <div class="hero-grupo">⬤ Grupo<br>JORGIÑO</div>
+                    </div>
+                </div>
             </div>
-            <div class="hero-separador"></div>
-            <div class="text-center">
-            <div class="hero-anios">35<span>años</span></div>
-            <div class="hero-grupo">⬤ Grupo<br>JORGIÑO</div>
+        </div>
+        <div class="carousel-item">
+            <div class="hero-slide hero-slide-2">
+                <h2 class="hero-titulo-2">Tu salud, nuestra prioridad</h2>
             </div>
         </div>
+        <div class="carousel-item">
+            <div class="hero-slide hero-slide-3">
+                <h2 class="hero-titulo-3">Atención de calidad para toda la familia</h2>
+            </div>
         </div>
-    </div>
-    <div class="carousel-item">
-        <div class="hero-slide hero-slide-2">
-        <h2 class="hero-titulo-2">Tu salud, nuestra prioridad</h2>
-        </div>
-    </div>
-    <div class="carousel-item">
-        <div class="hero-slide hero-slide-3">
-        <h2 class="hero-titulo-3">Atención de calidad para toda la familia</h2>
-        </div>
-    </div>
     </div>
     <div class="carousel-indicators">
-    <button type="button" data-bs-target="#Banner" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#Banner" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#Banner" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#Banner" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#Banner" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#Banner" data-bs-slide-to="2"></button>
     </div>
 </div>
 
@@ -272,53 +260,54 @@
     <h2 class="text-center fw-bold mb-4">¿En qué podemos ayudarte hoy?</h2>
     <div class="row g-3 justify-content-center">
 
-    <div class="col-md-3 col-sm-6">
-        <div class="card card-servicio h-100 text-center p-3">
-        <div class="card-body">
-            <div class="card-icono">🫶</div>
-            <h6 class="card-titulo">Servicios para ti</h6>
-            <p class="card-descripcion">Servicios pensados en tu bienestar y el de tu familia</p>
-            <a href="#" class="btn btn-naranja">Conoce más</a>
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-servicio h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="card-icono">🫶</div>
+                    <h6 class="card-titulo">Servicios para ti</h6>
+                    <p class="card-descripcion">Servicios pensados en tu bienestar y el de tu familia</p>
+                    <a href="#" class="btn btn-naranja">Conoce más</a>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="card card-servicio h-100 text-center p-3">
-        <div class="card-body">
-            <div class="card-icono">🏥</div>
-            <h6 class="card-titulo">Emergencia</h6>
-            <p class="card-descripcion">Conoce nuestro servicio de emergencia</p>
-            <a href="#" class="btn btn-naranja">Conoce al Staff</a>
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-servicio h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="card-icono">🏥</div>
+                    <h6 class="card-titulo">Emergencia</h6>
+                    <p class="card-descripcion">Conoce nuestro servicio de emergencia</p>
+                    <a href="#" class="btn btn-naranja">Conoce al Staff</a>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="card card-servicio h-100 text-center p-3">
-        <div class="card-body">
-            <div class="card-icono">🩺</div>
-            <h6 class="card-titulo">Staff Médico</h6>
-            <p class="card-descripcion">Conoce a tu doctor de confianza y sus horarios</p>
-            <a href="#" class="btn btn-naranja">Reserva</a>
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-servicio h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="card-icono">🩺</div>
+                    <h6 class="card-titulo">Staff Médico</h6>
+                    <p class="card-descripcion">Conoce a tu doctor de confianza y sus horarios</p>
+                    <a href="#" class="btn btn-naranja">Reserva</a>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
 
-    <div class="col-md-3 col-sm-6">
-        <div class="card card-servicio h-100 text-center p-3">
-        <div class="card-body">
-            <div class="card-icono">👨‍⚕️</div>
-            <h6 class="card-titulo">Reserva una cita</h6>
-            <p class="card-descripcion">Reservar una cita a través de nuestro canal digital</p>
-            <a href="#" class="btn btn-naranja">Reserva</a>
+        <div class="col-md-3 col-sm-6">
+            <div class="card card-servicio h-100 text-center p-3">
+                <div class="card-body">
+                    <div class="card-icono">👨‍⚕️</div>
+                    <h6 class="card-titulo">Reserva una cita</h6>
+                    <p class="card-descripcion">Reservar una cita a través de nuestro canal digital</p>
+                    <a href="#" class="btn btn-naranja">Reserva</a>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
 
     </div>
 </div>
 
+<script src="/Clinica/js/login.js"></script>
 <script src="/Clinica/js/medicos.js"></script>
 </body>
 </html>
