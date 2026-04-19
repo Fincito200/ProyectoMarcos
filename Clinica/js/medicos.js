@@ -18,7 +18,7 @@ const doctores = {
         { value: "👨‍⚕️ Méd. Aaron", nombre: "👨‍⚕️ Méd. Aaron" }
     ],
     traumatologia: [
-        { value: "👨‍⚕️ Méd. Joseph", nombre: "👨‍⚕️ Méd. Joseph" }
+        { value: "👨‍⚕️Méd. Joseph", nombre: "👨‍⚕️Méd. Joseph" }
     ],
     neurologia: [
         { value: "👨‍⚕️ Méd. Ney", nombre: "👨‍⚕️ Méd. Ney" }
@@ -89,7 +89,7 @@ const horariosPorMedico = {
             { value: "16:00", label: "04:00 pm" },
             { value: "17:00", label: "05:00 pm" }
         ],
-        5: [ // Viernes
+        5: [
             { value: "08:00", label: "08:00 am" },
             { value: "09:00", label: "09:00 am" },
             { value: "15:00", label: "03:00 pm" }
@@ -137,17 +137,14 @@ const horariosPorMedico = {
 
 const NOMBRES_DIA = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 
-// ACTUALIZAR LOS HORARIOS
 function actualizarHoras() {
     const doctorVal = doctorSelect.value;
     const fechaVal  = fechaInput.value;
 
-    // RESETEAR LA SELECCION DE HORARIO
     horaSelect.innerHTML = '<option value="" disabled selected>Selecciona una hora</option>';
 
     if (!doctorVal || !fechaVal) return;
 
-    // OBTENER EL DIA POR LA FECHA SELECCIONADA
     const [anio, mes, dia] = fechaVal.split("-").map(Number);
     const fecha = new Date(anio, mes - 1, dia);
     const diaSemana = fecha.getDay(); 
@@ -155,7 +152,6 @@ function actualizarHoras() {
     const horarios = horariosPorMedico[doctorVal];
 
     if (!horarios || !horarios[diaSemana]) {
-        // EL MEDICO NO ATIENDE ESE DIA
         const opt = document.createElement("option");
         opt.disabled = true;
         opt.textContent = `⚠️ ${NOMBRES_DIA[diaSemana]}: el médico no atiende este día`;
@@ -171,7 +167,6 @@ function actualizarHoras() {
     });
 }
 
-// LIMPIA MEDICOS
 especialidadSelect.addEventListener("change", function () {
     const especialidad = this.value;
 
@@ -191,7 +186,6 @@ especialidadSelect.addEventListener("change", function () {
 doctorSelect.addEventListener("change", actualizarHoras);
 fechaInput.addEventListener("change",   actualizarHoras);
 
-// BLOQUEA LAS FECHAS CUANDO NO HAY SELECCION
 fechaInput.addEventListener("input", function() {
     const doctorVal = doctorSelect.value;
     if (!doctorVal) return;
@@ -205,7 +199,6 @@ fechaInput.addEventListener("input", function() {
     const diaSemana = fecha.getDay();
 
     if (!diasDisponibles.includes(diaSemana)) {
-        // 
         fechaInput.setCustomValidity(
             `El Dr. no atiende los ${NOMBRES_DIA[diaSemana]}. Días disponibles: ${diasDisponibles.map(d => NOMBRES_DIA[d]).join(", ")}`
         );

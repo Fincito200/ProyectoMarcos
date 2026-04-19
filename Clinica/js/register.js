@@ -1,6 +1,3 @@
-// ══════════════════════════════════════════════
-//  TOGGLE MOSTRAR / OCULTAR CONTRASEÑA
-// ══════════════════════════════════════════════
 function togglePass(inputId, btn) {
     const input = document.getElementById(inputId);
     if (input.type === "password") {
@@ -12,9 +9,6 @@ function togglePass(inputId, btn) {
     }
 }
 
-// ══════════════════════════════════════════════
-//  INDICADOR DE FORTALEZA DE CONTRASEÑA
-// ══════════════════════════════════════════════
 document.addEventListener("DOMContentLoaded", function () {
     const passInput = document.getElementById("reg-password");
     if (!passInput) return;
@@ -48,9 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// ══════════════════════════════════════════════
-//  MOSTRAR ALERTAS
-// ══════════════════════════════════════════════
 function mostrarError(msg) {
     const el = document.getElementById("alerta-error");
     el.textContent = "❌ " + msg;
@@ -66,9 +57,6 @@ function mostrarExito(msg) {
     document.getElementById("alerta-error").classList.add("d-none");
 }
 
-// ══════════════════════════════════════════════
-//  REGISTRAR USUARIO
-// ══════════════════════════════════════════════
 function registrar() {
     const nombres    = document.getElementById("reg-nombres").value.trim();
     const apellidos  = document.getElementById("reg-apellidos").value.trim();
@@ -78,7 +66,6 @@ function registrar() {
     const password   = document.getElementById("reg-password").value;
     const password2  = document.getElementById("reg-password2").value;
 
-    // ── Validaciones ──
     if (!nombres || !apellidos || !dni || !telefono || !correo || !password || !password2) {
         mostrarError("Completa todos los campos.");
         return;
@@ -109,7 +96,6 @@ function registrar() {
         return;
     }
 
-    // ── Verificar si el correo ya está registrado ──
     const usuarios = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
     const yaExiste = usuarios.find(u => u.correo === correo);
     if (yaExiste) {
@@ -117,7 +103,6 @@ function registrar() {
         return;
     }
 
-    // ── Guardar nuevo usuario ──
     const nuevoUsuario = { nombres, apellidos, dni, telefono, correo, password };
     usuarios.push(nuevoUsuario);
     localStorage.setItem("usuariosRegistrados", JSON.stringify(usuarios));
@@ -126,12 +111,12 @@ function registrar() {
     localStorage.setItem("sesionActiva",  "true");
     localStorage.setItem("usuarioNombre", nombres);
     localStorage.setItem("tipoUsuario",   "paciente");
+    localStorage.setItem("usuarioCorreo", correo);
 
     mostrarExito("¡Cuenta creada! Redirigiendo...");
     setTimeout(() => { window.location.href = "/Clinica/pages/inicio.html"; }, 1500);
 }
 
-// ── Redirigir si ya hay sesión ──
 window.addEventListener("load", function () {
     const sesion = localStorage.getItem("sesionActiva");
     const tipo   = localStorage.getItem("tipoUsuario");

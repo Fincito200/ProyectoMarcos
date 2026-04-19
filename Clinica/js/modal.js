@@ -19,17 +19,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const [anio, mes, dia] = fecha.split("-");
         const fechaLegible = `${dia}/${mes}/${anio}`;
 
-        // ── GUARDAR CITA EN LOCALSTORAGE (incluye datos completos del paciente) ──
+        // ── GUARDAR CITA EN LOCALSTORAGE POR USUARIO ──
         const nuevaCita = { nombres, apellidos, dni, telefono, correo, especialidad, doctor, fechaLegible, hora, motivo };
-        const citasGuardadas = JSON.parse(localStorage.getItem("misCitas") || "[]");
+        const usuarioCorreo = localStorage.getItem("usuarioCorreo") || "guest";
+        const citasKey = "misCitas_" + usuarioCorreo;
+        const citasGuardadas = JSON.parse(localStorage.getItem(citasKey) || "[]");
         citasGuardadas.push(nuevaCita);
-        localStorage.setItem("misCitas", JSON.stringify(citasGuardadas));
+        localStorage.setItem(citasKey, JSON.stringify(citasGuardadas));
 
-        // Mostrar botón "Mis Citas" en el navbar
         const btnMisCitas = document.getElementById("btn-mis-citas");
         if (btnMisCitas) btnMisCitas.classList.remove("d-none");
 
-        // Llenar resumen
         document.getElementById("resumen-cita").innerHTML = `
             <p class="mb-1"><strong>👤 Paciente:</strong> ${nombres} ${apellidos}</p>
             <p class="mb-1"><strong>🏥 Especialidad:</strong> ${especialidad}</p>

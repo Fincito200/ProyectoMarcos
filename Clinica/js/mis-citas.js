@@ -28,7 +28,6 @@ const horariosPorMedico = {
 
 const NOMBRES_DIA = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
 
-// ── ACTUALIZAR HORAS SEGÚN MÉDICO Y FECHA ──
 function actualizarHorasEditar() {
     const doctor     = document.getElementById("editar-index").dataset.doctor;
     const fechaVal   = document.getElementById("editar-fecha").value;
@@ -62,10 +61,10 @@ function actualizarHorasEditar() {
     });
 }
 
-// ── ABRIR MODAL EDITAR ──
 function abrirEditar(index) {
-    const citas = JSON.parse(localStorage.getItem("misCitas") || "[]");
-    const cita  = citas[index];
+    const correoActivo = localStorage.getItem("usuarioCorreo") || "guest";
+    const citas  = JSON.parse(localStorage.getItem("misCitas_" + correoActivo) || "[]");
+    const cita   = citas[index];
 
     const [dia, mes, anio] = cita.fechaLegible.split("/");
     const fechaISO = `${anio}-${mes.padStart(2,"0")}-${dia.padStart(2,"0")}`;
@@ -86,7 +85,6 @@ function abrirEditar(index) {
     new bootstrap.Modal(document.getElementById("modalEditar")).show();
 }
 
-// ── GUARDAR EDICIÓN ──
 function guardarEdicion() {
     const index       = parseInt(document.getElementById("editar-index").value);
     const nuevaFecha  = document.getElementById("editar-fecha").value;
@@ -110,32 +108,33 @@ function guardarEdicion() {
 
     const fechaLegible = `${String(dia).padStart(2,"0")}/${String(mes).padStart(2,"0")}/${anio}`;
 
-    const citas = JSON.parse(localStorage.getItem("misCitas") || "[]");
+    const correoActivo = localStorage.getItem("usuarioCorreo") || "guest";
+    const citasKey = "misCitas_" + correoActivo;
+    const citas = JSON.parse(localStorage.getItem(citasKey) || "[]");
     citas[index].fechaLegible = fechaLegible;
     citas[index].hora         = nuevaHora;
     citas[index].motivo       = nuevoMotivo;
-    localStorage.setItem("misCitas", JSON.stringify(citas));
+    localStorage.setItem(citasKey, JSON.stringify(citas));
 
     bootstrap.Modal.getInstance(document.getElementById("modalEditar")).hide();
     location.reload();
 }
 
-// ── ELIMINAR CITA ──
 function eliminarCita(index) {
     if (!confirm("¿Seguro que deseas cancelar esta cita?")) return;
-    const citas = JSON.parse(localStorage.getItem("misCitas") || "[]");
+    const correoActivo = localStorage.getItem("usuarioCorreo") || "guest";
+    const citasKey = "misCitas_" + correoActivo;
+    const citas = JSON.parse(localStorage.getItem(citasKey) || "[]");
     citas.splice(index, 1);
-    localStorage.setItem("misCitas", JSON.stringify(citas));
+    localStorage.setItem(citasKey, JSON.stringify(citas));
     location.reload();
 }
 
-// ── CARGAR PÁGINA ──
 window.addEventListener("load", function () {
     const sesion = localStorage.getItem("sesionActiva");
     const tipo   = localStorage.getItem("tipoUsuario");
     const nombre = localStorage.getItem("usuarioNombre");
 
-    // Solo pacientes pueden ver mis-citas
     if (sesion !== "true" || tipo === "doctor") {
         window.location.href = "/Clinica/pages/login.html";
         return;
@@ -147,7 +146,9 @@ window.addEventListener("load", function () {
     const btnCerrar = document.getElementById("btn-cerrar-sesion");
     if (btnCerrar) btnCerrar.classList.remove("d-none");
 
-    const citas      = JSON.parse(localStorage.getItem("misCitas") || "[]");
+    const correoActivo = localStorage.getItem("usuarioCorreo") || "guest";
+    const citasKey     = "misCitas_" + correoActivo;
+    const citas      = JSON.parse(localStorage.getItem(citasKey) || "[]");
     const contenedor = document.getElementById("lista-citas");
 
     if (citas.length === 0) {
@@ -156,7 +157,7 @@ window.addEventListener("load", function () {
                 <div style="font-size:3rem;">📭</div>
                 <h5 class="mt-3">No tienes citas programadas</h5>
                 <a href="/Clinica/pages/inicio.html" class="btn mt-3 text-white fw-semibold"
-                   style="background-color: #0E588E;">
+                    style="background-color: #0E588E;">
                     📅 Generar una Cita
                 </a>
             </div>`;
@@ -172,7 +173,6 @@ window.addEventListener("load", function () {
         const diffDias   = Math.ceil((fechaCita - hoy) / (1000 * 60 * 60 * 24));
         const puedeEditar = diffDias > 2;
 
-        // Obtener estado que el doctor pudo haber cambiado
         const key    = cita.nombres + "_" + cita.apellidos + "_" + cita.fechaLegible + "_" + cita.hora;
         const estados = JSON.parse(localStorage.getItem("estadosCitas") || "{}");
         const estado  = estados[key] || "pendiente";
@@ -187,7 +187,7 @@ window.addEventListener("load", function () {
         <div class="col-md-6 col-lg-4">
             <div class="card shadow-sm h-100 border-0">
                 <div class="card-header text-white fw-semibold d-flex justify-content-between align-items-center"
-                     style="background-color: #0E588E;">
+                        style="background-color: #0E588E;">
                     <span>🏥 ${cita.especialidad}</span>
                     ${badgeEstado}
                 </div>
@@ -204,7 +204,7 @@ window.addEventListener("load", function () {
                         : estado === "atendida"
                         ? `<span class="text-secondary small fw-semibold">Cita finalizada</span>`
                         : `<span class="text-danger small fw-semibold">⛔ No reprogramable<br>
-                           <span class="text-muted fw-normal">Quedan ${diffDias} día(s)</span></span>`
+                            <span class="text-muted fw-normal">Quedan ${diffDias} día(s)</span></span>`
                     }
                     ${estado !== "atendida"
                         ? `<button class="btn btn-sm btn-outline-danger" onclick="eliminarCita(${index})">🗑️ Cancelar</button>`

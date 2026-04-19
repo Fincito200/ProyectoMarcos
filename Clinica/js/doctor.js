@@ -21,8 +21,16 @@ window.addEventListener("load", function () {
 });
 
 function getCitasDoctor() {
-    const doctorNombre  = localStorage.getItem("doctorNombre") || "";
-    const todasLasCitas = JSON.parse(localStorage.getItem("misCitas") || "[]");
+    const doctorNombre = localStorage.getItem("doctorNombre") || "";
+    // Recopilar citas de todos los usuarios (claves misCitas_*)
+    let todasLasCitas = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith("misCitas_")) {
+            const citas = JSON.parse(localStorage.getItem(key) || "[]");
+            todasLasCitas = todasLasCitas.concat(citas);
+        }
+    }
     return todasLasCitas.filter(c => c.doctor === doctorNombre);
 }
 
@@ -62,7 +70,6 @@ function renderCitas() {
         return matchFiltro && matchBusqueda;
     });
 
-    // Estadísticas
     document.getElementById("total-citas").textContent      = citas.length;
     document.getElementById("citas-pendientes").textContent  = citas.filter(c => getEstado(citaKey(c)) === "pendiente").length;
     document.getElementById("citas-confirmadas").textContent = citas.filter(c => getEstado(citaKey(c)) === "confirmada").length;
@@ -150,5 +157,6 @@ function cerrarSesionDoctor() {
     localStorage.removeItem("usuarioNombre");
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
+    localStorage.removeItem("usuarioCorreo");
     window.location.href = "/Clinica/pages/login.html";
 }
