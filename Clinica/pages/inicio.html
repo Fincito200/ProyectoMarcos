@@ -8,16 +8,264 @@
     <link rel="stylesheet" href="/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/Clinica/css/pages.css">
+    <style>
+        /* ── HERO MEJORADO ── */
+        .hero-slide { height: 420px; }
+
+        .hero-slide-1 {
+            background: linear-gradient(135deg, #0A3760 0%, #0E588E 55%, #29A8EF 100%);
+        }
+        .hero-slide-2 {
+            background: linear-gradient(135deg, #05203d 0%, #0E588E 50%, #1dd3b0 100%);
+        }
+        .hero-slide-3 {
+            background: linear-gradient(135deg, #0A3760 0%, #1a6fa8 60%, #29A8EF 100%);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-cta-btn {
+            background: #fff;
+            color: #0E588E;
+            font-weight: 700;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 32px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .hero-cta-btn:hover {
+            background: #0E588E;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .hero-cta-btn-outline {
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 30px;
+            padding: 11px 28px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .hero-cta-btn-outline:hover {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .hero-stat-box {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 14px;
+            padding: 14px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        .hero-stat-box .num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+        .hero-stat-box .lbl { font-size: 0.75rem; opacity: 0.85; margin-top: 2px; }
+
+        /* ── FRANJA AZUL CON TELÉFONO ── */
+        .franja-contacto {
+            background: #0A3760;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 0.88rem;
+        }
+
+        /* ── SECCIÓN SERVICIOS ── */
+        .card-servicio {
+            border: none !important;
+            border-radius: 16px !important;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            transition: transform 0.22s, box-shadow 0.22s;
+            overflow: hidden;
+        }
+        .card-servicio:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(14,88,142,0.15);
+        }
+        .card-servicio .card-top-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #0E588E, #29A8EF);
+        }
+
+        /* ── SECCIÓN STATS ── */
+        .stats-section {
+            background: linear-gradient(135deg, #0A3760, #0E588E);
+            padding: 50px 0;
+        }
+        .stat-item .num { font-size: 2.8rem; font-weight: 900; color: #fff; line-height: 1; }
+        .stat-item .label { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 4px; }
+
+        /* ── SECCIÓN ESPECIALIDADES ── */
+        .especialidad-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            border: 1.5px solid #e3eef8;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0A3760;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .especialidad-pill:hover {
+            background: #0E588E;
+            color: #fff;
+            border-color: #0E588E;
+            transform: scale(1.04);
+        }
+        .especialidad-pill span { font-size: 1.3rem; }
+
+        /* ── SECCIÓN PASOS ── */
+        .paso-num {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #0E588E, #29A8EF);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 14px rgba(14,88,142,0.3);
+        }
+        .paso-linea {
+            position: absolute;
+            top: 26px; left: calc(50% + 40px);
+            width: calc(100% - 80px);
+            height: 2px;
+            background: linear-gradient(90deg, #0E588E55, #29A8EF55);
+        }
+
+        /* ── TESTIMONIOS ── */
+        .testimonio-card {
+            background: #fff;
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 3px 18px rgba(0,0,0,0.07);
+            padding: 1.8rem;
+            height: 100%;
+        }
+        .testimonio-card .stars { color: #f4b942; font-size: 1.1rem; }
+        .testimonio-card .avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0E588E, #29A8EF);
+            color: #fff;
+            font-size: 1.3rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ── BANNER URGENCIAS ── */
+        .urgencias-banner {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: #fff;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+        }
+
+        /* ── NOTICIAS ── */
+        .noticia-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .noticia-card:hover { transform: translateY(-4px); }
+        .noticia-tag {
+            font-size: 0.72rem; font-weight: 700;
+            padding: 3px 10px; border-radius: 20px;
+            background: #e8f4fd; color: #0E588E;
+        }
+
+        /* ── FOOTER ── */
+        .site-footer {
+            background: #05203d;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            padding: 50px 0 20px;
+        }
+        .site-footer h6 { color: #fff; font-weight: 700; margin-bottom: 1rem; }
+        .site-footer a { color: rgba(255,255,255,0.6); text-decoration: none; display: block; margin-bottom: 6px; }
+        .site-footer a:hover { color: #29A8EF; }
+        .footer-divider { border-color: rgba(255,255,255,0.1); margin: 30px 0 20px; }
+        .social-btn {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex; align-items: center; justify-content: center;
+            color: #fff; text-decoration: none; font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .social-btn:hover { background: #0E588E; color: #fff; }
+
+        /* ── SECCIÓN MÉDICOS ── */
+        .medico-card {
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 3px 16px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.22s, box-shadow 0.22s;
+        }
+        .medico-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(14,88,142,0.18);
+        }
+        .medico-avatar {
+            background: linear-gradient(135deg, #0E588E, #29A8EF);
+            padding: 28px 0 20px;
+            font-size: 4rem;
+            text-align: center;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color:#f5f8fc; font-family:'Segoe UI',sans-serif;">
+
+<!-- ══════════════════════════════════════
+     FRANJA SUPERIOR
+══════════════════════════════════════ -->
+<div class="franja-contacto d-none d-md-block">
+    <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+        <div class="d-flex gap-4">
+            <span>📞 Central: (01) 611-4000</span>
+            <span>🕐 Lun–Sáb: 7:00 am – 8:00 pm</span>
+            <span>📍 Av. José Pardo 452, Miraflores</span>
+        </div>
+        <div class="d-flex gap-3">
+            <a href="#" class="text-white text-decoration-none" style="font-size:0.85rem;">📧 atencion@clinicajosepardo.com.pe</a>
+        </div>
+    </div>
+</div>
 
 <!--NAVBAR-->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #0E588E; box-shadow: 0 2px 12px rgba(0,0,0,0.15);">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
             <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
-            José Pardo
+            <span class="fw-bold">José Pardo</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,274 +286,640 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/Clinica/pages/nosotros.html">👨‍💼 Nosotros</a></li>
-                        <li><a class="dropdown-item" href="#">📜 Informacion</a></li>
-                        <li><a class="dropdown-item" href="#">📝 Sobre la empresa</a></li>
+                        <li><a class="dropdown-item" href="/Clinica/pages/nuestros-doctores.html">👨‍⚕️ Nuestros Doctores</a></li>
+                        <li><a class="dropdown-item" href="/Clinica/pages/consejos-de-salud.html">💡 Consejos de Salud</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <!-- BOTON CITA Y BUSCAR -->
-            <div class="d-flex align-items-center gap-2">
-
+            <div class="d-flex align-items-center gap-2 flex-wrap">
                 <button type="button" class="btn fw-semibold text-white"
-                    style="background-color: #0E588E; border-color: #0A3760;"
+                    style="background-color: #1a6fa8; border-color: #0A3760; border-radius:20px;"
                     onclick="verificarSesionParaCita()">
                     📅 Generar Cita
                 </button>
 
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
-
-                <!-- SE MUESTRA SI NO HAY SESION INGRESADA -->
-                <a id="btn-login" href="/Clinica/pages/login.html" class="btn btn-outline-light fw-semibold d-none">
+                <a id="btn-login" href="/Clinica/pages/login.html" class="btn btn-outline-light fw-semibold d-none" style="border-radius:20px;">
                     🔐 Iniciar Sesión
                 </a>
-
-                <!-- SE MUESTRA SI EL USUARIO TIENE CITAS GUARDADAS -->
                 <a id="btn-mis-citas" href="/Clinica/pages/mis-citas.html"
-                    class="btn btn-outline-light fw-semibold d-none">
+                    class="btn btn-outline-light fw-semibold d-none" style="border-radius:20px;">
                     🗓️ Mis Citas
                 </a>
-
-                <!-- SE MUESTRA SI HAY SESION ACTIVA -->
                 <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
-                <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
+                <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()" style="border-radius:20px;">
                     🚪 Cerrar Sesión
                 </button>
-
             </div>
         </div>
     </div>
 
-    <!-- MODAL AVISO SIN SESION -->
-    <div class="modal fade" id="modalSinSesion" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #0E588E;">
-                    <h5 class="modal-title">⚠️ Acceso Requerido</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <p class="fs-5 mb-1">Para generar una cita debes</p>
-                    <p class="fs-5 fw-bold mb-4">iniciar sesión o registrarte primero.</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <a href="/Clinica/pages/login.html" class="btn btn-primary px-4">🔐 Iniciar Sesión</a>
-                        <a href="/Clinica/pages/register.html" class="btn btn-outline-primary px-4">📝 Registrarse</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CITA -->
-    <div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #0E588E;">
-                    <h5 class="modal-title" id="modalCitaLabel">📅 Generar Cita Médica</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formCita">
-
-                        <!-- DATOS DEL PACIENTE -->
-                        <h6 class="fw-bold text-secondary mb-3">👤 Datos del Paciente</h6>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Nombres</label>
-                                <input type="text" name="nombres" class="form-control" placeholder="Ej: Juan Carlos" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Apellidos</label>
-                                <input type="text" name="apellidos" class="form-control" placeholder="Ej: López Pérez" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">DNI</label>
-                                <input type="text" name="dni" class="form-control" placeholder="Ej: 12345678" maxlength="8" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Teléfono</label>
-                                <input type="tel" name="telefono" class="form-control" placeholder="Ej: 987654321" maxlength="9" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Correo electrónico</label>
-                            <input type="email" name="correo" class="form-control" placeholder="Ej: juan@gmail.com">
-                        </div>
-
-                        <hr>
-
-                        <!-- DATOS DE LA CITA -->
-                        <h6 class="fw-bold text-secondary mb-3">🏥 Datos de la Cita</h6>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Especialidad</label>
-                                <select id="especialidad" name="especialidad" class="form-select" required>
-                                    <option value="" disabled selected>Selecciona una especialidad</option>
-                                    <option value="medicina_general">Medicina General</option>
-                                    <option value="cardiologia">Cardiología</option>
-                                    <option value="pediatria">Pediatría</option>
-                                    <option value="ginecologia">Ginecología</option>
-                                    <option value="traumatologia">Traumatología</option>
-                                    <option value="neurologia">Neurología</option>
-                                    <option value="oftalmologia">Oftalmología</option>
-                                    <option value="dermatologia">Dermatología</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Médico</label>
-                                <select id="doctor" name="doctor" class="form-select" required>
-                                    <option value="" disabled selected>Selecciona un Médico</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Fecha de la cita</label>
-                                <input type="date" id="fecha" name="fecha" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Hora</label>
-                                <select id="hora" name="hora" class="form-select" required>
-                                    <option value="" disabled selected>Selecciona una hora</option>
-                                </select>
-                                <div id="hora-ayuda" class="form-text text-muted mt-1">
-                                    Selecciona médico y fecha para ver horarios disponibles.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Motivo de consulta</label>
-                            <textarea name="motivo" class="form-control" rows="3"
-                                placeholder="Describe brevemente el motivo de tu consulta..." required></textarea>
-                        </div>
-
-                        <div class="modal-footer px-0 pb-0">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn text-white fw-semibold"
-                                style="background-color: #0E588E;">Confirmar Cita</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CITA REGISTRADA -->
-    <div class="modal fade" id="modalCitaExito" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header text-white" style="background-color: #0E588E;">
-                    <h5 class="modal-title">✅ Cita Registrada</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <div style="font-size:3.5rem;">🎉</div>
-                    <h4 class="fw-bold mt-2 mb-1">¡Tu cita ha sido registrada!</h4>
-                    <p class="text-muted mb-3">Nos pondremos en contacto contigo para confirmar los detalles.</p>
-                    <div id="resumen-cita" class="text-start bg-light rounded p-3 mb-3 small"></div>
-                    <button type="button" class="btn text-white fw-semibold px-5"
-                        style="background-color: #0E588E;"
-                        data-bs-dismiss="modal">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="/Clinica/js/modal.js"></script>
 </nav>
 
-<!-- BANNER -->
-<div id="Banner" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="hero-slide hero-slide-1">
-                <div class="d-flex align-items-center gap-4">
-                    <div class="hero-texto-principal">
-                        Creer es
-                        <div class="hero-texto-bold">crecer</div>
+<!-- MODAL AVISO SIN SESION -->
+<div class="modal fade" id="modalSinSesion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #0E588E;">
+                <h5 class="modal-title">⚠️ Acceso Requerido</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <p class="fs-5 mb-1">Para generar una cita debes</p>
+                <p class="fs-5 fw-bold mb-4">iniciar sesión o registrarte primero.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/Clinica/pages/login.html" class="btn btn-primary px-4">🔐 Iniciar Sesión</a>
+                    <a href="/Clinica/pages/register.html" class="btn btn-outline-primary px-4">📝 Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CITA -->
+<div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #0E588E;">
+                <h5 class="modal-title" id="modalCitaLabel">📅 Generar Cita Médica</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCita">
+                    <h6 class="fw-bold text-secondary mb-3">👤 Datos del Paciente</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombres</label>
+                            <input type="text" name="nombres" class="form-control" placeholder="Ej: Juan Carlos" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Apellidos</label>
+                            <input type="text" name="apellidos" class="form-control" placeholder="Ej: López Pérez" required>
+                        </div>
                     </div>
-                    <div class="hero-separador"></div>
-                    <div class="text-center">
-                        <div class="hero-anios">35<span>años</span></div>
-                        <div class="hero-grupo">⬤ Grupo<br>JORGIÑO</div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">DNI</label>
+                            <input type="text" name="dni" class="form-control" placeholder="Ej: 12345678" maxlength="8" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" name="telefono" class="form-control" placeholder="Ej: 987654321" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo electrónico</label>
+                        <input type="email" name="correo" class="form-control" placeholder="Ej: juan@gmail.com">
+                    </div>
+                    <hr>
+                    <h6 class="fw-bold text-secondary mb-3">🏥 Datos de la Cita</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Especialidad</label>
+                            <select id="especialidad" name="especialidad" class="form-select" required>
+                                <option value="" disabled selected>Selecciona una especialidad</option>
+                                <option value="medicina_general">Medicina General</option>
+                                <option value="cardiologia">Cardiología</option>
+                                <option value="pediatria">Pediatría</option>
+                                <option value="ginecologia">Ginecología</option>
+                                <option value="traumatologia">Traumatología</option>
+                                <option value="neurologia">Neurología</option>
+                                <option value="oftalmologia">Oftalmología</option>
+                                <option value="dermatologia">Dermatología</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Médico</label>
+                            <select id="doctor" name="doctor" class="form-select" required>
+                                <option value="" disabled selected>Selecciona un Médico</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha de la cita</label>
+                            <input type="date" id="fecha" name="fecha" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Hora</label>
+                            <select id="hora" name="hora" class="form-select" required>
+                                <option value="" disabled selected>Selecciona una hora</option>
+                            </select>
+                            <div id="hora-ayuda" class="form-text text-muted mt-1">
+                                Selecciona médico y fecha para ver horarios disponibles.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Motivo de consulta</label>
+                        <textarea name="motivo" class="form-control" rows="3"
+                            placeholder="Describe brevemente el motivo de tu consulta..." required></textarea>
+                    </div>
+                    <div class="modal-footer px-0 pb-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn text-white fw-semibold"
+                            style="background-color: #0E588E;">Confirmar Cita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL CITA REGISTRADA -->
+<div class="modal fade" id="modalCitaExito" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #0E588E;">
+                <h5 class="modal-title">✅ Cita Registrada</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div style="font-size:3.5rem;">🎉</div>
+                <h4 class="fw-bold mt-2 mb-1">¡Tu cita ha sido registrada!</h4>
+                <p class="text-muted mb-3">Nos pondremos en contacto contigo para confirmar los detalles.</p>
+                <div id="resumen-cita" class="text-start bg-light rounded p-3 mb-3 small"></div>
+                <button type="button" class="btn text-white fw-semibold px-5"
+                    style="background-color: #0E588E;" data-bs-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/Clinica/js/modal.js"></script>
+
+<!-- ══════════════════════════════════════
+     HERO / CARRUSEL
+══════════════════════════════════════ -->
+<div id="Banner" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="hero-slide hero-slide-1 d-flex align-items-center justify-content-center px-4">
+                <div class="text-center text-white" style="max-width:700px;">
+                    <div class="hero-badge">🏥 CLÍNICA JOSÉ PARDO — LIMA, PERÚ</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(2rem,5vw,3.2rem); line-height:1.15;">
+                        Tu salud es nuestra<br><span style="color:#a8d8f0;">mayor prioridad</span>
+                    </h1>
+                    <p class="mb-4 opacity-85" style="font-size:1.05rem;">
+                        Más de 35 años brindando atención médica de calidad para ti y tu familia.
+                    </p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap mb-5">
+                        <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📅 Reservar Cita Ahora</button>
+                        <a href="/Clinica/pages/nosotros.html" class="hero-cta-btn-outline">Conócenos →</a>
+                    </div>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <div class="hero-stat-box"><div class="num">35+</div><div class="lbl">Años de experiencia</div></div>
+                        <div class="hero-stat-box"><div class="num">80k+</div><div class="lbl">Pacientes atendidos</div></div>
+                        <div class="hero-stat-box"><div class="num">30+</div><div class="lbl">Especialidades</div></div>
+                        <div class="hero-stat-box"><div class="num">24/7</div><div class="lbl">Emergencias</div></div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Slide 2 -->
         <div class="carousel-item">
-            <div class="hero-slide hero-slide-2">
-                <h2 class="hero-titulo-2">Tu salud, nuestra prioridad</h2>
+            <div class="hero-slide hero-slide-2 d-flex align-items-center justify-content-center px-4">
+                <div class="text-center text-white" style="max-width:620px;">
+                    <div class="hero-badge">🩺 ESPECIALISTAS A TU SERVICIO</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,5vw,3rem);">
+                        Médicos expertos que<br><span style="color:#a8f0e8;">realmente te escuchan</span>
+                    </h1>
+                    <p class="mb-4 opacity-85">
+                        Nuestro equipo de especialistas está disponible para guiarte hacia una vida más saludable.
+                    </p>
+                    <button class="hero-cta-btn" onclick="verificarSesionParaCita()">🗓️ Agenda tu consulta</button>
+                </div>
             </div>
         </div>
+
+        <!-- Slide 3 -->
         <div class="carousel-item">
-            <div class="hero-slide hero-slide-3">
-                <h2 class="hero-titulo-3">Atención de calidad para toda la familia</h2>
+            <div class="hero-slide hero-slide-3 d-flex align-items-center justify-content-center px-4">
+                <div class="text-center text-white" style="max-width:620px;">
+                    <div class="hero-badge">🔬 TECNOLOGÍA DE VANGUARDIA</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,5vw,3rem);">
+                        Diagnósticos precisos para<br><span style="color:#a8d8f0;">decisiones acertadas</span>
+                    </h1>
+                    <p class="mb-4 opacity-85">
+                        Equipamiento moderno y laboratorio propio para resultados rápidos y confiables.
+                    </p>
+                    <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📋 Ver nuestros servicios</button>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#Banner" data-bs-slide-to="0" class="active"></button>
         <button type="button" data-bs-target="#Banner" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#Banner" data-bs-slide-to="2"></button>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#Banner" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#Banner" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
 </div>
 
-<!-- CARDS -->
+<!-- ══════════════════════════════════════
+     SERVICIOS RÁPIDOS
+══════════════════════════════════════ -->
 <div class="container seccion-ayuda">
-    <h2 class="text-center fw-bold mb-4">¿En qué podemos ayudarte hoy?</h2>
-    <div class="row g-3 justify-content-center">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold" style="color:#0A3760;">¿En qué podemos ayudarte hoy?</h2>
+        <p class="text-muted">Accede rápidamente a nuestros principales servicios</p>
+    </div>
+    <div class="row g-4 justify-content-center">
 
         <div class="col-md-3 col-sm-6">
-            <div class="card card-servicio h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="card-icono">🫶</div>
+            <div class="card card-servicio h-100 text-center p-4">
+                <div class="card-top-bar"></div>
+                <div class="card-body pt-3">
+                    <div class="card-icono mb-2">🫶</div>
                     <h6 class="card-titulo">Servicios para ti</h6>
-                    <p class="card-descripcion">Servicios pensados en tu bienestar y el de tu familia</p>
-                    <a href="#" class="btn btn-naranja">Conoce más</a>
+                    <p class="card-descripcion">Consultas, exámenes y tratamientos pensados en tu bienestar y el de tu familia.</p>
+                    <a href="#" class="btn btn-naranja mt-auto">Conoce más</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3 col-sm-6">
-            <div class="card card-servicio h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="card-icono">🏥</div>
-                    <h6 class="card-titulo">Emergencia</h6>
-                    <p class="card-descripcion">Conoce nuestro servicio de emergencia</p>
-                    <a href="#" class="btn btn-naranja">Conoce al Staff</a>
+            <div class="card card-servicio h-100 text-center p-4">
+                <div class="card-top-bar"></div>
+                <div class="card-body pt-3">
+                    <div class="card-icono mb-2">🏥</div>
+                    <h6 class="card-titulo">Emergencias 24h</h6>
+                    <p class="card-descripcion">Atención de urgencias disponible todos los días del año, sin excepción.</p>
+                    <a href="tel:+5116114000" class="btn btn-naranja mt-auto">Llamar ahora</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3 col-sm-6">
-            <div class="card card-servicio h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="card-icono">🩺</div>
+            <div class="card card-servicio h-100 text-center p-4">
+                <div class="card-top-bar"></div>
+                <div class="card-body pt-3">
+                    <div class="card-icono mb-2">🩺</div>
                     <h6 class="card-titulo">Staff Médico</h6>
-                    <p class="card-descripcion">Conoce a tu doctor de confianza y sus horarios</p>
-                    <a href="#" class="btn btn-naranja">Reserva</a>
+                    <p class="card-descripcion">Conoce a nuestros especialistas, sus especialidades y horarios de atención.</p>
+                    <a href="/Clinica/pages/nosotros.html" class="btn btn-naranja mt-auto">Ver médicos</a>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3 col-sm-6">
-            <div class="card card-servicio h-100 text-center p-3">
-                <div class="card-body">
-                    <div class="card-icono">👨‍⚕️</div>
-                    <h6 class="card-titulo">Reserva una cita</h6>
-                    <p class="card-descripcion">Reservar una cita a través de nuestro canal digital</p>
-                    <a href="#" class="btn btn-naranja">Reserva</a>
+            <div class="card card-servicio h-100 text-center p-4">
+                <div class="card-top-bar"></div>
+                <div class="card-body pt-3">
+                    <div class="card-icono mb-2">📅</div>
+                    <h6 class="card-titulo">Reserva tu cita</h6>
+                    <p class="card-descripcion">Agenda tu consulta médica en línea de forma rápida, fácil y segura.</p>
+                    <button class="btn btn-naranja mt-auto w-100" onclick="verificarSesionParaCita()">Reservar ahora</button>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+<!-- ══════════════════════════════════════
+     ESTADÍSTICAS
+══════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3 stat-item">
+                <div class="num">35+</div>
+                <div class="label">Años de experiencia</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="num">80,000+</div>
+                <div class="label">Pacientes atendidos</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="num">5</div>
+                <div class="label">Médicos especialistas</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="num">8</div>
+                <div class="label">Especialidades médicas</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ESPECIALIDADES
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#fff;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color:#0A3760;">Nuestras Especialidades</h2>
+            <p class="text-muted">Un equipo multidisciplinario listo para cuidarte en cada área</p>
+        </div>
+        <div class="row g-3 justify-content-center">
+            <div class="col-auto"><div class="especialidad-pill"><span>🫀</span> Cardiología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>🧠</span> Neurología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>👶</span> Pediatría</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>🦴</span> Traumatología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>👁️</span> Oftalmología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>🌸</span> Ginecología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>🧬</span> Dermatología</div></div>
+            <div class="col-auto"><div class="especialidad-pill"><span>🩺</span> Medicina General</div></div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/Clinica/pages/nosotros.html" class="btn fw-semibold px-4 py-2 text-white" style="background:#0E588E; border-radius:25px;">
+                Ver todas las especialidades →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     NUESTROS MÉDICOS
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#f5f8fc;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color:#0A3760;">Conoce a nuestros Médicos</h2>
+            <p class="text-muted">Profesionales con vocación, experiencia y compromiso con tu salud</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-sm-6 col-md-4 col-lg">
+                <div class="card medico-card h-100">
+                    <div class="medico-avatar">👨‍⚕️</div>
+                    <div class="card-body text-center p-3">
+                        <h6 class="fw-bold mb-1" style="color:#0A3760;">Méd. Joseph</h6>
+                        <span class="badge" style="background:#e8f4fd;color:#0E588E;font-size:0.72rem;">Medicina General · Traumatología</span>
+                        <p class="text-muted small mt-2 mb-3">12 años de experiencia en atención primaria y lesiones musculoesqueléticas.</p>
+                        <button class="btn btn-sm w-100 text-white fw-semibold" style="background:#0E588E;border-radius:20px;" onclick="verificarSesionParaCita()">Reservar cita</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg">
+                <div class="card medico-card h-100">
+                    <div class="medico-avatar">👨‍⚕️</div>
+                    <div class="card-body text-center p-3">
+                        <h6 class="fw-bold mb-1" style="color:#0A3760;">Méd. Eduardo</h6>
+                        <span class="badge" style="background:#e8f4fd;color:#0E588E;font-size:0.72rem;">Medicina General · Oftalmología</span>
+                        <p class="text-muted small mt-2 mb-3">10 años de trayectoria en diagnóstico visual y atención ambulatoria.</p>
+                        <button class="btn btn-sm w-100 text-white fw-semibold" style="background:#0E588E;border-radius:20px;" onclick="verificarSesionParaCita()">Reservar cita</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg">
+                <div class="card medico-card h-100">
+                    <div class="medico-avatar">👨‍⚕️</div>
+                    <div class="card-body text-center p-3">
+                        <h6 class="fw-bold mb-1" style="color:#0A3760;">Méd. Ney</h6>
+                        <span class="badge" style="background:#e8f4fd;color:#0E588E;font-size:0.72rem;">Cardiología · Neurología</span>
+                        <p class="text-muted small mt-2 mb-3">15 años. Cardiólogo y neurólogo con formación en centros especializados de España.</p>
+                        <button class="btn btn-sm w-100 text-white fw-semibold" style="background:#0E588E;border-radius:20px;" onclick="verificarSesionParaCita()">Reservar cita</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg">
+                <div class="card medico-card h-100">
+                    <div class="medico-avatar">👨‍⚕️</div>
+                    <div class="card-body text-center p-3">
+                        <h6 class="fw-bold mb-1" style="color:#0A3760;">Méd. Enrique</h6>
+                        <span class="badge" style="background:#e8f4fd;color:#0E588E;font-size:0.72rem;">Pediatría · Dermatología</span>
+                        <p class="text-muted small mt-2 mb-3">8 años dedicados a la salud infantil y enfermedades cutáneas.</p>
+                        <button class="btn btn-sm w-100 text-white fw-semibold" style="background:#0E588E;border-radius:20px;" onclick="verificarSesionParaCita()">Reservar cita</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg">
+                <div class="card medico-card h-100">
+                    <div class="medico-avatar">👨‍⚕️</div>
+                    <div class="card-body text-center p-3">
+                        <h6 class="fw-bold mb-1" style="color:#0A3760;">Méd. Aaron</h6>
+                        <span class="badge" style="background:#e8f4fd;color:#0E588E;font-size:0.72rem;">Ginecología</span>
+                        <p class="text-muted small mt-2 mb-3">11 años de especialidad en salud femenina, atención prenatal y preventiva.</p>
+                        <button class="btn btn-sm w-100 text-white fw-semibold" style="background:#0E588E;border-radius:20px;" onclick="verificarSesionParaCita()">Reservar cita</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CÓMO FUNCIONA (PASOS)
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#fff;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color:#0A3760;">¿Cómo reservar tu cita?</h2>
+            <p class="text-muted">Solo 3 pasos simples para tu atención médica</p>
+        </div>
+        <div class="row g-4 text-center position-relative">
+            <div class="col-md-4 position-relative">
+                <div class="paso-num">1</div>
+                <h6 class="fw-bold" style="color:#0A3760;">Crea tu cuenta</h6>
+                <p class="text-muted small">Regístrate gratis con tu correo y datos básicos en menos de 2 minutos.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="paso-num">2</div>
+                <h6 class="fw-bold" style="color:#0A3760;">Elige especialidad y médico</h6>
+                <p class="text-muted small">Selecciona la especialidad que necesitas, el doctor de tu preferencia, fecha y hora.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="paso-num">3</div>
+                <h6 class="fw-bold" style="color:#0A3760;">¡Listo! Tu cita está confirmada</h6>
+                <p class="text-muted small">Recibirás la confirmación al instante. Podrás reprogramar cuando lo necesites.</p>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn fw-semibold px-5 py-2 text-white" style="background:#0E588E; border-radius:25px; font-size:1rem;" onclick="verificarSesionParaCita()">
+                📅 Reservar mi cita ahora
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIOS
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#f0f7ff;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color:#0A3760;">Lo que dicen nuestros pacientes</h2>
+            <p class="text-muted">Más de 80,000 familias confían en nosotros</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonio-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p class="text-muted small mb-3">"La atención del Dr. Joseph fue excelente. Me explicó todo con mucha claridad y me sentí en muy buenas manos. Sin duda volvería."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar">👩</div>
+                        <div>
+                            <div class="fw-bold small" style="color:#0A3760;">María G.</div>
+                            <div class="text-muted" style="font-size:0.75rem;">Paciente de Medicina General</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonio-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p class="text-muted small mb-3">"Reservar la cita por internet fue muy fácil. El sistema es intuitivo y el Dr. Ney fue muy profesional. Altamente recomendado."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar">👨</div>
+                        <div>
+                            <div class="fw-bold small" style="color:#0A3760;">Carlos M.</div>
+                            <div class="text-muted" style="font-size:0.75rem;">Paciente de Cardiología</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonio-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p class="text-muted small mb-3">"Llevé a mi hijo con el Dr. Enrique y fue increíble. Muy paciente con los niños y muy buen diagnóstico. Toda la clínica es muy organizada."</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="avatar">👩</div>
+                        <div>
+                            <div class="fw-bold small" style="color:#0A3760;">Lucía P.</div>
+                            <div class="text-muted" style="font-size:0.75rem;">Paciente de Pediatría</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BANNER URGENCIAS
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#fff;">
+    <div class="container">
+        <div class="urgencias-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+            <div>
+                <h4 class="fw-bold mb-1">🚨 ¿Tienes una emergencia?</h4>
+                <p class="mb-0 opacity-85">Nuestro servicio de emergencias está disponible las 24 horas, los 7 días de la semana. No esperes — llama ahora.</p>
+            </div>
+            <div class="d-flex gap-3 flex-shrink-0">
+                <a href="tel:+5116114000" class="btn btn-light fw-bold px-4 py-2" style="border-radius:25px; color:#c0392b;">
+                    📞 (01) 611-4000
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     NOTICIAS / CONSEJOS
+══════════════════════════════════════ -->
+<section class="py-5" style="background:#f5f8fc;">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color:#0A3760;">Consejos de Salud</h2>
+            <p class="text-muted">Información útil de nuestro equipo médico para tu bienestar diario</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card noticia-card h-100">
+                    <div style="background:linear-gradient(135deg,#0E588E,#29A8EF); height:120px; display:flex; align-items:center; justify-content:center; font-size:3.5rem;">🫀</div>
+                    <div class="card-body p-4">
+                        <span class="noticia-tag">Cardiología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">5 hábitos para cuidar tu corazón</h6>
+                        <p class="text-muted small">Caminar 30 minutos al día, reducir la sal, dormir bien y mantener el estrés bajo control son claves para una salud cardiovascular óptima.</p>
+                        <a href="#" class="text-decoration-none fw-semibold small" style="color:#0E588E;">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card noticia-card h-100">
+                    <div style="background:linear-gradient(135deg,#1a7a3c,#2ecc71); height:120px; display:flex; align-items:center; justify-content:center; font-size:3.5rem;">👶</div>
+                    <div class="card-body p-4">
+                        <span class="noticia-tag" style="background:#e8f8ef;color:#1a7a3c;">Pediatría</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">La importancia de las vacunas en niños</h6>
+                        <p class="text-muted small">Mantener el calendario de vacunación al día protege a los niños de enfermedades graves y contribuye a la salud de toda la comunidad.</p>
+                        <a href="#" class="text-decoration-none fw-semibold small" style="color:#0E588E;">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card noticia-card h-100">
+                    <div style="background:linear-gradient(135deg,#7d3c98,#a569bd); height:120px; display:flex; align-items:center; justify-content:center; font-size:3.5rem;">🧠</div>
+                    <div class="card-body p-4">
+                        <span class="noticia-tag" style="background:#f4ecfd;color:#7d3c98;">Neurología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">Cómo prevenir los dolores de cabeza</h6>
+                        <p class="text-muted small">La hidratación, el descanso regular y evitar las pantallas antes de dormir pueden reducir significativamente la frecuencia de migrañas.</p>
+                        <a href="#" class="text-decoration-none fw-semibold small" style="color:#0E588E;">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
+                    <span class="fw-bold fs-5 text-white">Clínica José Pardo</span>
+                </div>
+                <p>Más de 35 años brindando atención médica de calidad con calidez humana a las familias de Lima y el Perú.</p>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="#" class="social-btn">📘</a>
+                    <a href="https://www.instagram.com/_joseph_otto_.py/" class="social-btn">📸</a>
+                    <a href="#" class="social-btn">🐦</a>
+                    <a href="#" class="social-btn">▶️</a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h6>Navegación</h6>
+                <a href="/Clinica/pages/inicio.html">Inicio</a>
+                <a href="/Clinica/pages/nosotros.html">Nosotros</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Nuestros Doctores</a>
+                <a href="/Clinica/pages/consejos-de-salud.html">Consejos de Salud</a>
+                <a href="/Clinica/pages/login.html">Iniciar sesión</a>
+                <a href="/Clinica/pages/mis-citas.html">Mis Citas</a>
+            </div>
+            <div class="col-md-3">
+                <h6>Especialidades</h6>
+                <a href="/Clinica/pages/nuestros-doctores.html">Medicina General</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Cardiología</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Pediatría</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Neurología</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Traumatología</a>
+                <a href="/Clinica/pages/nuestros-doctores.html">Ginecología</a>
+            </div>
+            <div class="col-md-3">
+                <h6>Contacto</h6>
+                <a href="#">📍 Av. José Pardo 452, Miraflores</a>
+                <a href="tel:+5116114000">📞 (01) 611-4000</a>
+                <a href="#">📧 atencion@clinicajosepardo.com.pe</a>
+                <a href="#">📱 +51 987 654 321</a>
+                <p class="mt-2 mb-0">🕐 Lun–Sáb: 7:00 am – 8:00 pm</p>
+                <p class="mb-0">🚨 Emergencias: 24 horas</p>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center">
+            <p class="mb-0">© 2025 Clínica José Pardo · Todos los derechos reservados · Grupo JORGIÑO</p>
+            <p class="mb-0"><a href="#">Política de privacidad</a> · <a href="#">Términos de uso</a></p>
+        </div>
+    </div>
+</footer>
 
 <script src="/Clinica/js/login.js"></script>
 <script src="/Clinica/js/medicos.js"></script>

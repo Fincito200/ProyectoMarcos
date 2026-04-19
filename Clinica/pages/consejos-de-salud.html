@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros — Clínica José Pardo</title>
+    <title>Consejos de Salud — Clínica José Pardo</title>
     <link rel="icon" href="/Clinica/img/3063176.png">
     <link rel="stylesheet" href="/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <script src="/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/Clinica/css/pages.css">
-    <link rel="stylesheet" href="/Clinica/css/nosotros.css">
+    <link rel="stylesheet" href="/Clinica/css/consejos-de-salud.css">
 </head>
 <body style="background-color:#f5f8fc; font-family:'Segoe UI',sans-serif;">
 <!-- FRANJA SUPERIOR -->
@@ -43,9 +43,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">⌛ Opciones</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item active" aria-current="page" href="/Clinica/pages/nosotros.html">👨‍💼 Nosotros</a></li>
+                        <li><a class="dropdown-item" href="/Clinica/pages/nosotros.html">👨‍💼 Nosotros</a></li>
                         <li><a class="dropdown-item" href="/Clinica/pages/nuestros-doctores.html">👨‍⚕️ Nuestros Doctores</a></li>
-                        <li><a class="dropdown-item" href="/Clinica/pages/consejos-de-salud.html">💡 Consejos de Salud</a></li>
+                        <li><a class="dropdown-item active" aria-current="page" href="/Clinica/pages/consejos-de-salud.html">💡 Consejos de Salud</a></li>
                     </ul>
                 </li>
             </ul>
@@ -174,9 +174,9 @@
         <div class="carousel-item active">
             <div class="hero-slide hero-slide-1 d-flex align-items-center justify-content-center px-4">
                 <div class="text-center text-white" style="max-width:680px;">
-                    <div class="hero-badge">🏥 CLÍNICA JOSÉ PARDO — LIMA, PERÚ</div>
-                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem); line-height:1.15;">35 años construyendo<br><span style='color:#a8d8f0;'>confianza médica</span></h1>
-                    <p class="mb-4 opacity-85" style="font-size:1.05rem;">Conoce nuestra historia, misión y el equipo humano que nos distingue.</p>
+                    <div class="hero-badge">💡 CONSEJOS DE SALUD</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem); line-height:1.15;">Tu bienestar empieza<br><span style='color:#a8d8f0;'>con la información correcta</span></h1>
+                    <p class="mb-4 opacity-85" style="font-size:1.05rem;">Artículos y tips de salud redactados por nuestros especialistas.</p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📅 Reservar Cita</button>
                         <a href="/Clinica/pages/inicio.html" class="hero-cta-btn-outline">← Volver al Inicio</a>
@@ -187,9 +187,9 @@
         <div class="carousel-item">
             <div class="hero-slide hero-slide-2 d-flex align-items-center justify-content-center px-4">
                 <div class="text-center text-white" style="max-width:680px;">
-                    <div class="hero-badge">🎯 NUESTRA MISIÓN</div>
-                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem);">Salud de calidad,<br><span style='color:#a8f0e8;'>al alcance de todos</span></h1>
-                    <p class="mb-4 opacity-85">Nos comprometemos a brindar atención médica accesible, humana y de excelencia.</p>
+                    <div class="hero-badge">🍎 VIDA SALUDABLE</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem);">Pequeños cambios,<br><span style='color:#a8f0e8;'>grandes resultados</span></h1>
+                    <p class="mb-4 opacity-85">Hábitos simples que pueden transformar tu salud a largo plazo.</p>
                     <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📅 Reservar Cita</button>
                 </div>
             </div>
@@ -197,9 +197,9 @@
         <div class="carousel-item">
             <div class="hero-slide hero-slide-3 d-flex align-items-center justify-content-center px-4">
                 <div class="text-center text-white" style="max-width:680px;">
-                    <div class="hero-badge">📍 ENCUÉNTRANOS</div>
-                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem);">Estamos en<br><span style='color:#a8d8f0;'>el corazón de Miraflores</span></h1>
-                    <p class="mb-4 opacity-85">Av. José Pardo 452, Lima. Atención Lun–Sáb de 7:00 am a 8:00 pm.</p>
+                    <div class="hero-badge">🩺 PREVENCIÓN</div>
+                    <h1 class="fw-bold mb-3" style="font-size:clamp(1.8rem,4.5vw,3rem);">Prevenir es<br><span style='color:#a8d8f0;'>mejor que curar</span></h1>
+                    <p class="mb-4 opacity-85">Conoce los chequeos y controles médicos que deberías hacerte cada año.</p>
                     <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📅 Reservar Cita</button>
                 </div>
             </div>
@@ -217,154 +217,146 @@
         <span class="carousel-control-next-icon"></span>
     </button>
 </div>
-<!-- ══ QUIÉNES SOMOS ══ -->
+<!-- ══ INTRO ══ -->
 <section class="py-5" style="background:#f8fbff;">
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <span class="badge mb-3 px-3 py-2 fs-6" style="background:#e8f4fd;color:#0E588E;">🏥 Quiénes Somos</span>
-                <h2 class="fw-bold mb-3" style="color:#0A3760;">Clínica José Pardo —<br>35 años cuidando tu salud</h2>
-                <p class="text-muted mb-3">Fundada en 1990 en el corazón de Lima, la <strong>Clínica José Pardo</strong> nació con una misión clara: brindar atención médica de calidad, accesible y humana a cada paciente que cruza nuestras puertas.</p>
-                <p class="text-muted mb-4">A lo largo de más de tres décadas, hemos crecido hasta convertirnos en uno de los centros de salud más reconocidos de la región, integrando tecnología de vanguardia con el trato cálido y personalizado que nos caracteriza.</p>
-                <div class="row g-3 text-center">
-                    <div class="col-4"><div class="stat-box"><div class="num">35+</div><div class="lbl">Años de exp.</div></div></div>
-                    <div class="col-4"><div class="stat-box"><div class="num">80k+</div><div class="lbl">Pacientes</div></div></div>
-                    <div class="col-4"><div class="stat-box"><div class="num">30+</div><div class="lbl">Especialidades</div></div></div>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center">
-                <div class="rounded-4 overflow-hidden shadow-lg d-inline-block" style="background:linear-gradient(135deg,#0A3760,#29A8EF);padding:3rem 2.5rem;">
-                    <div style="font-size:7rem;">🏥</div>
-                    <div class="text-white fw-bold fs-4 mt-2">Clínica José Pardo</div>
-                    <div class="text-white opacity-75 small">Lima, Perú — Desde 1990</div>
-                </div>
-            </div>
+    <div class="container text-center">
+        <h2 class="fw-bold mb-3" style="color:#0A3760;">Consejos de Salud</h2>
+        <p class="text-muted mx-auto" style="max-width:580px;">Información médica confiable redactada por nuestro equipo de especialistas para ayudarte a llevar una vida más saludable.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+            <button class="categoria-btn active">Todos</button>
+            <button class="categoria-btn">🫀 Cardiología</button>
+            <button class="categoria-btn">🧠 Neurología</button>
+            <button class="categoria-btn">👶 Pediatría</button>
+            <button class="categoria-btn">🌸 Ginecología</button>
+            <button class="categoria-btn">🦴 Traumatología</button>
+            <button class="categoria-btn">🧬 Dermatología</button>
         </div>
     </div>
 </section>
  
-<!-- ══ MISIÓN, VISIÓN, VALORES ══ -->
-<section class="py-5" style="background:#fff;">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color:#0A3760;">Nuestros pilares institucionales</h2>
-            <p class="text-muted">Lo que nos guía cada día en nuestra labor médica</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-md-4"><div class="pilar-card">
-                <div style="font-size:3rem;">🎯</div>
-                <h5 class="fw-bold mt-3" style="color:#0E588E;">Misión</h5>
-                <p class="text-muted small mt-2">Brindar atención médica integral, oportuna y de alta calidad, centrada en el bienestar de nuestros pacientes y sus familias, con personal comprometido y tecnología de vanguardia.</p>
-            </div></div>
-            <div class="col-md-4"><div class="pilar-card">
-                <div style="font-size:3rem;">🔭</div>
-                <h5 class="fw-bold mt-3" style="color:#0E588E;">Visión</h5>
-                <p class="text-muted small mt-2">Ser la clínica líder del Perú en salud preventiva y especializada, reconocida por la excelencia de su atención, la innovación de sus procesos y el impacto positivo en la comunidad.</p>
-            </div></div>
-            <div class="col-md-4"><div class="pilar-card">
-                <div style="font-size:3rem;">💎</div>
-                <h5 class="fw-bold mt-3" style="color:#0E588E;">Valores</h5>
-                <p class="text-muted small mt-2">Nos guían la <strong>ética</strong>, el <strong>respeto</strong> por la dignidad del paciente, la <strong>excelencia clínica</strong>, la <strong>empatía</strong> en cada consulta y el compromiso con la <strong>mejora continua</strong>.</p>
-            </div></div>
-        </div>
-    </div>
-</section>
- 
-<!-- ══ HISTORIA / LÍNEA DE TIEMPO ══ -->
-<section class="py-5" style="background:#f0f7ff;">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color:#0A3760;">Nuestra Historia</h2>
-            <p class="text-muted">Tres décadas de crecimiento al servicio de la salud</p>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="linea-tiempo">
-                    <div class="lt-item">
-                        <div class="lt-punto"></div>
-                        <div><strong style="color:#0E588E;">1990 — Fundación</strong><br><span class="text-muted small">El Dr. José Pardo inaugura la clínica con 3 consultorios y un equipo de 8 personas comprometidas con la salud de Miraflores.</span></div>
-                    </div>
-                    <div class="lt-item">
-                        <div class="lt-punto"></div>
-                        <div><strong style="color:#0E588E;">1998 — Primera expansión</strong><br><span class="text-muted small">Se amplían las instalaciones con un laboratorio clínico propio y se incorporan 5 nuevas especialidades médicas.</span></div>
-                    </div>
-                    <div class="lt-item">
-                        <div class="lt-punto"></div>
-                        <div><strong style="color:#0E588E;">2005 — Servicio de Emergencias 24h</strong><br><span class="text-muted small">Implementamos nuestra unidad de emergencias con atención permanente y equipos de diagnóstico avanzado.</span></div>
-                    </div>
-                    <div class="lt-item">
-                        <div class="lt-punto"></div>
-                        <div><strong style="color:#0E588E;">2015 — Acreditación internacional</strong><br><span class="text-muted small">Recibimos la certificación de calidad en gestión hospitalaria, convirtiéndonos en referente regional de buenas prácticas médicas.</span></div>
-                    </div>
-                    <div class="lt-item">
-                        <div class="lt-punto"></div>
-                        <div><strong style="color:#0E588E;">2024 — Portal digital de citas</strong><br><span class="text-muted small">Lanzamos nuestra plataforma online para que los pacientes puedan agendar, reprogramar y gestionar sus citas desde cualquier dispositivo.</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- 
-<!-- ══ POR QUÉ ELEGIRNOS ══ -->
-<section class="py-5" style="background:linear-gradient(135deg,#0A3760,#0E588E);">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-white">¿Por qué elegirnos?</h2>
-            <p style="color:rgba(255,255,255,0.75);">Razones que nos distinguen cada día</p>
-        </div>
-        <div class="row g-4 text-white text-center">
-            <div class="col-md-3 col-sm-6"><div style="font-size:2.5rem;">📅</div><h6 class="fw-bold">Citas en línea 24/7</h6><p class="small opacity-75">Reserva tu consulta desde cualquier dispositivo, a cualquier hora, sin filas.</p></div>
-            <div class="col-md-3 col-sm-6"><div style="font-size:2.5rem;">🔬</div><h6 class="fw-bold">Tecnología avanzada</h6><p class="small opacity-75">Equipos de diagnóstico de última generación para resultados precisos y rápidos.</p></div>
-            <div class="col-md-3 col-sm-6"><div style="font-size:2.5rem;">🤝</div><h6 class="fw-bold">Atención personalizada</h6><p class="small opacity-75">Cada paciente recibe un trato único, con tiempo y dedicación en cada consulta.</p></div>
-            <div class="col-md-3 col-sm-6"><div style="font-size:2.5rem;">🚨</div><h6 class="fw-bold">Emergencias 24 horas</h6><p class="small opacity-75">Servicio de urgencias disponible todos los días del año, sin excepción.</p></div>
-        </div>
-    </div>
-</section>
- 
-<!-- ══ UBICACIÓN Y CONTACTO ══ -->
-<section class="py-5" style="background:#f8fbff;">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color:#0A3760;">Encuéntranos</h2>
-            <p class="text-muted">Estamos cerca de ti para cuando más nos necesitas</p>
-        </div>
-        <div class="row g-4 align-items-stretch">
-            <div class="col-md-5">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-                    <h5 class="fw-bold mb-4" style="color:#0E588E;">📍 Información de Contacto</h5>
-                    <ul class="list-unstyled text-muted">
-                        <li class="mb-3">📌 <strong>Dirección:</strong> Av. José Pardo 452, Miraflores, Lima 15074</li>
-                        <li class="mb-3">📞 <strong>Central:</strong> (01) 611-4000</li>
-                        <li class="mb-3">📱 <strong>WhatsApp:</strong> +51 987 654 321</li>
-                        <li class="mb-3">📧 <strong>Correo:</strong> atencion@clinicajosepardo.com.pe</li>
-                        <li class="mb-3">🕐 <strong>Horario:</strong> Lunes a Sábado — 7:00 am a 8:00 pm</li>
-                        <li>🚨 <strong>Emergencias:</strong> 24 horas / 7 días</li>
-                    </ul>
-                    <div class="mt-4 d-flex gap-2 flex-wrap">
-                        <button onclick="verificarSesionParaCita()" class="btn btn-sm fw-semibold text-white px-3" style="background:#0E588E;border-radius:20px;">📅 Reservar Cita</button>
-                        <a href="tel:+5116114000" class="btn btn-sm btn-outline-secondary px-3" style="border-radius:20px;">📞 Llamar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="min-height:280px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7!2d-77.0282!3d-12.1211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDA3JzE2LjAiUyA3N8KwMDEnNDIuMCJX!5e0!3m2!1ses!2spe!4v1"
-                        width="100%" height="100%" style="border:0;min-height:280px;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
- 
-<!-- ══ URGENCIAS BANNER ══ -->
+<!-- ══ ARTÍCULOS DESTACADOS ══ -->
 <section class="py-4" style="background:#fff;">
     <div class="container">
-        <div class="urgencias-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
-            <div><h4 class="fw-bold mb-1">🚨 ¿Tienes una emergencia?</h4>
-            <p class="mb-0 opacity-85">Nuestro servicio de emergencias está disponible las 24 horas, los 7 días de la semana.</p></div>
-            <a href="tel:+5116114000" class="btn btn-light fw-bold px-4 py-2" style="border-radius:25px;color:#c0392b;flex-shrink:0;">📞 (01) 611-4000</a>
+        <h5 class="fw-bold mb-4" style="color:#0A3760;">📌 Artículos Destacados</h5>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#0E588E,#29A8EF);height:130px;display:flex;align-items:center;justify-content:center;font-size:4rem;">🫀</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#e8f4fd;color:#0E588E;">Cardiología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">5 hábitos para cuidar tu corazón todos los días</h6>
+                        <p class="text-muted small">Caminar 30 minutos al día, reducir la sal y el estrés, dormir bien y evitar el tabaco son las claves para una salud cardiovascular óptima. Tu corazón te lo agradecerá.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Ney Flores</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#1a7a3c,#2ecc71);height:130px;display:flex;align-items:center;justify-content:center;font-size:4rem;">👶</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#e8f8ef;color:#1a7a3c;">Pediatría</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">La importancia del calendario de vacunación</h6>
+                        <p class="text-muted small">Mantener las vacunas al día protege a los niños de enfermedades graves y contribuye a la inmunidad colectiva. Conoce qué vacunas corresponden a cada etapa.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Enrique Quispe</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#7d3c98,#a569bd);height:130px;display:flex;align-items:center;justify-content:center;font-size:4rem;">🧠</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#f4ecfd;color:#7d3c98;">Neurología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">Cómo prevenir los dolores de cabeza frecuentes</h6>
+                        <p class="text-muted small">La hidratación, el descanso regular y limitar el tiempo de pantalla antes de dormir reducen significativamente la frecuencia e intensidad de las migrañas.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Ney Flores</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
+ 
+<!-- ══ MÁS ARTÍCULOS ══ -->
+<section class="py-4" style="background:#f5f8fc;">
+    <div class="container">
+        <h5 class="fw-bold mb-4" style="color:#0A3760;">📚 Más artículos</h5>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#c0392b,#e74c3c);height:110px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🌸</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#fde8e8;color:#c0392b;">Ginecología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">Chequeos ginecológicos que toda mujer necesita</h6>
+                        <p class="text-muted small">El Papanicolaou anual, la ecografía pélvica y la mamografía a partir de los 40 son esenciales para la detección temprana de enfermedades graves.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Aaron Vásquez</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#d35400,#e67e22);height:110px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🦴</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#fef0e4;color:#d35400;">Traumatología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">Cómo cuidar tus articulaciones con el ejercicio</h6>
+                        <p class="text-muted small">El calentamiento previo, el estiramiento posterior y el uso de calzado adecuado reducen hasta en un 60% el riesgo de lesiones articulares durante el deporte.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Joseph Ortega</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="articulo-card">
+                    <div style="background:linear-gradient(135deg,#16a085,#1abc9c);height:110px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🧬</div>
+                    <div class="p-4">
+                        <span class="articulo-tag" style="background:#e0f8f4;color:#16a085;">Dermatología</span>
+                        <h6 class="fw-bold mt-2 mb-2" style="color:#0A3760;">Protege tu piel del sol todo el año</h6>
+                        <p class="text-muted small">Aplicar bloqueador solar FPS 30+ cada 2 horas, incluso en días nublados, es la medida más efectiva para prevenir el envejecimiento prematuro y el cáncer de piel.</p>
+                        <div class="d-flex align-items-center justify-content-between mt-3">
+                            <small class="text-muted">👨‍⚕️ Méd. Enrique Quispe</small>
+                            <a href="#" class="fw-semibold small text-decoration-none" style="color:#0E588E;">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ 
+<!-- ══ TIPS RÁPIDOS ══ -->
+<section class="py-5" style="background:#fff;">
+    <div class="container">
+        <h5 class="fw-bold mb-4" style="color:#0A3760;">⚡ Tips Rápidos de Salud</h5>
+        <div class="row g-3">
+            <div class="col-md-4"><div class="tip-card"><div style="font-size:1.8rem;">💧</div><p class="fw-bold small mb-1" style="color:#0A3760;">Hidratación diaria</p><p class="text-muted small mb-0">Bebe al menos 8 vasos de agua al día. La hidratación adecuada mejora la concentración, la digestión y la salud de la piel.</p></div></div>
+            <div class="col-md-4"><div class="tip-card" style="border-left-color:#1a7a3c;"><div style="font-size:1.8rem;">🥦</div><p class="fw-bold small mb-1" style="color:#0A3760;">Incluye verduras en cada comida</p><p class="text-muted small mb-0">Las verduras aportan fibra, vitaminas y minerales esenciales. Apunta a que la mitad de tu plato sea de vegetales de colores variados.</p></div></div>
+            <div class="col-md-4"><div class="tip-card" style="border-left-color:#7d3c98;"><div style="font-size:1.8rem;">😴</div><p class="fw-bold small mb-1" style="color:#0A3760;">Duerme 7-8 horas</p><p class="text-muted small mb-0">El sueño reparador refuerza el sistema inmune, regula el metabolismo y mejora el estado de ánimo. Establece un horario fijo.</p></div></div>
+            <div class="col-md-4"><div class="tip-card" style="border-left-color:#d35400;"><div style="font-size:1.8rem;">🚶</div><p class="fw-bold small mb-1" style="color:#0A3760;">Muévete 30 minutos al día</p><p class="text-muted small mb-0">Caminar, nadar o practicar yoga 30 minutos diarios reduce el riesgo de enfermedades cardiovasculares en un 35%.</p></div></div>
+            <div class="col-md-4"><div class="tip-card" style="border-left-color:#c0392b;"><div style="font-size:1.8rem;">🚭</div><p class="fw-bold small mb-1" style="color:#0A3760;">Evita el tabaco y el alcohol</p><p class="text-muted small mb-0">Dejar de fumar mejora la capacidad pulmonar en pocas semanas. Reducir el alcohol protege el hígado, el corazón y el cerebro.</p></div></div>
+            <div class="col-md-4"><div class="tip-card" style="border-left-color:#16a085;"><div style="font-size:1.8rem;">🩺</div><p class="fw-bold small mb-1" style="color:#0A3760;">Chequeos médicos regulares</p><p class="text-muted small mb-0">Un control médico anual permite detectar enfermedades antes de que se vuelvan graves. Agenda tu cita hoy.</p></div></div>
+        </div>
+    </div>
+</section>
+ 
+<!-- ══ CTA RESERVAR ══ -->
+<section class="py-5" style="background:linear-gradient(135deg,#0A3760,#0E588E);">
+    <div class="container text-center text-white">
+        <h3 class="fw-bold mb-3">¿Tienes dudas sobre tu salud?</h3>
+        <p class="opacity-85 mb-4" style="max-width:500px;margin:auto;">No esperes a que los síntomas empeoren. Nuestros especialistas están listos para atenderte y orientarte.</p>
+        <button class="hero-cta-btn" onclick="verificarSesionParaCita()">📅 Agenda tu consulta ahora</button>
     </div>
 </section>
  
