@@ -143,9 +143,7 @@ function verificarSesionParaCita() {
     }
 }
 
-// ══════════════════════════════════════════════
-//  RECUPERAR CONTRASEÑA
-// ══════════════════════════════════════════════
+// RECUPERAR CONTRASEÑA 
 
 function verificarCorreoRecuperar() {
     const correo = document.getElementById("recuperar-correo").value.trim().toLowerCase();
@@ -157,10 +155,10 @@ function verificarCorreoRecuperar() {
         return;
     }
 
-    // Buscar en usuarios registrados dinámicamente
+    // BUSCA EN USUARIO REGISTRADOS
     const registrados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
     const existe = registrados.find(u => u.correo.toLowerCase() === correo) ||
-                   correo === usuarioPrueba.correo;
+                    correo === usuarioPrueba.correo;
 
     if (!existe) {
         errEl.textContent = "❌ No encontramos una cuenta con ese correo.";
@@ -168,7 +166,7 @@ function verificarCorreoRecuperar() {
         return;
     }
 
-    // Guardar temporalmente el correo para el paso 2
+    // GUARDA EL CORREO TEMPORALMENTE PARA EL SIGUIENTE PASO
     sessionStorage.setItem("recuperar-correo-temp", correo);
 
     errEl.classList.add("d-none");
@@ -201,14 +199,14 @@ function guardarNuevaPassword() {
         return;
     }
 
-    // Actualizar en usuariosRegistrados
+    // ACTUALIZAR EN USUARIOREGISTRADOS
     const registrados = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
     const idx = registrados.findIndex(u => u.correo.toLowerCase() === correo);
     if (idx !== -1) {
         registrados[idx].password = nueva;
         localStorage.setItem("usuariosRegistrados", JSON.stringify(registrados));
     }
-    // Nota: el usuario de prueba juan@gmail.com es fijo en código, no se puede cambiar desde aquí
+    //el usuario de prueba juan@gmail.com es fijo en codigo, no se puede cambiar desde aqui
 
     sessionStorage.removeItem("recuperar-correo-temp");
     errEl.classList.add("d-none");

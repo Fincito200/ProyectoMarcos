@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const [anio, mes, dia] = fecha.split("-");
         const fechaLegible = `${dia}/${mes}/${anio}`;
 
-        // ── GUARDAR CITA EN LOCALSTORAGE POR USUARIO ──
+        // GUARDAR CITA EN LOCALSTORAGE POR USUARIO 
         const nuevaCita = { nombres, apellidos, dni, telefono, correo, especialidad, doctor, fechaLegible, hora, motivo };
         const usuarioCorreo = localStorage.getItem("usuarioCorreo") || "guest";
         const citasKey = "misCitas_" + usuarioCorreo;
