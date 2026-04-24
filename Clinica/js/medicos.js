@@ -5,7 +5,7 @@ const horaSelect = document.querySelector("select[name='hora']");
 
 const doctores = {
     medicina_general: [
-        { value: "👨‍⚕️Méd. Joseph", nombre: "👨‍⚕️Méd. Joseph" },
+        { value: "👨‍⚕️ Méd. Joseph", nombre: "👨‍⚕️ Méd. Joseph" },
         { value: "👨‍⚕️ Méd. Eduardo", nombre: "👨‍⚕️ Méd. Eduardo" }
     ],
     cardiologia: [
@@ -18,7 +18,7 @@ const doctores = {
         { value: "👨‍⚕️ Méd. Aaron", nombre: "👨‍⚕️ Méd. Aaron" }
     ],
     traumatologia: [
-        { value: "👨‍⚕️Méd. Joseph", nombre: "👨‍⚕️Méd. Joseph" }
+        { value: "👨‍⚕️ Méd. Joseph", nombre: "👨‍⚕️ Méd. Joseph" }
     ],
     neurologia: [
         { value: "👨‍⚕️ Méd. Ney", nombre: "👨‍⚕️ Méd. Ney" }
@@ -35,7 +35,7 @@ const doctores = {
 // 0=Dom 1=Lun 2=Mar 3=Mie 4=Jue 5=Vie 6=Sab
 const horariosPorMedico = {
 
-    "👨‍⚕️Méd. Joseph": {
+    "👨‍⚕️ Méd. Joseph": {
         1: [
             { value: "08:00", label: "08:00 am" },
             { value: "09:00", label: "09:00 am" },

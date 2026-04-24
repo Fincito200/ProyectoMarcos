@@ -14,16 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!passInput) return;
 
     passInput.addEventListener("input", function () {
-        const val    = passInput.value;
-        const fill   = document.getElementById("strength-fill");
-        const label  = document.getElementById("strength-label");
-        let score    = 0;
+        const val   = passInput.value;
+        const fill  = document.getElementById("strength-fill");
+        const label = document.getElementById("strength-label");
+        let score   = 0;
 
-        if (val.length >= 6)                        score++;
-        if (val.length >= 10)                       score++;
-        if (/[A-Z]/.test(val))                      score++;
-        if (/[0-9]/.test(val))                      score++;
-        if (/[^A-Za-z0-9]/.test(val))               score++;
+        if (val.length >= 6)           score++;
+        if (val.length >= 10)          score++;
+        if (/[A-Z]/.test(val))         score++;
+        if (/[0-9]/.test(val))         score++;
+        if (/[^A-Za-z0-9]/.test(val))  score++;
 
         const niveles = [
             { pct: "0%",   color: "#dee2e6", texto: "" },
@@ -57,14 +57,14 @@ function mostrarExito(msg) {
     document.getElementById("alerta-error").classList.add("d-none");
 }
 
-function registrar() {
-    const nombres    = document.getElementById("reg-nombres").value.trim();
-    const apellidos  = document.getElementById("reg-apellidos").value.trim();
-    const dni        = document.getElementById("reg-dni").value.trim();
-    const telefono   = document.getElementById("reg-telefono").value.trim();
-    const correo     = document.getElementById("reg-correo").value.trim();
-    const password   = document.getElementById("reg-password").value;
-    const password2  = document.getElementById("reg-password2").value;
+async function registrar() {
+    const nombres   = document.getElementById("reg-nombres").value.trim();
+    const apellidos = document.getElementById("reg-apellidos").value.trim();
+    const dni       = document.getElementById("reg-dni").value.trim();
+    const telefono  = document.getElementById("reg-telefono").value.trim();
+    const correo    = document.getElementById("reg-correo").value.trim();
+    const password  = document.getElementById("reg-password").value;
+    const password2 = document.getElementById("reg-password2").value;
 
     if (!nombres || !apellidos || !dni || !telefono || !correo || !password || !password2) {
         mostrarError("Completa todos los campos.");
@@ -96,32 +96,36 @@ function registrar() {
         return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem("usuariosRegistrados") || "[]");
-    const yaExiste = usuarios.find(u => u.correo === correo);
-    if (yaExiste) {
-        mostrarError("Ya existe una cuenta con ese correo.");
-        return;
+    try {
+        const res = await fetch("/ProyectoModificado/ProyectoMarcos/Clinica/api/register.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombres, apellidos, dni, telefono, correo, password })
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+            localStorage.setItem("sesionActiva",  "true");
+            localStorage.setItem("usuarioNombre", data.nombres);
+            localStorage.setItem("tipoUsuario",   "paciente");
+            localStorage.setItem("usuarioCorreo", data.correo);
+            mostrarExito("¡Cuenta creada! Redirigiendo...");
+            setTimeout(() => { window.location.href = "/ProyectoModificado/ProyectoMarcos/Clinica/pages/inicio.html"; }, 1500);
+        } else {
+            mostrarError(data.msg);
+        }
+
+    } catch (err) {
+        mostrarError("No se pudo conectar con el servidor.");
     }
-
-    const nuevoUsuario = { nombres, apellidos, dni, telefono, correo, password };
-    usuarios.push(nuevoUsuario);
-    localStorage.setItem("usuariosRegistrados", JSON.stringify(usuarios));
-
-    // ── Iniciar sesión automáticamente ──
-    localStorage.setItem("sesionActiva",  "true");
-    localStorage.setItem("usuarioNombre", nombres);
-    localStorage.setItem("tipoUsuario",   "paciente");
-    localStorage.setItem("usuarioCorreo", correo);
-
-    mostrarExito("¡Cuenta creada! Redirigiendo...");
-    setTimeout(() => { window.location.href = "/Clinica/pages/inicio.html"; }, 1500);
 }
 
 window.addEventListener("load", function () {
     const sesion = localStorage.getItem("sesionActiva");
     const tipo   = localStorage.getItem("tipoUsuario");
     if (sesion === "true") {
-        if (tipo === "doctor") window.location.href = "/Clinica/pages/doctor.html";
-        else window.location.href = "/Clinica/pages/inicio.html";
+        if (tipo === "doctor") window.location.href = "/ProyectoModificado/ProyectoMarcos/Clinica/pages/doctor.html";
+        else window.location.href = "/ProyectoModificado/ProyectoMarcos/Clinica/pages/inicio.html";
     }
 });

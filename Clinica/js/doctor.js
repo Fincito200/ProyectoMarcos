@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
     const tipo   = localStorage.getItem("tipoUsuario");
 
     if (sesion !== "true" || tipo !== "doctor") {
-        window.location.href = "/Clinica/pages/login.html";
+        window.location.href = "/ProyectoModificado/ProyectoMarcos/Clinica/pages/login.html";
         return;
     }
 
@@ -158,5 +158,5 @@ function cerrarSesionDoctor() {
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
     localStorage.removeItem("usuarioCorreo");
-    window.location.href = "/Clinica/pages/login.html";
+    window.location.href = "/ProyectoModificado/ProyectoMarcos/Clinica/pages/login.html";
 }

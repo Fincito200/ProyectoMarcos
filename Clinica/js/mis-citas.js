@@ -1,5 +1,5 @@
 const horariosPorMedico = {
-    "👨‍⚕️Méd. Joseph": {
+    "👨‍⚕️ Méd. Joseph": {
         1: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"15:00",label:"03:00 pm"}, {value:"16:00",label:"04:00 pm"} ],
         3: [ {value:"08:00",label:"08:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"14:00",label:"02:00 pm"}, {value:"17:00",label:"05:00 pm"} ],
         5: [ {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"16:00",label:"04:00 pm"} ]
@@ -156,7 +156,7 @@ window.addEventListener("load", function () {
             <div class="text-center py-5 text-muted">
                 <div style="font-size:3rem;">📭</div>
                 <h5 class="mt-3">No tienes citas programadas</h5>
-                <a href="/Clinica/pages/inicio.html" class="btn mt-3 text-white fw-semibold"
+                <a href="/ProyectoMarcos/Clinica/pages/inicio.html" class="btn mt-3 text-white fw-semibold"
                     style="background-color: #0E588E;">
                     📅 Generar una Cita
                 </a>

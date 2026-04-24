@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formCita = document.getElementById("formCita");
     if (!formCita) return;
 
-    formCita.addEventListener("submit", function (e) {
+    formCita.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const nombres      = formCita.querySelector("[name='nombres']").value;
@@ -14,12 +14,39 @@ document.addEventListener("DOMContentLoaded", function () {
         const doctor       = formCita.querySelector("[name='doctor'] option:checked")?.text || "";
         const fecha        = formCita.querySelector("[name='fecha']").value;
         const hora         = formCita.querySelector("[name='hora'] option:checked")?.text || "";
+        const horaValue    = formCita.querySelector("[name='hora']").value;
         const motivo       = formCita.querySelector("[name='motivo']").value;
 
         const [anio, mes, dia] = fecha.split("-");
         const fechaLegible = `${dia}/${mes}/${anio}`;
 
-        // GUARDAR CITA EN LOCALSTORAGE POR USUARIO 
+        // ── Guardar en PostgreSQL via PHP ──
+        try {
+            const res = await fetch("/Clinica/api/guardar_cita.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    correo,
+                    doctor,
+                    especialidad,
+                    fecha,        // YYYY-MM-DD para la BD
+                    hora: horaValue,
+                    motivo
+                })
+            });
+
+            const data = await res.json();
+
+            if (!data.ok) {
+                alert("❌ Error al guardar la cita: " + (data.msg || "Intenta de nuevo."));
+                return;
+            }
+        } catch (err) {
+            alert("❌ No se pudo conectar con el servidor. Verifica que PHP esté corriendo.");
+            return;
+        }
+
+        // ── También guardar en localStorage para que mis-citas.js lo muestre ──
         const nuevaCita = { nombres, apellidos, dni, telefono, correo, especialidad, doctor, fechaLegible, hora, motivo };
         const usuarioCorreo = localStorage.getItem("usuarioCorreo") || "guest";
         const citasKey = "misCitas_" + usuarioCorreo;
@@ -27,9 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
         citasGuardadas.push(nuevaCita);
         localStorage.setItem(citasKey, JSON.stringify(citasGuardadas));
 
+        // ── Mostrar botón mis citas ──
         const btnMisCitas = document.getElementById("btn-mis-citas");
         if (btnMisCitas) btnMisCitas.classList.remove("d-none");
 
+        // ── Mostrar resumen ──
         document.getElementById("resumen-cita").innerHTML = `
             <p class="mb-1"><strong>👤 Paciente:</strong> ${nombres} ${apellidos}</p>
             <p class="mb-1"><strong>🏥 Especialidad:</strong> ${especialidad}</p>
