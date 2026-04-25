@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const [anio, mes, dia] = fecha.split("-");
         const fechaLegible = `${dia}/${mes}/${anio}`;
 
-        // ── Guardar en PostgreSQL via PHP ──
+        // GUARDA EN POSTGRESQL VIA PHP
         try {
-            const res = await fetch("/Clinica/api/guardar_cita.php", {
+                const res = await fetch("/ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_cita.php", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     correo,
                     doctor,
                     especialidad,
-                    fecha,        // YYYY-MM-DD para la BD
+                    fecha,        // YYYY-MM-DD PARA LA BD
                     hora: horaValue,
                     motivo
                 })
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ── También guardar en localStorage para que mis-citas.js lo muestre ──
+        // TAMBIEN GUARDAR EL localStorage PARA QUE mis-citas.js LO MUESTRE
         const nuevaCita = { nombres, apellidos, dni, telefono, correo, especialidad, doctor, fechaLegible, hora, motivo };
         const usuarioCorreo = localStorage.getItem("usuarioCorreo") || "guest";
         const citasKey = "misCitas_" + usuarioCorreo;
@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
         citasGuardadas.push(nuevaCita);
         localStorage.setItem(citasKey, JSON.stringify(citasGuardadas));
 
-        // ── Mostrar botón mis citas ──
+        // MOSTRAR BOTON DE MIS CITAS
         const btnMisCitas = document.getElementById("btn-mis-citas");
         if (btnMisCitas) btnMisCitas.classList.remove("d-none");
 
-        // ── Mostrar resumen ──
+        // MOSTRAR RESUMEN
         document.getElementById("resumen-cita").innerHTML = `
             <p class="mb-1"><strong>👤 Paciente:</strong> ${nombres} ${apellidos}</p>
             <p class="mb-1"><strong>🏥 Especialidad:</strong> ${especialidad}</p>

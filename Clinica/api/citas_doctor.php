@@ -6,6 +6,9 @@ require "conexion.php";
 
 $nombre_doctor = trim($_GET["nombre"] ?? "");
 
+// Quitar emojis y espacios extra para buscar en la BD
+$nombreLimpio = trim(preg_replace('/[^\x00-\x7F]/u', '', $nombre_doctor));
+
 $stmt = $pdo->prepare(
     "SELECT c.id, c.especialidad, c.estado,
             to_char(c.fecha, 'DD/MM/YYYY') AS fecha_legible,
@@ -16,7 +19,7 @@ $stmt = $pdo->prepare(
         WHERE c.medico_nombre = ?
         ORDER BY c.fecha ASC, c.hora ASC"
 );
-$stmt->execute([$nombre_doctor]);
+$stmt->execute([$nombreLimpio]);
 $citas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode(["ok" => true, "citas" => $citas]);

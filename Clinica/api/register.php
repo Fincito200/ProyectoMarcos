@@ -20,7 +20,7 @@ if (!$nombres || !$apellidos || !$dni || !$telefono || !$correo || !$password) {
     exit;
 }
 
-// Verificar si el correo ya existe
+// VERIFICA SI EL CORREO EXISTE
 $check = $pdo->prepare("SELECT id FROM pacientes WHERE correo = ?");
 $check->execute([$correo]);
 if ($check->fetch()) {

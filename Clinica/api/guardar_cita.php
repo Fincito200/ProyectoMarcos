@@ -10,11 +10,13 @@ $data = json_decode(file_get_contents("php://input"), true);
 $correo_paciente = trim($data["correo"] ?? "");
 $medico_nombre   = $data["doctor"] ?? "";
 $especialidad    = $data["especialidad"] ?? "";
-$fecha           = $data["fecha"] ?? ""; // formato YYYY-MM-DD
+$fecha           = $data["fecha"] ?? "";
 $hora            = $data["hora"] ?? "";
 $motivo          = $data["motivo"] ?? "";
 
-// Buscar id del paciente
+// Quitar emojis del nombre del médico antes de guardar
+$medico_nombre = trim(preg_replace('/[^\x00-\x7F]/u', '', $medico_nombre));
+
 $stmt = $pdo->prepare("SELECT id FROM pacientes WHERE correo = ?");
 $stmt->execute([$correo_paciente]);
 $paciente = $stmt->fetch(PDO::FETCH_ASSOC);
