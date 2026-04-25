@@ -81,5 +81,36 @@
     </div>
 </div>
 
+<!-- MODAL COMENTARIO DOCTOR -->
+<div class="modal fade" id="modalComentario" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header text-white" style="background-color:#1a7a4a;">
+                <h5 class="modal-title">📝 Comentario del Doctor</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted small mb-2">Este comentario quedará guardado en el historial del paciente.</p>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Paciente</label>
+                    <input type="text" id="comentario-paciente" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Comentario médico</label>
+                    <textarea id="comentario-texto" class="form-control" rows="5"
+                        placeholder="Escribe aquí el diagnóstico, observaciones o indicaciones..."></textarea>
+                </div>
+                <div id="comentario-exito" class="alert alert-success d-none">✅ Comentario guardado correctamente.</div>
+                <div id="comentario-error" class="alert alert-danger d-none">❌ Error al guardar el comentario.</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn text-white fw-semibold" style="background-color:#1a7a4a;"
+                    onclick="guardarComentario()">💾 Guardar comentario</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

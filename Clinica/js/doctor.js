@@ -1,4 +1,5 @@
 let filtroActivo = "todas";
+let citaComentarioId = null;
 
 window.addEventListener("load", function () {
     const sesion = localStorage.getItem("sesionActiva");
@@ -79,10 +80,14 @@ async function renderCitas() {
 
         const acciones = estado === "pendiente"
             ? `<button class="btn-confirmar" onclick="cambiarEstado(${cita.id}, 'confirmada')">✅ Confirmar</button>
-                <button class="btn-cancelar-doc ms-auto" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
+               <button class="btn-cancelar-doc ms-auto" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
             : estado === "confirmada"
             ? `<button class="btn-atender" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
             : `<span class="text-muted small">Cita finalizada</span>`;
+
+        const comentarioBadge = cita.comentario
+            ? `<span class="badge bg-info text-dark ms-1" style="font-size:0.7rem;">💬 Con comentario</span>`
+            : "";
 
         const citaDataStr = encodeURIComponent(JSON.stringify(cita));
 
@@ -91,16 +96,21 @@ async function renderCitas() {
             <div class="cita-card">
                 <div class="cita-header">
                     <span class="cita-especialidad">🏥 ${cita.especialidad}</span>
-                    ${estadoBadge}
+                    <div class="d-flex align-items-center gap-1">
+                        ${estadoBadge}
+                        ${comentarioBadge}
+                    </div>
                 </div>
                 <div class="cita-body">
                     <p class="dato"><strong>👤 Paciente:</strong> ${cita.nombres} ${cita.apellidos}</p>
                     <p class="dato"><strong>📅 Fecha:</strong> ${cita.fecha_legible} &nbsp; <strong>⏰</strong> ${cita.hora}</p>
                     <p class="dato"><strong>📝 Motivo:</strong> ${cita.motivo}</p>
                     ${cita.dni ? `<p class="dato"><strong>🪪 DNI:</strong> ${cita.dni}</p>` : ""}
+                    ${cita.comentario ? `<p class="dato border-top pt-2 mt-2"><strong>💬 Comentario:</strong> ${cita.comentario}</p>` : ""}
                 </div>
                 <div class="cita-footer">
                     ${acciones}
+                    <button class="btn btn-sm btn-outline-info ms-1" onclick="abrirComentario(${cita.id}, '${cita.nombres} ${cita.apellidos}', '${(cita.comentario || "").replace(/'/g, "\\'")}')">💬</button>
                     <button class="btn btn-sm btn-outline-secondary ms-1" onclick="verDetalle('${citaDataStr}')">🔍</button>
                 </div>
             </div>
@@ -129,6 +139,43 @@ async function cambiarEstado(id, nuevoEstado) {
     renderCitas();
 }
 
+function abrirComentario(id, paciente, comentarioActual) {
+    citaComentarioId = id;
+    document.getElementById("comentario-paciente").value = paciente;
+    document.getElementById("comentario-texto").value    = comentarioActual || "";
+    document.getElementById("comentario-exito").classList.add("d-none");
+    document.getElementById("comentario-error").classList.add("d-none");
+    new bootstrap.Modal(document.getElementById("modalComentario")).show();
+}
+
+async function guardarComentario() {
+    const comentario = document.getElementById("comentario-texto").value.trim();
+    const exitoEl    = document.getElementById("comentario-exito");
+    const errorEl    = document.getElementById("comentario-error");
+
+    try {
+        const res = await fetch("/ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_comentario.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: citaComentarioId, comentario })
+        });
+        const data = await res.json();
+
+        if (data.ok) {
+            exitoEl.classList.remove("d-none");
+            errorEl.classList.add("d-none");
+            setTimeout(() => {
+                bootstrap.Modal.getInstance(document.getElementById("modalComentario")).hide();
+                renderCitas();
+            }, 1500);
+        } else {
+            errorEl.classList.remove("d-none");
+        }
+    } catch (err) {
+        errorEl.classList.remove("d-none");
+    }
+}
+
 function verDetalle(dataStr) {
     const cita = JSON.parse(decodeURIComponent(dataStr));
     document.getElementById("detalle-body").innerHTML = `
@@ -141,7 +188,8 @@ function verDetalle(dataStr) {
         <div class="mb-2"><strong>👨‍⚕️ Médico:</strong> ${cita.medico_nombre}</div>
         <div class="mb-2"><strong>📅 Fecha:</strong> ${cita.fecha_legible}</div>
         <div class="mb-2"><strong>⏰ Hora:</strong> ${cita.hora}</div>
-        <div class="mb-0"><strong>📝 Motivo:</strong> ${cita.motivo}</div>
+        <div class="mb-2"><strong>📝 Motivo:</strong> ${cita.motivo}</div>
+        ${cita.comentario ? `<hr><div class="mb-0"><strong>💬 Comentario del doctor:</strong><br>${cita.comentario}</div>` : ""}
     `;
     new bootstrap.Modal(document.getElementById("modalDetalle")).show();
 }
