@@ -1,6 +1,5 @@
 -- Script de base de datos para Clinica_JosePardo (PostgreSQL)
--- Ejecutar manualmente en pgAdmin o psql antes de 
-iniciar Spring Boot
+-- Ejecutar manualmente en pgAdmin o psql antes de iniciar Spring Boot
 
 CREATE TABLE IF NOT EXISTS pacientes (
     id         SERIAL PRIMARY KEY,
@@ -35,11 +34,11 @@ CREATE TABLE IF NOT EXISTS citas (
     created_at     TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 );
 
--- Datos iniciales de médicos (contraseña: la misma que tenías en tu BD)
+-- Datos iniciales de médicos (contraseña: doctor123)
 INSERT INTO medicos (nombre, correo, password, especialidad) VALUES
-('Méd. Joseph',  'joseph@clinica.com',  '$2b$10$JHqmiurcA9h1SjI7qXCf.xQVkr/zqO8kJzvQzCvXwkqOEsLInikq', 'Medicina General'),
-('Méd. Eduardo', 'eduardo@clinica.com', '$2b$10$JHqmiurcA9h1SjI7qXCf.xQVkr/zqO8kJzvQzCvXwkqOEsLInikq', 'Oftalmología'),
-('Méd. Ney',     'ney@clinica.com',     '$2b$10$JHqmiurcA9h1SjI7qXCf.xQVkr/zqO8kJzvQzCvXwkqOEsLInikq', 'Cardiología'),
-('Méd. Enrique', 'enrique@clinica.com', '$2b$10$JHqmiurcA9h1SjI7qXCf.xQVkr/zqO8kJzvQzCvXwkqOEsLInikq', 'Pediatría'),
-('Méd. Aaron',   'aaron@clinica.com',   '$2b$10$JHqmiurcA9h1SjI7qXCf.xQVkr/zqO8kJzvQzCvXwkqOEsLInikq', 'Ginecología')
+('Méd. Joseph',  'joseph@clinica.com',  '$2a$10$R7dRn0A80Dap.vZCdQXlaun1JprS8H.PJDz/B0xJrpVBrSIhOs.1.', 'Medicina General'),
+('Méd. Eduardo', 'eduardo@clinica.com', '$2a$10$R7dRn0A80Dap.vZCdQXlaun1JprS8H.PJDz/B0xJrpVBrSIhOs.1.', 'Oftalmología'),
+('Méd. Ney',     'ney@clinica.com',     '$2a$10$R7dRn0A80Dap.vZCdQXlaun1JprS8H.PJDz/B0xJrpVBrSIhOs.1.', 'Cardiología'),
+('Méd. Enrique', 'enrique@clinica.com', '$2a$10$R7dRn0A80Dap.vZCdQXlaun1JprS8H.PJDz/B0xJrpVBrSIhOs.1.', 'Pediatría'),
+('Méd. Aaron',   'aaron@clinica.com',   '$2a$10$R7dRn0A80Dap.vZCdQXlaun1JprS8H.PJDz/B0xJrpVBrSIhOs.1.', 'Ginecología')
 ON CONFLICT (correo) DO NOTHING;
