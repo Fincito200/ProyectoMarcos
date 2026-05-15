@@ -367,4 +367,12 @@ public class ClinicaController {
 
         return ResponseEntity.ok(Map.of("ok", true));
     }
+
+@GetMapping("/generar-hash")
+public ResponseEntity<String> generarHash() {
+    String hash = encoder.encode("doctor123");
+    return ResponseEntity.ok(hash);
 }
+
+}
+
