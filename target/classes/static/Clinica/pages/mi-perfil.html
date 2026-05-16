@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Clínica José Pardo</title>
+    <link rel="icon" href="/Clinica/img/3063176.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/Clinica/css/pages.css">
+    <link rel="stylesheet" href="/Clinica/css/mi-perfil.css">
+</head>
+<body>
+
+<!-- FRANJA SUPERIOR -->
+<div class="franja-contacto d-none d-md-block">
+    <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+        <div class="d-flex gap-4">
+            <span>📞 Central: (01) 111-2222</span>
+            <span>🕐 Lun-Sáb: 7:00 am - 8:00 pm</span>
+            <span>📍 Av. José Pardo 452, Comas</span>
+        </div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/inicio.html">
+            <img src="/Clinica/img/3063176.png" alt="Logo" height="40" class="rounded">
+            <span class="fw-bold">José Pardo</span>
+        </a>
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <a href="/Clinica/pages/mis-citas.html" class="btn btn-outline-light fw-semibold">
+                ← Mis Citas
+            </a>
+            <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
+            <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
+                🚪 Cerrar Sesión
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO -->
+<div class="container py-5">
+    <div class="perfil-card">
+        <h2 class="fw-bold mb-1" style="color: #0E588E;">👤 Mi Perfil</h2>
+        <p class="text-muted mb-4">Actualiza tu información personal.</p>
+
+        <div id="alerta-exito" class="alert alert-success d-none py-2"></div>
+        <div id="alerta-error" class="alert alert-danger d-none py-2"></div>
+
+        <div class="card shadow-sm border-0 p-4">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Nombres</label>
+                    <input type="text" id="p-nombres" class="form-control" placeholder="Juan Carlos">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Apellidos</label>
+                    <input type="text" id="p-apellidos" class="form-control" placeholder="López Pérez">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">DNI</label>
+                    <input type="text" id="p-dni" class="form-control" maxlength="8" placeholder="12345678">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Teléfono</label>
+                    <input type="tel" id="p-telefono" class="form-control" maxlength="9" placeholder="987654321">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Correo electrónico</label>
+                <input type="email" id="p-correo" class="form-control" placeholder="ejemplo@gmail.com">
+            </div>
+
+            <hr>
+            <p class="text-muted small mb-3">🔒 Cambiar contraseña (dejar en blanco para no cambiarla)</p>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Nueva contraseña</label>
+                    <div class="input-pass">
+                        <input type="password" id="p-pass-nueva" class="form-control" placeholder="••••••••">
+                        <button type="button" class="toggle-pass" onclick="togglePass('p-pass-nueva', this)">👁️</button>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">Confirmar contraseña</label>
+                    <div class="input-pass">
+                        <input type="password" id="p-pass-confirmar" class="form-control" placeholder="••••••••">
+                        <button type="button" class="toggle-pass" onclick="togglePass('p-pass-confirmar', this)">👁️</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn text-white fw-semibold w-100 mt-2"
+                    style="background-color: #0E588E;" onclick="guardarPerfil()">
+                💾 Guardar cambios
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="/Clinica/js/Login.js"></script>
+</body>
+</html>

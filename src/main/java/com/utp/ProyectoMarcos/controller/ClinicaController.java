@@ -18,8 +18,6 @@ import java.util.*;
 
 /**
  * Controlador principal que reemplaza todos los archivos PHP de la carpeta api/.
- * Los endpoints están mapeados en la misma ruta que usaba el frontend original:
- * /ProyectoModificado/ProyectoMarcos/Clinica/api/
  */
 @RestController
 @RequestMapping("/ProyectoModificado/ProyectoMarcos/Clinica/api")
@@ -37,10 +35,6 @@ public class ClinicaController {
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    // ============================================================
-    // LOGIN — reemplaza login.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/login.php
-    // ============================================================
     @PostMapping("/login.php")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> body) {
         String correo = body.getOrDefault("correo", "").trim();
@@ -77,10 +71,6 @@ public class ClinicaController {
         return ResponseEntity.ok(resp);
     }
 
-    // ============================================================
-    // REGISTER — reemplaza register.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/register.php
-    // ============================================================
     @PostMapping("/register.php")
     public ResponseEntity<Map<String, Object>> register(@RequestBody Map<String, String> body) {
         Map<String, Object> resp = new LinkedHashMap<>();
@@ -120,10 +110,6 @@ public class ClinicaController {
         return ResponseEntity.ok(resp);
     }
 
-    // ============================================================
-    // VERIFICAR CORREO — reemplaza verificar_correo.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/verificar_correo.php
-    // ============================================================
     @PostMapping("/verificar_correo.php")
     public ResponseEntity<Map<String, Object>> verificarCorreo(@RequestBody Map<String, String> body) {
         String correo = body.getOrDefault("correo", "").trim();
@@ -131,10 +117,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", existe));
     }
 
-    // ============================================================
-    // CAMBIAR PASSWORD — reemplaza cambiar_password.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/cambiar_password.php
-    // ============================================================
     @PostMapping("/cambiar_password.php")
     public ResponseEntity<Map<String, Object>> cambiarPassword(@RequestBody Map<String, String> body) {
         String correo   = body.getOrDefault("correo", "").trim();
@@ -156,10 +138,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ============================================================
-    // GUARDAR CITA — reemplaza guardar_cita.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_cita.php
-    // ============================================================
     @PostMapping("/guardar_cita.php")
     public ResponseEntity<Map<String, Object>> guardarCita(@RequestBody Map<String, String> body) {
         String correo       = body.getOrDefault("correo", "").trim();
@@ -195,10 +173,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Cita guardada correctamente."));
     }
 
-    // ============================================================
-    // MIS CITAS (paciente) — reemplaza mis_citas.php
-    // GET /ProyectoModificado/ProyectoMarcos/Clinica/api/mis_citas.php?correo=...
-    // ============================================================
     @GetMapping("/mis_citas.php")
     public ResponseEntity<Map<String, Object>> misCitas(@RequestParam String correo) {
         List<Cita> citas = citaRepo.findByPacienteCorreoOrderByFechaDescHoraDesc(correo.trim());
@@ -228,10 +202,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true, "citas", lista));
     }
 
-    // ============================================================
-    // CITAS DEL DOCTOR — reemplaza citas_doctor.php
-    // GET /ProyectoModificado/ProyectoMarcos/Clinica/api/citas_doctor.php?nombre=...
-    // ============================================================
     @GetMapping("/citas_doctor.php")
     public ResponseEntity<Map<String, Object>> citasDoctor(@RequestParam String nombre) {
         // Limpiar emojis igual que el PHP original
@@ -264,10 +234,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true, "citas", lista));
     }
 
-    // ============================================================
-    // ACTUALIZAR ESTADO — reemplaza actualizar_estado.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/actualizar_estado.php
-    // ============================================================
     @PostMapping("/actualizar_estado.php")
     public ResponseEntity<Map<String, Object>> actualizarEstado(@RequestBody Map<String, Object> body) {
         int id = body.containsKey("id") ? (int) body.get("id") : 0;
@@ -290,10 +256,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ============================================================
-    // EDITAR CITA — reemplaza editar_cita.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/editar_cita.php
-    // ============================================================
     @PostMapping("/editar_cita.php")
     public ResponseEntity<Map<String, Object>> editarCita(@RequestBody Map<String, Object> body) {
         int id = body.containsKey("id") ? (int) body.get("id") : 0;
@@ -323,10 +285,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ============================================================
-    // ELIMINAR CITA — reemplaza eliminar_cita.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/eliminar_cita.php
-    // ============================================================
     @PostMapping("/eliminar_cita.php")
     public ResponseEntity<Map<String, Object>> eliminarCita(@RequestBody Map<String, Object> body) {
         int id = body.containsKey("id") ? (int) body.get("id") : 0;
@@ -343,10 +301,6 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ============================================================
-    // GUARDAR COMENTARIO — reemplaza guardar_comentario.php
-    // POST /ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_comentario.php
-    // ============================================================
     @PostMapping("/guardar_comentario.php")
     public ResponseEntity<Map<String, Object>> guardarComentario(@RequestBody Map<String, Object> body) {
         int id = body.containsKey("id") ? (int) body.get("id") : 0;
@@ -368,11 +322,82 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-@GetMapping("/generar-hash")
-public ResponseEntity<String> generarHash() {
+
+
+    @GetMapping("/perfil.php")
+    public ResponseEntity<Map<String, Object>> getPerfil(@RequestParam String correo) {
+    Optional<Paciente> opt = pacienteRepo.findByCorreo(correo.trim());
+    if (opt.isEmpty()) {
+        return ResponseEntity.ok(Map.of("ok", false, "msg", "Paciente no encontrado."));
+    }
+    Paciente p = opt.get();
+    Map<String, Object> resp = new LinkedHashMap<>();
+    resp.put("ok", true);
+    resp.put("nombres", p.getNombres());
+    resp.put("apellidos", p.getApellidos());
+    resp.put("dni", p.getDni());
+    resp.put("telefono", p.getTelefono());
+    resp.put("correo", p.getCorreo());
+    return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping("/actualizar_perfil.php")
+    public ResponseEntity<Map<String, Object>> actualizarPerfil(@RequestBody Map<String, String> body) {
+    String correoActual = body.getOrDefault("correo_actual", "").trim();
+    String nombres      = body.getOrDefault("nombres", "").trim();
+    String apellidos    = body.getOrDefault("apellidos", "").trim();
+    String dni          = body.getOrDefault("dni", "").trim();
+    String telefono     = body.getOrDefault("telefono", "").trim();
+    String correoNuevo  = body.getOrDefault("correo_nuevo", "").trim();
+    String passwordNueva = body.getOrDefault("password_nueva", "");
+
+    if (correoActual.isEmpty() || nombres.isEmpty() || apellidos.isEmpty()
+            || dni.isEmpty() || telefono.isEmpty() || correoNuevo.isEmpty()) {
+        return ResponseEntity.ok(Map.of("ok", false, "msg", "Completa todos los campos obligatorios."));
+    }
+
+    Optional<Paciente> opt = pacienteRepo.findByCorreo(correoActual);
+    if (opt.isEmpty()) {
+        return ResponseEntity.ok(Map.of("ok", false, "msg", "Paciente no encontrado."));
+    }
+
+    // Si cambió el correo, verificar que el nuevo no esté en uso
+    if (!correoNuevo.equals(correoActual) && pacienteRepo.existsByCorreo(correoNuevo)) {
+        return ResponseEntity.ok(Map.of("ok", false, "msg", "Ese correo ya está registrado por otro usuario."));
+    }
+
+    Paciente p = opt.get();
+    p.setNombres(nombres);
+    p.setApellidos(apellidos);
+    p.setDni(dni);
+    p.setTelefono(telefono);
+    p.setCorreo(correoNuevo);
+
+    if (!passwordNueva.isEmpty()) {
+        if (passwordNueva.length() < 6) {
+            return ResponseEntity.ok(Map.of("ok", false, "msg", "La contraseña nueva debe tener al menos 6 caracteres."));
+        }
+        p.setPassword(encoder.encode(passwordNueva));
+    }
+
+    pacienteRepo.save(p);
+
+    Map<String, Object> resp = new LinkedHashMap<>();
+    resp.put("ok", true);
+    resp.put("nombres", p.getNombres());
+    resp.put("correo", p.getCorreo());
+    return ResponseEntity.ok(resp);
+    }
+
+
+    
+    @GetMapping("/generar-hash")
+    public ResponseEntity<String> generarHash() {
     String hash = encoder.encode("doctor123");
     return ResponseEntity.ok(hash);
-}
+    }
+
+
 
 }
 

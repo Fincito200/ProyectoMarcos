@@ -143,6 +143,9 @@ async function guardarEdicion() {
     location.reload();
 }
 
+
+
+
 window.addEventListener("load", async function () {
     const sesion = localStorage.getItem("sesionActiva");
     const tipo   = localStorage.getItem("tipoUsuario");
@@ -161,6 +164,10 @@ window.addEventListener("load", async function () {
 
     const citas      = await getCitasPaciente();
     const contenedor = document.getElementById("lista-citas");
+
+    // ─── SISTEMA DE NOTIFICACIONES ───────────────────────────
+    mostrarNotificacionesCitas(citas);
+    // ─────────────────────────────────────────────────────────
 
     if (citas.length === 0) {
         contenedor.innerHTML = `
@@ -191,7 +198,6 @@ window.addEventListener("load", async function () {
             ? '<span class="badge bg-secondary ms-1">🏁 Atendida</span>'
             : '<span class="badge bg-warning text-dark ms-1">⏳ Pendiente</span>';
 
-        // Nombre del médico sin emoji para buscar horarios
         const medicoLimpio = cita.medico_nombre.replace(/[^\x00-\x7F]/g, "").trim();
 
         html += `
@@ -228,3 +234,72 @@ window.addEventListener("load", async function () {
     html += '</div>';
     contenedor.innerHTML = html;
 });
+
+// ═══════════════════════════════════════════════════════════════
+//  SISTEMA DE NOTIFICACIONES DE CITAS
+// ═══════════════════════════════════════════════════════════════
+
+function mostrarNotificacionesCitas(citas) {
+    // Solo citas activas (no atendidas)
+    const citasActivas = citas.filter(c => c.estado !== "atendida");
+    if (citasActivas.length === 0) return;
+
+    const alertas = [];
+
+    citasActivas.forEach(function(cita) {
+        const [dia, mes, anio] = cita.fecha_legible.split("/");
+        const fechaCita = new Date(anio, mes - 1, dia);
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+        const diffDias = Math.ceil((fechaCita - hoy) / (1000 * 60 * 60 * 24));
+
+        if (diffDias === 0) {
+            alertas.push({
+                tipo: "danger",
+                icono: "🚨",
+                mensaje: `<strong>¡Tu cita es HOY!</strong> ${cita.especialidad} con ${cita.medico_nombre} a las ${cita.hora}.`
+            });
+        } else if (diffDias === 1) {
+            alertas.push({
+                tipo: "warning",
+                icono: "⚠️",
+                mensaje: `<strong>¡Mañana tienes cita!</strong> ${cita.especialidad} con ${cita.medico_nombre} a las ${cita.hora}.`
+            });
+        } else if (diffDias === 2) {
+            alertas.push({
+                tipo: "info",
+                icono: "📅",
+                mensaje: `<strong>Cita en 2 días</strong> (${cita.fecha_legible}): ${cita.especialidad} con ${cita.medico_nombre} a las ${cita.hora}.`
+            });
+        } else if (diffDias > 0 && diffDias <= 7) {
+            alertas.push({
+                tipo: "primary",
+                icono: "🗓️",
+                mensaje: `<strong>Cita próxima en ${diffDias} días</strong> (${cita.fecha_legible}): ${cita.especialidad} con ${cita.medico_nombre}.`
+            });
+        }
+    });
+
+    if (alertas.length === 0) return;
+
+    // Crear el contenedor de notificaciones
+    const notifDiv = document.createElement("div");
+    notifDiv.id = "notificaciones-citas";
+    notifDiv.style.marginBottom = "1.5rem";
+
+    alertas.forEach(function(alerta) {
+        const div = document.createElement("div");
+        div.className = `alert alert-${alerta.tipo} alert-dismissible fade show d-flex align-items-center gap-2`;
+        div.setAttribute("role", "alert");
+        div.innerHTML = `
+            <span style="font-size:1.3rem;">${alerta.icono}</span>
+            <span>${alerta.mensaje}</span>
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        `;
+        notifDiv.appendChild(div);
+    });
+
+    // Insertarlo antes de la lista de citas
+    const contenedor = document.getElementById("lista-citas");
+    contenedor.parentNode.insertBefore(notifDiv, contenedor);
+};
