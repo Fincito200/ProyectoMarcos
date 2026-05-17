@@ -13,12 +13,12 @@ public class PageController {
     // Ruta raíz redirige a inicio
     @GetMapping("/")
     public String index() {
-        return "forward:/Clinica/pages/inicio.html";
+        return "forward:/Clinica/pages/index.html";
     }
 
-    @GetMapping("/inicio")
+    @GetMapping("/index")
     public String inicio() {
-        return "forward:/Clinica/pages/inicio.html";
+        return "forward:/Clinica/pages/index.html";
     }
 
     @GetMapping("/login")

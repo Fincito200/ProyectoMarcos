@@ -174,7 +174,7 @@ window.addEventListener("load", async function () {
             <div class="text-center py-5 text-muted">
                 <div style="font-size:3rem;">📭</div>
                 <h5 class="mt-3">No tienes citas programadas</h5>
-                <a href="/Clinica/pages/inicio.html" class="btn mt-3 text-white fw-semibold"
+                <a href="/Clinica/pages/index.html" class="btn mt-3 text-white fw-semibold"
                     style="background-color: #0E588E;">
                     📅 Generar una Cita
                 </a>

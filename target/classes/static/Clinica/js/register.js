@@ -111,7 +111,7 @@ async function registrar() {
             localStorage.setItem("tipoUsuario",   "paciente");
             localStorage.setItem("usuarioCorreo", data.correo);
             mostrarExito("¡Cuenta creada! Redirigiendo...");
-            setTimeout(() => { window.location.href = "/Clinica/pages/inicio.html"; }, 1500);
+            setTimeout(() => { window.location.href = "/Clinica/pages/index.html"; }, 1500);
         } else {
             mostrarError(data.msg);
         }
@@ -126,6 +126,6 @@ window.addEventListener("load", function () {
     const tipo   = localStorage.getItem("tipoUsuario");
     if (sesion === "true") {
         if (tipo === "doctor") window.location.href = "/Clinica/pages/doctor.html";
-        else window.location.href = "/Clinica/pages/inicio.html";
+        else window.location.href = "/Clinica/pages/index.html";
     }
 });

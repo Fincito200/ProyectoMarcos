@@ -7,12 +7,12 @@ window.addEventListener("load", function () {
     if (document.getElementById("panel-paciente")) {
         if (sesion === "true") {
             if (tipo === "doctor") window.location.href = "/Clinica/pages/doctor.html";
-            else window.location.href = "/Clinica/pages/inicio.html";
+            else window.location.href = "/Clinica/pages/index.html";
         }
         return;
     }
 
-    // Lógica para inicio.html y otras páginas
+    // Lógica para index.html y otras páginas
     const btnLogin   = document.getElementById("btn-login");
     const btnCerrar  = document.getElementById("btn-cerrar-sesion");
     const btnMisCitas = document.getElementById("btn-mis-citas");
@@ -75,7 +75,7 @@ async function loginPaciente() {
             localStorage.setItem("usuarioNombre", data.nombre);
             localStorage.setItem("tipoUsuario",   "paciente");
             localStorage.setItem("usuarioCorreo", data.correo);
-            window.location.href = "/Clinica/pages/inicio.html";
+            window.location.href = "/Clinica/pages/index.html";
         } else {
             mostrarError();
         }
@@ -117,7 +117,7 @@ function cerrarSesion() {
     localStorage.removeItem("tipoUsuario");
     localStorage.removeItem("doctorNombre");
     localStorage.removeItem("usuarioCorreo");
-    window.location.href = "/Clinica/pages/inicio.html";
+    window.location.href = "/Clinica/pages/index.html";
 }
 
 function cerrarSesionDoctor() {
