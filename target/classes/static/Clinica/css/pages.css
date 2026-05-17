@@ -14,7 +14,7 @@ body {
 }
 
 
-/* HERO / CARRUSEL index.htmlusa height 420px · demás páginas usan 380px */
+/* HERO / CARRUSEL index.html usa height 420px · demás páginas usan 380px */
 .hero-slide {
     height: 420px;
     display: flex;
@@ -87,7 +87,7 @@ body {
     border-color: #fff;
 }
 
-/* Cajas de estadísticas dentro del hero (index.html */
+/* Cajas de estadísticas dentro del hero (index.html) */
 .hero-stat-box {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -105,7 +105,7 @@ body {
 }
 
 
-/* SECCIÓN SERVICIOS (index.html */
+/* SECCIÓN SERVICIOS (index.html) */
 .seccion-ayuda {
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -149,7 +149,7 @@ body {
 }
 
 
-/* SECCIÓN ESTADÍSTICAS (index.html */
+/* SECCIÓN ESTADÍSTICAS (index.html) */
 .stats-section {
     background: linear-gradient(135deg, #0A3760, #0E588E);
     padding: 50px 0;
@@ -158,7 +158,7 @@ body {
 .stat-item .label { color: rgba(255, 255, 255, 0.75); font-size: 0.9rem; margin-top: 4px; }
 
 
-/* PILLS DE ESPECIALIDADES (index.html· nuestros-doctores.html) */
+/* PILLS DE ESPECIALIDADES (index.html · nuestros-doctores.html) */
 .especialidad-pill {
     display: flex;
     align-items: center;
@@ -182,7 +182,7 @@ body {
 .especialidad-pill span { font-size: 1.3rem; }
 
 
-/* PASOS "CÓMO FUNCIONA" (index.html */
+/* PASOS "CÓMO FUNCIONA" (index.html) */
 .paso-num {
     width: 52px;
     height: 52px;
@@ -207,7 +207,7 @@ body {
 }
 
 
-/* TESTIMONIOS (index.html */
+/* TESTIMONIOS (index.html) */
 .testimonio-card {
     background: #fff;
     border-radius: 16px;
@@ -230,7 +230,7 @@ body {
 }
 
 
-/* BANNER DE URGENCIAS (index.html· nosotros.html) */
+/* BANNER DE URGENCIAS (index.html · nosotros.html) */
 .urgencias-banner {
     background: linear-gradient(135deg, #c0392b, #e74c3c);
     color: #fff;
@@ -239,7 +239,7 @@ body {
 }
 
 
-/* CARDS DE NOTICIAS / ARTÍCULOS (index.html· consejos-de-salud.html) */
+/* CARDS DE NOTICIAS / ARTÍCULOS (index.html · consejos-de-salud.html) */
 .noticia-card,
 .articulo-card {
     border: none;
@@ -264,7 +264,7 @@ body {
 }
 
 
-/* CARDS DE MÉDICOS (index.html· nuestros-doctores.html) */
+/* CARDS DE MÉDICOS (index.html · nuestros-doctores.html) */
 .medico-card {
     border: none;
     border-radius: 18px;
