@@ -210,7 +210,7 @@ window.addEventListener("load", async function () {
                 </div>
                 <div class="card-body small">
                     <p class="mb-1"><strong>👤 Paciente:</strong> ${cita.nombres} ${cita.apellidos}</p>
-                    <p class="mb-1"><strong>👨‍⚕️ Médico:</strong> ${cita.medico_nombre}</p>
+                    <p class="mb-1"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'16'%20r%3D'11'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M13%2035%20C13%2028%2039%2028%2039%2035%20L39%2046%20L13%2046%20Z'%20fill%3D'%230A3760'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2018%2038%2018%2042%20C18%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2026%2038%2026%2042%20C26%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Ccircle%20cx%3D'22'%20cy%3D'46'%20r%3D'2'%20fill%3D'%2329A8EF'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Médico:</strong> ${cita.medico_nombre}</p>
                     <p class="mb-1"><strong>📅 Fecha:</strong> ${cita.fecha_legible}</p>
                     <p class="mb-1"><strong>⏰ Hora:</strong> ${cita.hora}</p>
                     <p class="mb-0"><strong>📝 Motivo:</strong> ${cita.motivo}</p>
