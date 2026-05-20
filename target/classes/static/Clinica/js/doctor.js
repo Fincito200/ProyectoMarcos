@@ -11,7 +11,7 @@ window.addEventListener("load", function () {
     }
 
     const nombre = localStorage.getItem("doctorNombre") || "Doctor";
-    document.getElementById("titulo-bienvenida").textContent = "<img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'16'%20r%3D'11'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M13%2035%20C13%2028%2039%2028%2039%2035%20L39%2046%20L13%2046%20Z'%20fill%3D'%230A3760'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2018%2038%2018%2042%20C18%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2026%2038%2026%2042%20C26%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Ccircle%20cx%3D'22'%20cy%3D'46'%20r%3D'2'%20fill%3D'%2329A8EF'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Bienvenido, " + nombre;
+    document.getElementById("titulo-bienvenida").textContent = "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Bienvenido, " + nombre;
     document.getElementById("nav-nombre-doctor").textContent = nombre;
 
     renderCitas();
@@ -181,11 +181,11 @@ function verDetalle(dataStr) {
     document.getElementById("detalle-body").innerHTML = `
         <div class="mb-2"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'10'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M8%2048%20C8%2036%2044%2036%2044%2048'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'6'%20fill%3D'%2329A8EF'%20opacity%3D'.4'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Nombre:</strong> ${cita.nombres} ${cita.apellidos}</div>
         ${cita.dni      ? `<div class="mb-2"><strong>🪪 DNI:</strong> ${cita.dni}</div>`           : ""}
-        ${cita.telefono ? `<div class="mb-2"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'26'%20r%3D'22'%20fill%3D'%230A3760'%2F%3E%3Cpath%20d%3D'M16%2016%20C18%2020%2022%2024%2026%2026%20C30%2028%2034%2030%2036%2034%20L32%2038%20C28%2036%2020%2028%2014%2020%20Z'%20fill%3D'%2329A8EF'%2F%3E%3Cpath%20d%3D'M34%2034%20L38%2030%20C40%2032%2042%2034%2040%2038%20C38%2042%2032%2044%2026%2040'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M16%2016%20L20%2012%20C22%2010%2024%2012%2026%2014%20C22%2018%2018%2020%2016%2016Z'%20fill%3D'%230E588E'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Teléfono:</strong> ${cita.telefono}</div>` : ""}
+        ${cita.telefono ? `<div class="mb-2"><strong><img src="/Clinica/img/emojis/telefono.png" width="20" height="20" alt="teléfono" style="vertical-align:middle;"> Teléfono:</strong> ${cita.telefono}</div>` : ""}
         ${cita.correo   ? `<div class="mb-2"><strong>📧 Correo:</strong> ${cita.correo}</div>`     : ""}
         <hr>
         <div class="mb-2"><strong>🏥 Especialidad:</strong> ${cita.especialidad}</div>
-        <div class="mb-2"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'16'%20r%3D'11'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M13%2035%20C13%2028%2039%2028%2039%2035%20L39%2046%20L13%2046%20Z'%20fill%3D'%230A3760'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2018%2038%2018%2042%20C18%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M22%2036%20C22%2036%2026%2038%2026%2042%20C26%2046%2022%2046%2022%2046'%20stroke%3D'%2329A8EF'%20stroke-width%3D'2'%20fill%3D'none'%2F%3E%3Ccircle%20cx%3D'22'%20cy%3D'46'%20r%3D'2'%20fill%3D'%2329A8EF'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Médico:</strong> ${cita.medico_nombre}</div>
+        <div class="mb-2"><strong><img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Médico:</strong> ${cita.medico_nombre}</div>
         <div class="mb-2"><strong>📅 Fecha:</strong> ${cita.fecha_legible}</div>
         <div class="mb-2"><strong>⏰ Hora:</strong> ${cita.hora}</div>
         <div class="mb-2"><strong>📝 Motivo:</strong> ${cita.motivo}</div>
