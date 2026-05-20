@@ -21,9 +21,9 @@
             José Pardo
         </a>
         <div class="d-flex align-items-center gap-3">
-            <span class="badge-doctor-nav">🩺 Panel Médico</span>
+            <span class="badge-doctor-nav"><img src="/Clinica/img/emojis/estetoscopio.png" width="20" height="20" alt="médico" style="vertical-align:middle;"> Panel Médico</span>
             <span id="nav-nombre-doctor" class="text-white fw-semibold small"></span>
-            <button class="btn btn-outline-light btn-sm fw-semibold" onclick="cerrarSesionDoctor()">🚪 Salir</button>
+            <button class="btn btn-outline-light btn-sm fw-semibold" onclick="cerrarSesionDoctor()"><img src="/Clinica/img/emojis/cerrar-sesion.png" width="20" height="20" alt="cerrar sesión" style="vertical-align:middle;"> Salir</button>
         </div>
     </div>
 </nav>
@@ -46,13 +46,13 @@
 <div class="filtros-bar">
     <div class="container d-flex align-items-center gap-2 flex-wrap">
         <span class="text-muted small fw-semibold me-1">Filtrar:</span>
-        <button class="btn-filtro active" onclick="filtrarCitas('todas', this)">📋 Todas</button>
-        <button class="btn-filtro" onclick="filtrarCitas('pendiente', this)">⏳ Pendientes</button>
-        <button class="btn-filtro" onclick="filtrarCitas('confirmada', this)">✅ Confirmadas</button>
-        <button class="btn-filtro" onclick="filtrarCitas('atendida', this)">🏁 Atendidas</button>
+        <button class="btn-filtro active" onclick="filtrarCitas('todas', this)"><img src="/Clinica/img/emojis/historial.png" width="20" height="20" alt="historial" style="vertical-align:middle;"> Todas</button>
+        <button class="btn-filtro" onclick="filtrarCitas('pendiente', this)"><img src="/Clinica/img/emojis/hora.png" width="20" height="20" alt="tiempo" style="vertical-align:middle;"> Pendientes</button>
+        <button class="btn-filtro" onclick="filtrarCitas('confirmada', this)"><img src="/Clinica/img/emojis/confirmado.png" width="20" height="20" alt="confirmado" style="vertical-align:middle;"> Confirmadas</button>
+        <button class="btn-filtro" onclick="filtrarCitas('atendida', this)"><img src="/Clinica/img/emojis/completado.png" width="20" height="20" alt="completado" style="vertical-align:middle;"> Atendidas</button>
         <div class="ms-auto">
             <input type="text" id="buscar-paciente" class="form-control form-control-sm"
-                    placeholder="🔍 Buscar paciente..." style="min-width:180px;" oninput="renderCitas()">
+                    placeholder="<img src="/Clinica/img/emojis/buscar.png" width="20" height="20" alt="buscar" style="vertical-align:middle;"> Buscar paciente..." style="min-width:180px;" oninput="renderCitas()">
         </div>
     </div>
 </div>
@@ -60,7 +60,7 @@
 <!-- CITAS -->
 <div class="seccion-citas">
     <div class="container">
-        <h5 class="citas-titulo">📅 Citas asignadas a tu consulta</h5>
+        <h5 class="citas-titulo"><img src="/Clinica/img/emojis/calendario.png" width="20" height="20" alt="calendario" style="vertical-align:middle;"> Citas asignadas a tu consulta</h5>
         <div id="lista-citas-doctor"></div>
     </div>
 </div>
@@ -70,7 +70,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header text-white modal-header-verde">
-                <h5 class="modal-title">📋 Detalle del Paciente</h5>
+                <h5 class="modal-title"><img src="/Clinica/img/emojis/historial.png" width="20" height="20" alt="historial" style="vertical-align:middle;"> Detalle del Paciente</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body" id="detalle-body"></div>
@@ -86,7 +86,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0">
             <div class="modal-header text-white" style="background-color:#1a7a4a;">
-                <h5 class="modal-title">📝 Comentario del Doctor</h5>
+                <h5 class="modal-title"><img src="/Clinica/img/emojis/notas.png" width="20" height="20" alt="notas" style="vertical-align:middle;"> Comentario del Doctor</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -100,13 +100,13 @@
                     <textarea id="comentario-texto" class="form-control" rows="5"
                         placeholder="Escribe aquí el diagnóstico, observaciones o indicaciones..."></textarea>
                 </div>
-                <div id="comentario-exito" class="alert alert-success d-none">✅ Comentario guardado correctamente.</div>
-                <div id="comentario-error" class="alert alert-danger d-none">❌ Error al guardar el comentario.</div>
+                <div id="comentario-exito" class="alert alert-success d-none"><img src="/Clinica/img/emojis/confirmado.png" width="20" height="20" alt="confirmado" style="vertical-align:middle;"> Comentario guardado correctamente.</div>
+                <div id="comentario-error" class="alert alert-danger d-none"><img src="/Clinica/img/emojis/error.png" width="20" height="20" alt="error" style="vertical-align:middle;"> Error al guardar el comentario.</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn text-white fw-semibold" style="background-color:#1a7a4a;"
-                    onclick="guardarComentario()">💾 Guardar comentario</button>
+                    onclick="guardarComentario()"><img src="/Clinica/img/emojis/guardar.png" width="20" height="20" alt="guardar" style="vertical-align:middle;"> Guardar comentario</button>
             </div>
         </div>
     </div>

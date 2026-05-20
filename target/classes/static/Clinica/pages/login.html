@@ -28,12 +28,12 @@
 <!-- CARD -->
     <div class="card-login">
         <div id="alerta-error" class="alert alert-danger d-none py-2 small" role="alert">
-            ❌ Correo o contraseña incorrectos.
+            <img src="/Clinica/img/emojis/error.png" width="20" height="20" alt="error" style="vertical-align:middle;"> Correo o contraseña incorrectos.
         </div>
 
         <!-- PANEL PACIENTE -->
         <div class="panel-form active" id="panel-paciente">
-            <span class="badge-role badge-paciente">🏥 Acceso Paciente</span>
+            <span class="badge-role badge-paciente"><img src="/Clinica/img/emojis/hospital.png" width="20" height="20" alt="hospital" style="vertical-align:middle;"> Acceso Paciente</span>
             <div class="mb-3">
                 <label class="form-label">Correo electrónico</label>
                 <input type="email" id="correo-paciente" class="form-control" placeholder="usuario@gmail.com">
@@ -42,7 +42,7 @@
                 <label class="form-label">Contraseña</label>
                 <input type="password" id="password-paciente" class="form-control" placeholder="••••••••">
             </div>
-            <div class="hint-box">🔑 Prueba: <strong>juan@gmail.com</strong> / <strong>1234</strong></div>
+            <div class="hint-box"><img src="/Clinica/img/emojis/llave.png" width="20" height="20" alt="llave" style="vertical-align:middle;"> Prueba: <strong>juan@gmail.com</strong> / <strong>1234</strong></div>
             <br>
             <button class="btn-login-main" onclick="loginPaciente()">Ingresar como Paciente</button>
             <hr class="divider">
@@ -54,7 +54,7 @@
 
         <!-- PANEL DOCTOR -->
         <div class="panel-form" id="panel-doctor">
-            <span class="badge-role badge-doctor">🩺 Acceso Médico</span>
+            <span class="badge-role badge-doctor"><img src="/Clinica/img/emojis/estetoscopio.png" width="20" height="20" alt="médico" style="vertical-align:middle;"> Acceso Médico</span>
             <div class="mb-3">
                 <label class="form-label">Correo del médico</label>
                 <input type="email" id="correo-doctor" class="form-control" placeholder="doctor@clinica.com">
@@ -63,7 +63,7 @@
                 <label class="form-label">Contraseña</label>
                 <input type="password" id="password-doctor" class="form-control" placeholder="••••••••">
             </div>
-            <div class="hint-box doctor-hint">🔑 Prueba: <strong>joseph@clinica.com</strong> / <strong>doctor123</strong></div>
+            <div class="hint-box doctor-hint"><img src="/Clinica/img/emojis/llave.png" width="20" height="20" alt="llave" style="vertical-align:middle;"> Prueba: <strong>joseph@clinica.com</strong> / <strong>doctor123</strong></div>
             <br>
             <button class="btn-login-main doctor" onclick="loginDoctor()">Ingresar como Doctor</button>
             <hr class="divider">
@@ -72,7 +72,7 @@
 
         <!-- PANEL RECUPERAR CONTRASEÑA -->
         <div class="panel-form" id="panel-recuperar">
-            <span class="badge-role" style="background:#fff3cd;color:#856404;">🔑 Restablecer Contraseña</span>
+            <span class="badge-role" style="background:#fff3cd;color:#856404;"><img src="/Clinica/img/emojis/llave.png" width="20" height="20" alt="llave" style="vertical-align:middle;"> Restablecer Contraseña</span>
 
             <!-- PASO 1: INGRESAR CORREO -->
             <div id="recuperar-paso1">

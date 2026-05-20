@@ -17,10 +17,10 @@
         <div class="d-flex gap-4">
             <span><img src="/Clinica/img/emojis/telefono.png" width="20" height="20" alt="teléfono" style="vertical-align:middle;"> Central: (01) 111-2222</span>
             <span><img src="/Clinica/img/emojis/reloj-alarma.png" width="20" height="20" alt="reloj" style="vertical-align:middle;"> Lun-Sáb: 7:00 am - 8:00 pm</span>
-            <span>📍 Av. José Pardo 452, Comas</span>
+            <span><img src="/Clinica/img/emojis/ubicacion.png" width="20" height="20" alt="ubicación" style="vertical-align:middle;"> Av. José Pardo 452, Comas</span>
         </div>
         <div class="d-flex gap-3">
-            <a href="#" class="text-white text-decoration-none" style="font-size:0.85rem;">📧 atencion@clinicajosepardo.com.pe</a>
+            <a href="#" class="text-white text-decoration-none" style="font-size:0.85rem;"><img src="/Clinica/img/emojis/email.png" width="20" height="20" alt="email" style="vertical-align:middle;"> atencion@clinicajosepardo.com.pe</a>
         </div>
     </div>
 </div>
@@ -41,7 +41,7 @@
             </a>
             <span id="saludo-usuario" class="text-white fw-semibold d-none"></span>
             <button id="btn-cerrar-sesion" class="btn btn-outline-light fw-semibold d-none" onclick="cerrarSesion()">
-                🚪 Cerrar Sesión
+                <img src="/Clinica/img/emojis/cerrar-sesion.png" width="20" height="20" alt="cerrar sesión" style="vertical-align:middle;"> Cerrar Sesión
             </button>
         </div>
     </div>
@@ -49,7 +49,7 @@
 
 <!-- CONTENIDO -->
 <div class="container py-5">
-    <h2 class="fw-bold mb-1" style="color: #0E588E;">🗓️ Mis Citas Programadas</h2>
+    <h2 class="fw-bold mb-1" style="color: #0E588E;"><img src="/Clinica/img/emojis/mis-citas.png" width="20" height="20" alt="mis citas" style="vertical-align:middle;">️ Mis Citas Programadas</h2>
     <p class="text-muted mb-4">Aquí puedes ver todas tus citas médicas registradas.</p>
     <div id="lista-citas"></div>
 </div>
@@ -60,7 +60,7 @@
         <div class="modal-content">
 
             <div class="modal-header text-white" style="background-color: #0E588E;">
-                <h5 class="modal-title">✏️ Reprogramar Cita</h5>
+                <h5 class="modal-title"><img src="/Clinica/img/emojis/editar.png" width="20" height="20" alt="editar" style="vertical-align:middle;">️ Reprogramar Cita</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
@@ -70,21 +70,21 @@
                 <p id="editar-doctor-info" class="fw-semibold text-secondary mb-3"></p>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">📅 Nueva Fecha</label>
+                    <label class="form-label fw-semibold"><img src="/Clinica/img/emojis/calendario.png" width="20" height="20" alt="calendario" style="vertical-align:middle;"> Nueva Fecha</label>
                     <input type="date" id="editar-fecha" class="form-control" onchange="actualizarHorasEditar()">
                     <small id="editar-aviso-dia" class="text-danger"></small>
                     <div class="form-text text-muted">Solo puedes reprogramar con al menos 3 días de anticipación.</div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">⏰ Nueva Hora</label>
+                    <label class="form-label fw-semibold"><img src="/Clinica/img/emojis/reloj-alarma.png" width="20" height="20" alt="alarma" style="vertical-align:middle;"> Nueva Hora</label>
                     <select id="editar-hora" class="form-select">
                         <option value="" disabled selected>Selecciona una hora</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">📝 Motivo de consulta</label>
+                    <label class="form-label fw-semibold"><img src="/Clinica/img/emojis/notas.png" width="20" height="20" alt="notas" style="vertical-align:middle;"> Motivo de consulta</label>
                     <textarea id="editar-motivo" class="form-control" rows="3"></textarea>
                 </div>
             </div>
@@ -93,7 +93,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn text-white fw-semibold"
                         style="background-color: #0E588E;" onclick="guardarEdicion()">
-                    💾 Guardar cambios
+                    <img src="/Clinica/img/emojis/guardar.png" width="20" height="20" alt="guardar" style="vertical-align:middle;"> Guardar cambios
                 </button>
             </div>
 

@@ -23,18 +23,18 @@
                 <img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Médicos
             </button>
             <button class="nav-item" onclick="mostrarSeccion('especialidades')">
-                🏷️ Especialidades
+                <img src="/Clinica/img/emojis/etiqueta.png" width="20" height="20" alt="etiqueta" style="vertical-align:middle;">️ Especialidades
             </button>
             <button class="nav-item" onclick="mostrarSeccion('historial')">
-                📋 Historial de Citas
+                <img src="/Clinica/img/emojis/historial.png" width="20" height="20" alt="historial" style="vertical-align:middle;"> Historial de Citas
             </button>
             <button class="nav-item" onclick="mostrarSeccion('cuenta')">
-                🔒 Mi Cuenta
+                <img src="/Clinica/img/emojis/contrasena.png" width="20" height="20" alt="contraseña" style="vertical-align:middle;"> Mi Cuenta
             </button>
         </nav>
         <div class="sidebar-footer">
             <span id="admin-nombre-display"></span>
-            <button onclick="cerrarSesionAdmin()" class="btn-logout">🚪 Salir</button>
+            <button onclick="cerrarSesionAdmin()" class="btn-logout"><img src="/Clinica/img/emojis/cerrar-sesion.png" width="20" height="20" alt="cerrar sesión" style="vertical-align:middle;"> Salir</button>
         </div>
     </aside>
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="search-bar mb-3">
-                <input type="text" id="buscador-medicos" class="form-control" placeholder="🔍 Buscar médico por nombre o especialidad..." oninput="filtrarMedicos()">
+                <input type="text" id="buscador-medicos" class="form-control" placeholder="<img src="/Clinica/img/emojis/buscar.png" width="20" height="20" alt="buscar" style="vertical-align:middle;"> Buscar médico por nombre o especialidad..." oninput="filtrarMedicos()">
             </div>
 
             <div class="table-wrap">
@@ -67,7 +67,7 @@
         <!-- ══ SECCIÓN: ESPECIALIDADES ══ -->
         <section id="sec-especialidades" class="admin-section d-none">
             <div class="sec-header">
-                <h2>🏷️ Gestión de Especialidades</h2>
+                <h2><img src="/Clinica/img/emojis/etiqueta.png" width="20" height="20" alt="etiqueta" style="vertical-align:middle;">️ Gestión de Especialidades</h2>
                 <button class="btn-primary-admin" onclick="abrirModalEspecialidad()">+ Nueva Especialidad</button>
             </div>
 
@@ -86,7 +86,7 @@
         <!-- ══ SECCIÓN: HISTORIAL ══ -->
         <section id="sec-historial" class="admin-section d-none">
             <div class="sec-header">
-                <h2>📋 Historial de Citas</h2>
+                <h2><img src="/Clinica/img/emojis/historial.png" width="20" height="20" alt="historial" style="vertical-align:middle;"> Historial de Citas</h2>
                 <span id="historial-total" class="badge-total">0 citas</span>
             </div>
 
@@ -95,8 +95,8 @@
                 <input type="text" id="filtro-paciente" class="form-control" placeholder="<img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'10'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M8%2048%20C8%2036%2044%2036%2044%2048'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'6'%20fill%3D'%2329A8EF'%20opacity%3D'.4'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Paciente (nombre)">
                 <input type="text" id="filtro-medico" class="form-control" placeholder="<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Médico (nombre)">
                 <input type="date" id="filtro-fecha" class="form-control">
-                <button class="btn-primary-admin" onclick="buscarHistorial()">🔍 Buscar</button>
-                <button class="btn-secondary-admin" onclick="limpiarFiltros()">✖ Limpiar</button>
+                <button class="btn-primary-admin" onclick="buscarHistorial()"><img src="/Clinica/img/emojis/buscar.png" width="20" height="20" alt="buscar" style="vertical-align:middle;"> Buscar</button>
+                <button class="btn-secondary-admin" onclick="limpiarFiltros()"><img src="/Clinica/img/emojis/error.png" width="20" height="20" alt="cerrar" style="vertical-align:middle;"> Limpiar</button>
             </div>
 
             <div class="table-wrap">
@@ -118,7 +118,7 @@
         <!-- ══ SECCIÓN: CUENTA ══ -->
         <section id="sec-cuenta" class="admin-section d-none">
             <div class="sec-header">
-                <h2>🔒 Cambiar Contraseña</h2>
+                <h2><img src="/Clinica/img/emojis/contrasena.png" width="20" height="20" alt="contraseña" style="vertical-align:middle;"> Cambiar Contraseña</h2>
             </div>
             <div class="card-form">
                 <div id="cuenta-exito" class="alert alert-success d-none py-2"></div>
@@ -136,7 +136,7 @@
                     <label class="form-label fw-semibold">Confirmar nueva contraseña</label>
                     <input type="password" id="cuenta-confirmar" class="form-control" placeholder="••••••••">
                 </div>
-                <button class="btn-primary-admin" onclick="cambiarPasswordAdmin()">💾 Actualizar contraseña</button>
+                <button class="btn-primary-admin" onclick="cambiarPasswordAdmin()"><img src="/Clinica/img/emojis/guardar.png" width="20" height="20" alt="guardar" style="vertical-align:middle;"> Actualizar contraseña</button>
             </div>
         </section>
 
@@ -178,7 +178,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn text-white fw-semibold" style="background-color:#0E588E;" onclick="guardarMedico()">
-                    💾 Guardar
+                    <img src="/Clinica/img/emojis/guardar.png" width="20" height="20" alt="guardar" style="vertical-align:middle;"> Guardar
                 </button>
             </div>
         </div>
@@ -213,7 +213,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn text-white fw-semibold" style="background-color:#0E588E;" onclick="guardarEspecialidad()">
-                    💾 Guardar
+                    <img src="/Clinica/img/emojis/guardar.png" width="20" height="20" alt="guardar" style="vertical-align:middle;"> Guardar
                 </button>
             </div>
         </div>
@@ -225,7 +225,7 @@
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title">⚠️ Confirmar eliminación</h5>
+                <h5 class="modal-title"><img src="/Clinica/img/emojis/advertencia.png" width="20" height="20" alt="advertencia" style="vertical-align:middle;">️ Confirmar eliminación</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

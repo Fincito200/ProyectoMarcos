@@ -29,7 +29,7 @@ REEMPLAZAR: <img src="/Clinica/img/emojis/telefono.png" width="20" height="20" a
 ──────────────────────────────────────────────────────────────
 EMOJI:   (reloj)   → aparece en: index, nosotros, mis-citas, mi-perfil, nuestros-doctores, consejos-de-salud
 ──────────────────────────────────────────────────────────────
-BUSCAR:    <img src="/Clinica/img/emojis/reloj-alarma.png" width="20" height="20" alt="reloj" style="vertical-align:middle;">
+BUSCAR:    <img src="/Clinica/img/emojis/reloj-alarma.png" width="20" height="20" alt="reloj" style="vertical-align:middle;">b
 REEMPLAZAR: <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'26'%20r%3D'22'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'26'%20r%3D'18'%20fill%3D'%230E588E'%2F%3E%3Cline%20x1%3D'26'%20y1%3D'26'%20x2%3D'26'%20y2%3D'14'%20stroke%3D'white'%20stroke-width%3D'2.5'%20stroke-linecap%3D'round'%2F%3E%3Cline%20x1%3D'26'%20y1%3D'26'%20x2%3D'34'%20y2%3D'26'%20stroke%3D'%23a8d8f0'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'26'%20r%3D'2.5'%20fill%3D'%2329A8EF'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;">
 
 ──────────────────────────────────────────────────────────────
