@@ -398,7 +398,7 @@ body {
     width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -411,7 +411,7 @@ body {
 }
 .social-btn img {
     display: block;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
 }
 .social-btn:hover { background: #0E588E; color: #fff; }
