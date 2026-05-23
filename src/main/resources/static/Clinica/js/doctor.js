@@ -11,7 +11,7 @@ window.addEventListener("load", function () {
     }
 
     const nombre = localStorage.getItem("doctorNombre") || "Doctor";
-    document.getElementById("titulo-bienvenida").textContent = "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Bienvenido, " + nombre;
+    document.getElementById("titulo-bienvenida").innerHTML = `<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Bienvenido, ${nombre}`;
     document.getElementById("nav-nombre-doctor").textContent = nombre;
 
     renderCitas();
@@ -102,7 +102,7 @@ async function renderCitas() {
                     </div>
                 </div>
                 <div class="cita-body">
-                    <p class="dato"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'10'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M8%2048%20C8%2036%2044%2036%2044%2048'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'6'%20fill%3D'%2329A8EF'%20opacity%3D'.4'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Paciente:</strong> ${cita.nombres} ${cita.apellidos}</p>
+                    <p class="dato"><strong><img src=\"/Clinica/img/emojis/perfil.png\" width=\"20\" height=\"20\" alt=\"paciente\" style=\"vertical-align:middle;\"> Paciente:</strong> ${cita.nombres} ${cita.apellidos}</p>
                     <p class="dato"><strong>📅 Fecha:</strong> ${cita.fecha_legible} &nbsp; <strong>⏰</strong> ${cita.hora}</p>
                     <p class="dato"><strong>📝 Motivo:</strong> ${cita.motivo}</p>
                     ${cita.dni ? `<p class="dato"><strong>🪪 DNI:</strong> ${cita.dni}</p>` : ""}
@@ -179,7 +179,7 @@ async function guardarComentario() {
 function verDetalle(dataStr) {
     const cita = JSON.parse(decodeURIComponent(dataStr));
     document.getElementById("detalle-body").innerHTML = `
-        <div class="mb-2"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'10'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M8%2048%20C8%2036%2044%2036%2044%2048'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'6'%20fill%3D'%2329A8EF'%20opacity%3D'.4'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Nombre:</strong> ${cita.nombres} ${cita.apellidos}</div>
+        <div class="mb-2"><strong><img src=\"/Clinica/img/emojis/perfil.png\" width=\"20\" height=\"20\" alt=\"paciente\" style=\"vertical-align:middle;\"> Nombre:</strong> ${cita.nombres} ${cita.apellidos}</div>
         ${cita.dni      ? `<div class="mb-2"><strong>🪪 DNI:</strong> ${cita.dni}</div>`           : ""}
         ${cita.telefono ? `<div class="mb-2"><strong><img src="/Clinica/img/emojis/telefono.png" width="20" height="20" alt="teléfono" style="vertical-align:middle;"> Teléfono:</strong> ${cita.telefono}</div>` : ""}
         ${cita.correo   ? `<div class="mb-2"><strong>📧 Correo:</strong> ${cita.correo}</div>`     : ""}
