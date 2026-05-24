@@ -3,10 +3,7 @@ package com.utp.ProyectoMarcos.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * Controlador que redirige las rutas del frontend a sus páginas HTML en /static/
- * Permite acceder a las páginas directamente sin escribir .html
- */
+/** CONTROLADOR QUE REDIRIGE LAS RUTAS DEL FRONTEND A SUS PÁGINAS HTML EN /static/. PERMITE ACCEDER A LAS PÁGINAS DIRECTAMENTE SIN ESCRIBIR .html */
 @Controller
 public class PageController {
 

@@ -23,7 +23,7 @@ public class AdminController {
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    // ── LOGIN ADMIN ──────────────────────────────────────────────
+    // LOGIN ADMIN
     @PostMapping("/login_admin.php")
     public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Map<String, String> body) {
         String correo   = body.getOrDefault("correo", "").trim();
@@ -42,7 +42,7 @@ public class AdminController {
         return ResponseEntity.ok(resp);
     }
 
-    // ── CAMBIAR PASSWORD ADMIN ───────────────────────────────────
+    // CAMBIAR PASSWORD ADMIN
     @PostMapping("/cambiar_password_admin.php")
     public ResponseEntity<Map<String, Object>> cambiarPasswordAdmin(@RequestBody Map<String, String> body) {
         String correo      = body.getOrDefault("correo", "").trim();
@@ -62,9 +62,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  MÉDICOS
-    // ════════════════════════════════════════════════════════════
+    //MÉDICOS
 
     @GetMapping("/listar_medicos.php")
     public ResponseEntity<Map<String, Object>> listarMedicos() {
@@ -155,9 +153,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Médico eliminado correctamente."));
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  ESPECIALIDADES
-    // ════════════════════════════════════════════════════════════
+    // ESPECIALIDADES
 
     @GetMapping("/listar_especialidades.php")
     public ResponseEntity<Map<String, Object>> listarEspecialidades() {
@@ -235,9 +231,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Especialidad eliminada correctamente."));
     }
 
-    // ════════════════════════════════════════════════════════════
-    //  HISTORIAL DE CITAS (con filtros)
-    // ════════════════════════════════════════════════════════════
+    // HISTORIAL DE CITAS (con filtros)
 
     @GetMapping("/historial_citas.php")
     public ResponseEntity<Map<String, Object>> historialCitas(

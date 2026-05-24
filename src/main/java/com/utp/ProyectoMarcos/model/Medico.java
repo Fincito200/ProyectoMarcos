@@ -31,7 +31,7 @@ public class Medico {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters y Setters
+    // GET Y SET
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

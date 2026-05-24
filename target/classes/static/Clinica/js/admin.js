@@ -1,6 +1,6 @@
 const API = "/ProyectoModificado/ProyectoMarcos/Clinica/api/admin";
 
-// ── UTILIDADES ────────────────────────────────────────────────
+// UTILIDADES
 
 function cerrarSesionAdmin() {
     localStorage.removeItem("adminSesion");
@@ -27,7 +27,7 @@ function badgeEstado(estado) {
     return `<span class="${clase}">${estado}</span>`;
 }
 
-// ── MÉDICOS ───────────────────────────────────────────────────
+// MEDICOS 
 
 let medicosData = [];
 
@@ -162,7 +162,7 @@ function confirmarEliminarMedico(id, nombre) {
     new bootstrap.Modal(document.getElementById("modalConfirmar")).show();
 }
 
-// ── ESPECIALIDADES ────────────────────────────────────────────
+// ESPECIALIDADES
 
 async function cargarEspecialidades() {
     const res  = await fetch(`${API}/listar_especialidades.php`);
@@ -252,7 +252,7 @@ function confirmarEliminarEspecialidad(id, nombre) {
     new bootstrap.Modal(document.getElementById("modalConfirmar")).show();
 }
 
-// ── HISTORIAL DE CITAS ────────────────────────────────────────
+// HISTORIAL DE CITAS
 
 async function buscarHistorial() {
     const paciente = document.getElementById("filtro-paciente")?.value.trim() || "";
@@ -292,7 +292,7 @@ function limpiarFiltros() {
     buscarHistorial();
 }
 
-// ── CAMBIAR PASSWORD ADMIN ────────────────────────────────────
+// CAMBIAR PASSWORD ADMIN
 
 async function cambiarPasswordAdmin() {
     const correo    = localStorage.getItem("adminCorreo") || "";
@@ -334,7 +334,7 @@ async function cambiarPasswordAdmin() {
     document.getElementById("cuenta-confirmar").value = "";
 }
 
-// ── INICIALIZACIÓN ────────────────────────────────────────────
+// INICIALIZACION
 
 window.addEventListener("load", function() {
     if (localStorage.getItem("adminSesion") !== "true") {

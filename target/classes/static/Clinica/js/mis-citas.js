@@ -165,9 +165,8 @@ window.addEventListener("load", async function () {
     const citas      = await getCitasPaciente();
     const contenedor = document.getElementById("lista-citas");
 
-    // ─── SISTEMA DE NOTIFICACIONES ───────────────────────────
+    //  SISTEMA DE NOTIFICACIONES
     mostrarNotificacionesCitas(citas);
-    // ─────────────────────────────────────────────────────────
 
     if (citas.length === 0) {
         contenedor.innerHTML = `
@@ -235,9 +234,7 @@ window.addEventListener("load", async function () {
     contenedor.innerHTML = html;
 });
 
-// ═══════════════════════════════════════════════════════════════
-//  SISTEMA DE NOTIFICACIONES DE CITAS
-// ═══════════════════════════════════════════════════════════════
+// SISTEMA DE NOTIFICACIONES DE CITAS
 
 function mostrarNotificacionesCitas(citas) {
     // Solo citas activas (no atendidas)
@@ -282,7 +279,7 @@ function mostrarNotificacionesCitas(citas) {
 
     if (alertas.length === 0) return;
 
-    // Crear el contenedor de notificaciones
+    // CREAR EL CONTENEDOR DE NOTIFICACIONES
     const notifDiv = document.createElement("div");
     notifDiv.id = "notificaciones-citas";
     notifDiv.style.marginBottom = "1.5rem";
@@ -299,7 +296,7 @@ function mostrarNotificacionesCitas(citas) {
         notifDiv.appendChild(div);
     });
 
-    // Insertarlo antes de la lista de citas
+    // INSERTARLO ANTES DE LA LISTA DE CITAS
     const contenedor = document.getElementById("lista-citas");
     contenedor.parentNode.insertBefore(notifDiv, contenedor);
 };

@@ -3,7 +3,7 @@ window.addEventListener("load", function () {
     const tipo   = localStorage.getItem("tipoUsuario");
     const nombre = localStorage.getItem("usuarioNombre");
 
-    // Si estamos en login.html y hay sesión, redirigir
+// SI ESTAMOS EN login.html Y HAY SESION, REDIRIGIR
     if (document.getElementById("panel-paciente")) {
         if (sesion === "true") {
             if (tipo === "doctor") window.location.href = "/Clinica/pages/doctor.html";
@@ -12,7 +12,7 @@ window.addEventListener("load", function () {
         return;
     }
 
-    // Lógica para index.html y otras páginas
+    // LOGICA PARA index.html Y OTRAS PAGINAS
     const btnLogin   = document.getElementById("btn-login");
     const btnCerrar  = document.getElementById("btn-cerrar-sesion");
     const btnMisCitas = document.getElementById("btn-mis-citas");

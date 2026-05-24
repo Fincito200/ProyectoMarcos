@@ -80,7 +80,7 @@ async function renderCitas() {
 
         const acciones = estado === "pendiente"
             ? `<button class="btn-confirmar" onclick="cambiarEstado(${cita.id}, 'confirmada')">✅ Confirmar</button>
-               <button class="btn-cancelar-doc ms-auto" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
+                <button class="btn-cancelar-doc ms-auto" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
             : estado === "confirmada"
             ? `<button class="btn-atender" onclick="cambiarEstado(${cita.id}, 'atendida')">🏁 Marcar atendida</button>`
             : `<span class="text-muted small">Cita finalizada</span>`;

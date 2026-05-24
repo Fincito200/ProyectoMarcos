@@ -14,7 +14,7 @@ body {
 }
 
 
-/* HERO / CARRUSEL index.html usa height 420px · demás páginas usan 380px */
+/* HERO / CARRUSEL index.html USA HEIGHT 420PX · DEMÁS PÁGINAS USAN 380PX */
 .hero-slide {
     height: 420px;
     display: flex;
@@ -22,7 +22,7 @@ body {
     justify-content: center;
 }
 
-/* Subpáginas (nosotros, doctores, consejos) usan hero más compacto */
+/* SUBPAGINAS (NOSOTROS, DOCTORES, CONSEJOS) USAN HERO MAS COMPACTO */
 .hero-slide.hero-subpage {
     height: 380px;
 }
@@ -87,7 +87,7 @@ body {
     border-color: #fff;
 }
 
-/* Cajas de estadísticas dentro del hero (index.html) */
+/* CAJAS DE ESTADÍSTICAS DENTRO DEL HERO (index.html) */
 .hero-stat-box {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -99,13 +99,13 @@ body {
 .hero-stat-box .num { font-size: 1.8rem; font-weight: 800; line-height: 1; }
 .hero-stat-box .lbl { font-size: 0.75rem; opacity: 0.85; margin-top: 2px; }
 
-/* Indicadores del carrusel */
+/* INDICADORES DEL CARRUSEL */
 .carousel-indicators button {
     background-color: #2BC4D2 !important;
 }
 
 
-/* SECCIÓN SERVICIOS (index.html) */
+/* SECCION SERVICIOS (index.html) */
 .seccion-ayuda {
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -149,7 +149,7 @@ body {
 }
 
 
-/* SECCIÓN ESTADÍSTICAS (index.html) */
+/* SECCION ESTADISTICAS (index.html) */
 .stats-section {
     background: linear-gradient(135deg, #0A3760, #0E588E);
     padding: 50px 0;
@@ -182,7 +182,7 @@ body {
 .especialidad-pill span { font-size: 1.3rem; }
 
 
-/* PASOS "CÓMO FUNCIONA" (index.html) */
+/* PASOS "COMO FUNCIONA" (index.html) */
 .paso-num {
     width: 52px;
     height: 52px;
@@ -264,7 +264,7 @@ body {
 }
 
 
-/* CARDS DE MÉDICOS (index.html · nuestros-doctores.html) */
+/* CARDS DE MEDICOS (index.html · nuestros-doctores.html) */
 .medico-card {
     border: none;
     border-radius: 18px;
@@ -284,7 +284,7 @@ body {
     text-align: center;
 }
 
-/* Badge de horario del médico (nuestros-doctores.html) */
+/* BADGE DE HORARIO DEL MÉDICO (nuestros-doctores.html) */
 .horario-badge {
     background: #e8f4fd;
     color: #0E588E;
@@ -297,7 +297,7 @@ body {
 }
 
 
-/* NOSOTROS — Cajas de estadísticas, pilares, línea de tiempo */
+/* NOSOTROS, CAJAS DE ESTADÍSTICAS, PILARES, LÍNEA DE TIEMPO */
 .stat-box {
     background: #0E588E;
     color: #fff;
@@ -339,7 +339,7 @@ body {
 }
 
 
-/* CONSEJOS DE SALUD — Tips y botones de categoría */
+/* CONSEJOS DE SALUD, TIPS Y BOTONES DE CATEGORÍA */
 .tip-card {
     border: none;
     border-radius: 14px;
@@ -369,7 +369,7 @@ body {
 }
 
 
-/* FOOTER (todas las páginas) */
+/* FOOTER (TODAS LAS PÁGINAS) */
 .site-footer {
     background: #05203d;
     color: rgba(255, 255, 255, 0.7);

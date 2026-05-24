@@ -16,9 +16,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * Controlador principal que reemplaza todos los archivos PHP de la carpeta api/.
- */
+/** CONTROLADOR PRINCIPAL QUE REEMPLAZA TODOS LOS ARCHIVOS PHP DE LA CARPETA API/. */
 @RestController
 @RequestMapping("/ProyectoModificado/ProyectoMarcos/Clinica/api")
 @CrossOrigin(origins = "*")
