@@ -1,13 +1,18 @@
 package com.utp.ProyectoMarcos.controller;
 
-import com.utp.ProyectoMarcos.model.*;
-import com.utp.ProyectoMarcos.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.utp.ProyectoMarcos.dto.EspecialidadRequest;
+import com.utp.ProyectoMarcos.dto.MedicoRequest;
+import com.utp.ProyectoMarcos.model.Cita;
+import com.utp.ProyectoMarcos.model.Especialidad;
+import com.utp.ProyectoMarcos.model.Medico;
+import com.utp.ProyectoMarcos.model.Paciente;
+import com.utp.ProyectoMarcos.service.AdminService;
+import com.utp.ProyectoMarcos.service.ClinicaService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -16,57 +21,47 @@ import java.util.*;
 @CrossOrigin(origins = "*")
 public class AdminController {
 
-    @Autowired private AdminRepository adminRepo;
-    @Autowired private MedicoRepository medicoRepo;
-    @Autowired private EspecialidadRepository especialidadRepo;
-    @Autowired private CitaRepository citaRepo;
+    private final AdminService adminService;
+    private final ClinicaService clinicaService;
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    public AdminController(AdminService adminService, ClinicaService clinicaService) {
+        this.adminService = adminService;
+        this.clinicaService = clinicaService;
+    }
 
-    // LOGIN ADMIN
+    // ── AUTH ADMIN ─────────────────────────────────────────────────
+
     @PostMapping("/login_admin.php")
     public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Map<String, String> body) {
         String correo   = body.getOrDefault("correo", "").trim();
         String password = body.getOrDefault("password", "");
         Map<String, Object> resp = new LinkedHashMap<>();
-
-        Optional<Admin> opt = adminRepo.findByCorreo(correo);
-        if (opt.isPresent() && encoder.matches(password, opt.get().getPassword())) {
+        try {
+            var admin = adminService.loginAdmin(correo, password);
             resp.put("ok", true);
-            resp.put("nombre", opt.get().getNombre());
+            resp.put("nombre", admin.getNombre());
             resp.put("correo", correo);
-        } else {
+        } catch (RuntimeException e) {
             resp.put("ok", false);
-            resp.put("msg", "Correo o contraseña incorrectos.");
+            resp.put("msg", e.getMessage());
         }
         return ResponseEntity.ok(resp);
     }
 
-    // CAMBIAR PASSWORD ADMIN
     @PostMapping("/cambiar_password_admin.php")
     public ResponseEntity<Map<String, Object>> cambiarPasswordAdmin(@RequestBody Map<String, String> body) {
         String correo      = body.getOrDefault("correo", "").trim();
         String passwordAct = body.getOrDefault("password_actual", "");
         String passwordNew = body.getOrDefault("password_nueva", "");
-
-        Optional<Admin> opt = adminRepo.findByCorreo(correo);
-        if (opt.isEmpty() || !encoder.matches(passwordAct, opt.get().getPassword())) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Contraseña actual incorrecta."));
-        }
-        if (passwordNew.length() < 6) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "La nueva contraseña debe tener al menos 6 caracteres."));
-        }
-        Admin a = opt.get();
-        a.setPassword(encoder.encode(passwordNew));
-        adminRepo.save(a);
+        adminService.cambiarPasswordAdmin(correo, passwordAct, passwordNew);
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    //MÉDICOS
+    // ── MÉDICOS ────────────────────────────────────────────────────
 
     @GetMapping("/listar_medicos.php")
     public ResponseEntity<Map<String, Object>> listarMedicos() {
-        List<Medico> lista = medicoRepo.findAllByOrderByNombreAsc();
+        List<Medico> lista = adminService.listarMedicos();
         List<Map<String, Object>> resultado = new ArrayList<>();
         for (Medico m : lista) {
             Map<String, Object> item = new LinkedHashMap<>();
@@ -80,84 +75,40 @@ public class AdminController {
     }
 
     @PostMapping("/crear_medico.php")
-    public ResponseEntity<Map<String, Object>> crearMedico(@RequestBody Map<String, String> body) {
-        String nombre      = body.getOrDefault("nombre", "").trim();
-        String correo      = body.getOrDefault("correo", "").trim();
-        String password    = body.getOrDefault("password", "");
-        String especialidad = body.getOrDefault("especialidad", "").trim();
-
-        if (nombre.isEmpty() || correo.isEmpty() || password.isEmpty() || especialidad.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Completa todos los campos."));
-        }
-        if (medicoRepo.existsByCorreo(correo)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Ya existe un médico con ese correo."));
-        }
-        if (password.length() < 6) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "La contraseña debe tener al menos 6 caracteres."));
-        }
-
-        Medico m = new Medico();
-        m.setNombre(nombre);
-        m.setCorreo(correo);
-        m.setPassword(encoder.encode(password));
-        m.setEspecialidad(especialidad);
-        medicoRepo.save(m);
-
-        return ResponseEntity.ok(Map.of("ok", true, "msg", "Médico creado correctamente."));
+    public ResponseEntity<Map<String, Object>> crearMedico(@Valid @RequestBody MedicoRequest dto) {
+        adminService.crearMedico(dto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Map.of("ok", true, "msg", "Médico creado correctamente."));
     }
 
     @PostMapping("/editar_medico.php")
     public ResponseEntity<Map<String, Object>> editarMedico(@RequestBody Map<String, Object> body) {
         Long id = body.containsKey("id") ? Long.valueOf(body.get("id").toString()) : 0L;
-        String nombre       = ((String) body.getOrDefault("nombre", "")).trim();
-        String correo       = ((String) body.getOrDefault("correo", "")).trim();
-        String especialidad = ((String) body.getOrDefault("especialidad", "")).trim();
-        String passwordNew  = (String) body.getOrDefault("password_nueva", "");
-
-        if (id == 0 || nombre.isEmpty() || correo.isEmpty() || especialidad.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Datos incompletos."));
+        if (id == 0) {
+            return ResponseEntity.badRequest().body(Map.of("ok", false, "msg", "ID inválido."));
         }
+        MedicoRequest dto = new MedicoRequest();
+        dto.setNombre(((String) body.getOrDefault("nombre", "")).trim());
+        dto.setCorreo(((String) body.getOrDefault("correo", "")).trim());
+        dto.setEspecialidad(((String) body.getOrDefault("especialidad", "")).trim());
+        dto.setPassword((String) body.getOrDefault("password_nueva", ""));
 
-        Optional<Medico> opt = medicoRepo.findById(id);
-        if (opt.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Médico no encontrado."));
-        }
-
-        // Si el correo cambió, verificar que no esté en uso
-        Medico m = opt.get();
-        if (!correo.equals(m.getCorreo()) && medicoRepo.existsByCorreo(correo)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Ese correo ya está en uso por otro médico."));
-        }
-
-        m.setNombre(nombre);
-        m.setCorreo(correo);
-        m.setEspecialidad(especialidad);
-        if (!passwordNew.isEmpty()) {
-            if (passwordNew.length() < 6) {
-                return ResponseEntity.ok(Map.of("ok", false, "msg", "La contraseña debe tener al menos 6 caracteres."));
-            }
-            m.setPassword(encoder.encode(passwordNew));
-        }
-        medicoRepo.save(m);
-
+        adminService.editarMedico(id, dto);
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Médico actualizado correctamente."));
     }
 
     @PostMapping("/eliminar_medico.php")
     public ResponseEntity<Map<String, Object>> eliminarMedico(@RequestBody Map<String, Object> body) {
         Long id = body.containsKey("id") ? Long.valueOf(body.get("id").toString()) : 0L;
-        if (id == 0 || !medicoRepo.existsById(id)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Médico no encontrado."));
-        }
-        medicoRepo.deleteById(id);
+        adminService.eliminarMedico(id);
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Médico eliminado correctamente."));
     }
 
-    // ESPECIALIDADES
+    // ── ESPECIALIDADES ─────────────────────────────────────────────
 
     @GetMapping("/listar_especialidades.php")
     public ResponseEntity<Map<String, Object>> listarEspecialidades() {
-        List<Especialidad> lista = especialidadRepo.findAllByOrderByNombreAsc();
+        List<Especialidad> lista = adminService.listarEspecialidades();
         List<Map<String, Object>> resultado = new ArrayList<>();
         for (Especialidad e : lista) {
             Map<String, Object> item = new LinkedHashMap<>();
@@ -171,67 +122,35 @@ public class AdminController {
     }
 
     @PostMapping("/crear_especialidad.php")
-    public ResponseEntity<Map<String, Object>> crearEspecialidad(@RequestBody Map<String, String> body) {
-        String nombre      = body.getOrDefault("nombre", "").trim();
-        String descripcion = body.getOrDefault("descripcion", "").trim();
-
-        if (nombre.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "El nombre es obligatorio."));
-        }
-        if (especialidadRepo.existsByNombre(nombre)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Ya existe una especialidad con ese nombre."));
-        }
-
-        Especialidad e = new Especialidad();
-        e.setNombre(nombre);
-        e.setDescripcion(descripcion);
-        e.setActiva(true);
-        especialidadRepo.save(e);
-
-        return ResponseEntity.ok(Map.of("ok", true, "msg", "Especialidad creada correctamente."));
+    public ResponseEntity<Map<String, Object>> crearEspecialidad(@Valid @RequestBody EspecialidadRequest dto) {
+        adminService.crearEspecialidad(dto);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(Map.of("ok", true, "msg", "Especialidad creada correctamente."));
     }
 
     @PostMapping("/editar_especialidad.php")
     public ResponseEntity<Map<String, Object>> editarEspecialidad(@RequestBody Map<String, Object> body) {
-        Long id            = body.containsKey("id") ? Long.valueOf(body.get("id").toString()) : 0L;
-        String nombre      = ((String) body.getOrDefault("nombre", "")).trim();
-        String descripcion = ((String) body.getOrDefault("descripcion", "")).trim();
-        Boolean activa     = body.containsKey("activa") ? (Boolean) body.get("activa") : true;
-
-        if (id == 0 || nombre.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Datos incompletos."));
+        Long id = body.containsKey("id") ? Long.valueOf(body.get("id").toString()) : 0L;
+        if (id == 0) {
+            return ResponseEntity.badRequest().body(Map.of("ok", false, "msg", "ID inválido."));
         }
+        EspecialidadRequest dto = new EspecialidadRequest();
+        dto.setNombre(((String) body.getOrDefault("nombre", "")).trim());
+        dto.setDescripcion(((String) body.getOrDefault("descripcion", "")).trim());
+        dto.setActiva(body.containsKey("activa") ? (Boolean) body.get("activa") : true);
 
-        Optional<Especialidad> opt = especialidadRepo.findById(id);
-        if (opt.isEmpty()) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Especialidad no encontrada."));
-        }
-
-        Especialidad e = opt.get();
-        // Verificar nombre único si cambió
-        if (!nombre.equals(e.getNombre()) && especialidadRepo.existsByNombre(nombre)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Ya existe una especialidad con ese nombre."));
-        }
-
-        e.setNombre(nombre);
-        e.setDescripcion(descripcion);
-        e.setActiva(activa);
-        especialidadRepo.save(e);
-
+        adminService.editarEspecialidad(id, dto);
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Especialidad actualizada correctamente."));
     }
 
     @PostMapping("/eliminar_especialidad.php")
     public ResponseEntity<Map<String, Object>> eliminarEspecialidad(@RequestBody Map<String, Object> body) {
         Long id = body.containsKey("id") ? Long.valueOf(body.get("id").toString()) : 0L;
-        if (id == 0 || !especialidadRepo.existsById(id)) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Especialidad no encontrada."));
-        }
-        especialidadRepo.deleteById(id);
+        adminService.eliminarEspecialidad(id);
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Especialidad eliminada correctamente."));
     }
 
-    // HISTORIAL DE CITAS (con filtros)
+    // ── HISTORIAL DE CITAS ─────────────────────────────────────────
 
     @GetMapping("/historial_citas.php")
     public ResponseEntity<Map<String, Object>> historialCitas(
@@ -239,36 +158,16 @@ public class AdminController {
             @RequestParam(required = false, defaultValue = "") String medico,
             @RequestParam(required = false, defaultValue = "") String fecha) {
 
-        List<Cita> citas;
-        DateTimeFormatter fechaFmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        try {
-            boolean filtroPaciente = !paciente.isBlank();
-            boolean filtroMedico   = !medico.isBlank();
-            boolean filtroFecha    = !fecha.isBlank();
-
-            if (filtroFecha) {
-                citas = citaRepo.findByFecha(LocalDate.parse(fecha));
-            } else if (filtroPaciente && filtroMedico) {
-                citas = citaRepo.findByPacienteAndMedico(paciente, medico);
-            } else if (filtroPaciente) {
-                citas = citaRepo.findByPacienteNombreContaining(paciente);
-            } else if (filtroMedico) {
-                citas = citaRepo.findByMedicoNombreContaining(medico);
-            } else {
-                citas = citaRepo.findAllWithPacienteOrderByFechaDesc();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.ok(Map.of("ok", false, "msg", "Error en los filtros: " + e.getMessage()));
-        }
-
+        List<Cita> citas = clinicaService.historialCitas(paciente, medico, fecha);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         List<Map<String, Object>> lista = new ArrayList<>();
+
         for (Cita c : citas) {
             Map<String, Object> m = new LinkedHashMap<>();
             m.put("id", c.getId());
             m.put("medico_nombre", c.getMedicoNombre());
             m.put("especialidad", c.getEspecialidad());
-            m.put("fecha_legible", c.getFecha() != null ? c.getFecha().format(fechaFmt) : "");
+            m.put("fecha_legible", c.getFecha() != null ? c.getFecha().format(fmt) : "");
             m.put("fecha_iso", c.getFecha() != null ? c.getFecha().toString() : "");
             m.put("hora", c.getHora() != null ? c.getHora().toString() : "");
             m.put("motivo", c.getMotivo());
