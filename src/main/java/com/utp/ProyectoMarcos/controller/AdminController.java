@@ -29,7 +29,7 @@ public class AdminController {
         this.clinicaService = clinicaService;
     }
 
-    // ── AUTH ADMIN ─────────────────────────────────────────────────
+    // AUTH ADMIN
 
     @PostMapping("/login_admin.php")
     public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Map<String, String> body) {
@@ -57,7 +57,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ── MÉDICOS ────────────────────────────────────────────────────
+    // MÉDICOS
 
     @GetMapping("/listar_medicos.php")
     public ResponseEntity<Map<String, Object>> listarMedicos() {
@@ -104,7 +104,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Médico eliminado correctamente."));
     }
 
-    // ── ESPECIALIDADES ─────────────────────────────────────────────
+    // ESPECIALIDADES
 
     @GetMapping("/listar_especialidades.php")
     public ResponseEntity<Map<String, Object>> listarEspecialidades() {
@@ -150,7 +150,7 @@ public class AdminController {
         return ResponseEntity.ok(Map.of("ok", true, "msg", "Especialidad eliminada correctamente."));
     }
 
-    // ── HISTORIAL DE CITAS ─────────────────────────────────────────
+    // HISTORIAL DE CITAS
 
     @GetMapping("/historial_citas.php")
     public ResponseEntity<Map<String, Object>> historialCitas(

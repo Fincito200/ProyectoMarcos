@@ -26,7 +26,7 @@ public class ClinicaService {
         this.citaRepo = citaRepo;
     }
 
-    // ── PACIENTES ──────────────────────────────────────────────────
+    // PACIENTES
 
     public Paciente registrar(PacienteRequest dto) {
         if (pacienteRepo.existsByCorreo(dto.getCorreo())) {
@@ -92,7 +92,7 @@ public class ClinicaService {
         pacienteRepo.save(p);
     }
 
-    // ── CITAS ──────────────────────────────────────────────────────
+    // CITAS
 
     public Cita guardarCita(CitaRequest dto) {
         Paciente paciente = pacienteRepo.findByCorreo(dto.getCorreo())

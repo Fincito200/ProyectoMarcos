@@ -29,7 +29,7 @@ public class AdminService {
         this.especialidadRepo = especialidadRepo;
     }
 
-    // ── ADMIN LOGIN ────────────────────────────────────────────────
+    // ADMIN LOGIN
 
     public Admin loginAdmin(String correo, String password) {
         Admin a = adminRepo.findByCorreo(correo)
@@ -53,7 +53,7 @@ public class AdminService {
         adminRepo.save(a);
     }
 
-    // ── MÉDICOS ────────────────────────────────────────────────────
+    // MÉDICOS
 
     public List<Medico> listarMedicos() {
         return medicoRepo.findAllByOrderByNombreAsc();
@@ -99,7 +99,7 @@ public class AdminService {
         medicoRepo.deleteById(id);
     }
 
-    // ── ESPECIALIDADES ─────────────────────────────────────────────
+    // ESPECIALIDADES
 
     public List<Especialidad> listarEspecialidades() {
         return especialidadRepo.findAllByOrderByNombreAsc();

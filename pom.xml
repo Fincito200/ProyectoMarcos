@@ -19,45 +19,45 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Web MVC -->
+		<!-- SPRING WEB MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Spring Data JPA -->
+		<!-- SPRING DATA JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<!-- PostgreSQL Driver -->
+		<!-- POSTGRESQL DRIVER -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
-		<!-- Spring Validation - activa @Valid, @NotBlank, @Positive, @Min -->
+		<!-- SPRING VALIDATION - ACTIVA @VALID, @NOTBLANK, @POSITIVE, @MIN -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<!-- BCrypt para encriptar contraseñas (como PHP password_hash) -->
+		<!-- BCRYPT PARA ENCRIPTAR CONTRASEÑAS (COMO PHP PASSWORD_HASH) -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
 		</dependency>
 
-		<!-- Lombok (opcional pero útil) -->
+		<!-- LOMBOK (OPCIONAL PERO ÚTIL) -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Test -->
+		<!-- TEST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

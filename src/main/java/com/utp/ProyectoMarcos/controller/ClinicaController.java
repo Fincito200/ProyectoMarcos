@@ -135,7 +135,7 @@ public class ClinicaController {
         return ResponseEntity.ok(resp);
     }
 
-    // ── CITAS ──────────────────────────────────────────────────────
+    // CITAS
 
     @PostMapping("/guardar_cita.php")
     public ResponseEntity<Map<String, Object>> guardarCita(@Valid @RequestBody CitaRequest dto) {
@@ -199,14 +199,14 @@ public class ClinicaController {
         return ResponseEntity.ok(Map.of("ok", true));
     }
 
-    // ── UTILIDADES ─────────────────────────────────────────────────
+    // UTILIDADES
 
     @GetMapping("/generar-hash")
     public ResponseEntity<String> generarHash() {
         return ResponseEntity.ok(encoder.encode("doctor123"));
     }
 
-    // ── HELPERS DE MAPEO ───────────────────────────────────────────
+    // HELPERS DE MAPEO
 
     private List<Map<String, Object>> mapearCitasPaciente(List<Cita> citas) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");

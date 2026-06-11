@@ -17,23 +17,23 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p WHERE c.medicoNombre = :nombre ORDER BY c.fecha ASC, c.hora ASC")
     List<Cita> findByMedicoNombreOrderByFechaAscHoraAsc(@Param("nombre") String nombre);
 
-    // Para el admin: historial completo ordenado
+    // PARA EL ADMIN: HISTORIAL COMPLETO ORDENADO
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p ORDER BY c.fecha DESC, c.hora DESC")
     List<Cita> findAllWithPacienteOrderByFechaDesc();
 
-    // Filtro por nombre o apellido del paciente (búsqueda parcial)
+    // FILTRO POR NOMBRE O APELLIDO DEL PACIENTE (BÚSQUEDA PARCIAL)
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p WHERE LOWER(CONCAT(p.nombres, ' ', p.apellidos)) LIKE LOWER(CONCAT('%', :busqueda, '%')) ORDER BY c.fecha DESC")
     List<Cita> findByPacienteNombreContaining(@Param("busqueda") String busqueda);
 
-    // Filtro por nombre del médico (búsqueda parcial)
+    // FILTRO POR NOMBRE DEL MÉDICO (BÚSQUEDA PARCIAL)
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p WHERE LOWER(c.medicoNombre) LIKE LOWER(CONCAT('%', :medico, '%')) ORDER BY c.fecha DESC")
     List<Cita> findByMedicoNombreContaining(@Param("medico") String medico);
 
-    // Filtro por fecha exacta
+    // FILTRO POR FECHA EXACTA
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p WHERE c.fecha = :fecha ORDER BY c.hora ASC")
     List<Cita> findByFecha(@Param("fecha") LocalDate fecha);
 
-    // Filtro combinado paciente + médico
+    // FILTRO COMBINADO PACIENTE + MÉDICO
     @Query("SELECT c FROM Cita c JOIN FETCH c.paciente p WHERE LOWER(CONCAT(p.nombres, ' ', p.apellidos)) LIKE LOWER(CONCAT('%', :paciente, '%')) AND LOWER(c.medicoNombre) LIKE LOWER(CONCAT('%', :medico, '%')) ORDER BY c.fecha DESC")
     List<Cita> findByPacienteAndMedico(@Param("paciente") String paciente, @Param("medico") String medico);
 }
