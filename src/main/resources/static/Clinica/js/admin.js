@@ -289,7 +289,9 @@ function limpiarFiltros() {
     document.getElementById("filtro-paciente").value = "";
     document.getElementById("filtro-medico").value   = "";
     document.getElementById("filtro-fecha").value    = "";
-    buscarHistorial();
+    document.getElementById("historial-total").textContent = "0 citas";
+    document.getElementById("tbody-historial").innerHTML =
+        '<tr><td colspan="8" class="text-center text-muted py-3">Usa los filtros para buscar citas.</td></tr>';
 }
 
 // CAMBIAR PASSWORD ADMIN

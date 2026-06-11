@@ -3,135 +3,63 @@ const doctorSelect = document.getElementById("doctor");
 const fechaInput = document.querySelector("input[name='fecha']");
 const horaSelect = document.querySelector("select[name='hora']");
 
+// Nombres limpios sin HTML - los option.value deben ser texto plano
 const doctores = {
     medicina_general: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Joseph", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Joseph" },
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Eduardo", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Eduardo" }
+        { value: "Méd. Joseph",  nombre: "🩺 Méd. Joseph"  },
+        { value: "Méd. Eduardo", nombre: "🩺 Méd. Eduardo" }
     ],
     cardiologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Ney", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Ney" }
-    ], 
+        { value: "Méd. Ney",    nombre: "🩺 Méd. Ney"    }
+    ],
     pediatria: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Enrique", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Enrique" }
+        { value: "Méd. Enrique", nombre: "🩺 Méd. Enrique" }
     ],
     ginecologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Aaron", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Aaron" }
+        { value: "Méd. Aaron",  nombre: "🩺 Méd. Aaron"  }
     ],
     traumatologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Joseph", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Joseph" }
+        { value: "Méd. Joseph", nombre: "🩺 Méd. Joseph" }
     ],
     neurologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Ney", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Ney" }
+        { value: "Méd. Ney",   nombre: "🩺 Méd. Ney"   }
     ],
     oftalmologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Eduardo", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Eduardo" }
+        { value: "Méd. Eduardo", nombre: "🩺 Méd. Eduardo" }
     ],
     dermatologia: [
-        { value: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Enrique", nombre: "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Enrique" }
+        { value: "Méd. Enrique", nombre: "🩺 Méd. Enrique" }
     ]
 };
 
 // HORARIOS POR MEDICO Y DIA
 // 0=Dom 1=Lun 2=Mar 3=Mie 4=Jue 5=Vie 6=Sab
+// Las claves deben coincidir EXACTAMENTE con los value de doctores arriba
 const horariosPorMedico = {
-
-    "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Joseph": {
-        1: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" },
-            { value: "15:00", label: "03:00 pm" },
-            { value: "16:00", label: "04:00 pm" }
-        ],
-        3: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "11:00", label: "11:00 am" },
-            { value: "14:00", label: "02:00 pm" },
-            { value: "17:00", label: "05:00 pm" }
-        ],
-        5: [
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" },
-            { value: "11:00", label: "11:00 am" },
-            { value: "16:00", label: "04:00 pm" }
-        ]
+    "Méd. Joseph": {
+        1: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"15:00",label:"03:00 pm"}, {value:"16:00",label:"04:00 pm"} ],
+        3: [ {value:"08:00",label:"08:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"14:00",label:"02:00 pm"}, {value:"17:00",label:"05:00 pm"} ],
+        5: [ {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"16:00",label:"04:00 pm"} ]
     },
-
-    "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Eduardo": {
-        2: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "14:00", label: "02:00 pm" },
-            { value: "15:00", label: "03:00 pm" }
-        ],
-        4: [
-            { value: "10:00", label: "10:00 am" },
-            { value: "11:00", label: "11:00 am" },
-            { value: "16:00", label: "04:00 pm" },
-            { value: "17:00", label: "05:00 pm" }
-        ],
-        6: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" }
-        ]
+    "Méd. Eduardo": {
+        2: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"14:00",label:"02:00 pm"}, {value:"15:00",label:"03:00 pm"} ],
+        4: [ {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"16:00",label:"04:00 pm"}, {value:"17:00",label:"05:00 pm"} ],
+        6: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"} ]
     },
-
-    "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Ney": {
-        1: [
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" },
-            { value: "11:00", label: "11:00 am" }
-        ],
-        3: [
-            { value: "14:00", label: "02:00 pm" },
-            { value: "15:00", label: "03:00 pm" },
-            { value: "16:00", label: "04:00 pm" },
-            { value: "17:00", label: "05:00 pm" }
-        ],
-        5: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "15:00", label: "03:00 pm" }
-        ]
+    "Méd. Ney": {
+        1: [ {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"} ],
+        3: [ {value:"14:00",label:"02:00 pm"}, {value:"15:00",label:"03:00 pm"}, {value:"16:00",label:"04:00 pm"}, {value:"17:00",label:"05:00 pm"} ],
+        5: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"15:00",label:"03:00 pm"} ]
     },
-
-    "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Enrique": {
-        2: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "10:00", label: "10:00 am" },
-            { value: "11:00", label: "11:00 am" },
-            { value: "17:00", label: "05:00 pm" }
-        ],
-        4: [
-            { value: "09:00", label: "09:00 am" },
-            { value: "14:00", label: "02:00 pm" },
-            { value: "15:00", label: "03:00 pm" }
-        ],
-        6: [
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" }
-        ]
+    "Méd. Enrique": {
+        2: [ {value:"08:00",label:"08:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"17:00",label:"05:00 pm"} ],
+        4: [ {value:"09:00",label:"09:00 am"}, {value:"14:00",label:"02:00 pm"}, {value:"15:00",label:"03:00 pm"} ],
+        6: [ {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"} ]
     },
-
-    "<img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Méd. Aaron": {
-        1: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "14:00", label: "02:00 pm" }
-        ],
-        3: [
-            { value: "10:00", label: "10:00 am" },
-            { value: "11:00", label: "11:00 am" },
-            { value: "15:00", label: "03:00 pm" },
-            { value: "16:00", label: "04:00 pm" }
-        ],
-        5: [
-            { value: "08:00", label: "08:00 am" },
-            { value: "09:00", label: "09:00 am" },
-            { value: "10:00", label: "10:00 am" },
-            { value: "17:00", label: "05:00 pm" }
-        ]
+    "Méd. Aaron": {
+        1: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"14:00",label:"02:00 pm"} ],
+        3: [ {value:"10:00",label:"10:00 am"}, {value:"11:00",label:"11:00 am"}, {value:"15:00",label:"03:00 pm"}, {value:"16:00",label:"04:00 pm"} ],
+        5: [ {value:"08:00",label:"08:00 am"}, {value:"09:00",label:"09:00 am"}, {value:"10:00",label:"10:00 am"}, {value:"17:00",label:"05:00 pm"} ]
     }
 };
 
@@ -147,14 +75,15 @@ function actualizarHoras() {
 
     const [anio, mes, dia] = fechaVal.split("-").map(Number);
     const fecha = new Date(anio, mes - 1, dia);
-    const diaSemana = fecha.getDay(); 
+    const diaSemana = fecha.getDay();
 
     const horarios = horariosPorMedico[doctorVal];
 
     if (!horarios || !horarios[diaSemana]) {
         const opt = document.createElement("option");
         opt.disabled = true;
-        opt.textContent = `⚠️ ${NOMBRES_DIA[diaSemana]}: el médico no atiende este día`;
+        const diasDisponibles = Object.keys(horarios || {}).map(d => NOMBRES_DIA[d]).join(", ");
+        opt.textContent = `⚠️ ${NOMBRES_DIA[diaSemana]}: el médico no atiende este día. Disponible: ${diasDisponibles}`;
         horaSelect.appendChild(opt);
         return;
     }
