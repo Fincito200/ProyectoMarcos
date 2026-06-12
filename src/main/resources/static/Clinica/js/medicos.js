@@ -54,7 +54,7 @@ async function cargarEspecialidades() {
         const data = await res.json();
         if (!data.ok) return;
 
-        especialidadSelect.innerHTML = '<option value="" disabled selected>Selecciona una Especialidad</option>';
+        especialidadSelect.innerHTML = '<option value="" disabled selected>Selecciona una especialidad</option>';
 
         data.especialidades
             .filter(e => e.activa)
@@ -70,6 +70,10 @@ async function cargarEspecialidades() {
     }
 }
 
+function normalizar(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
 // ── CARGAR MÉDICOS DESDE LA BD SEGÚN ESPECIALIDAD ─────────────────
 async function cargarMedicos(especialidad) {
     doctorSelect.innerHTML = '<option value="" disabled selected>Cargando médicos…</option>';
@@ -80,8 +84,9 @@ async function cargarMedicos(especialidad) {
         const data = await res.json();
         if (!data.ok) return;
 
+        // Comparación normalizada: ignora acentos y mayúsculas
         const medicos = data.medicos.filter(
-            m => m.especialidad.toLowerCase().trim() === especialidad.toLowerCase().trim()
+            m => normalizar(m.especialidad) === normalizar(especialidad)
         );
 
         doctorSelect.innerHTML = '<option value="" disabled selected>Selecciona un Médico</option>';
