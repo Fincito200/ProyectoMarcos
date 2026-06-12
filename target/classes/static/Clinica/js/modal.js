@@ -60,9 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // MOSTRAR RESUMEN
         document.getElementById("resumen-cita").innerHTML = `
-            <p class="mb-1"><strong><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D'0%200%2052%2052'%20fill%3D'none'%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'10'%20fill%3D'%230E588E'%2F%3E%3Cpath%20d%3D'M8%2048%20C8%2036%2044%2036%2044%2048'%20fill%3D'%230A3760'%2F%3E%3Ccircle%20cx%3D'26'%20cy%3D'18'%20r%3D'6'%20fill%3D'%2329A8EF'%20opacity%3D'.4'%2F%3E%3C%2Fsvg%3E" width="20" height="20" style="vertical-align:middle;"> Paciente:</strong> ${nombres} ${apellidos}</p>
-            <p class="mb-1"><strong>🏥 Especialidad:</strong> ${especialidad}</p>
-            <p class="mb-1"><strong><img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" alt="doctor" style="vertical-align:middle;"> Médico:</strong> ${doctor}</p>
+            <p class="mb-1"><strong><img src="/Clinica/img/emojis/paciente.png" width="20" height="20" style="vertical-align:middle;"> Paciente:</strong> ${nombres} ${apellidos}</p>
+            <p class="mb-1"><strong><img src="/Clinica/img/emojis/hospital.png" width="20" height="20" style="vertical-align:middle;"> Especialidad:</strong> ${especialidad}</p>
+            <p class="mb-1"><strong><img src="/Clinica/img/emojis/doctor-avatar.png" width="20" height="20" style="vertical-align:middle;"> Médico:</strong> ${doctor}</p>
             <p class="mb-1"><strong>📅 Fecha:</strong> ${fechaLegible} &nbsp; <strong>⏰ Hora:</strong> ${hora}</p>
             <p class="mb-0"><strong>📝 Motivo:</strong> ${motivo}</p>
         `;
