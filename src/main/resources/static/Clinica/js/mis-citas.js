@@ -54,6 +54,33 @@ async function eliminarCita(id) {
     location.reload();
 }
 
+// Horario genérico para médicos nuevos o sin clave exacta
+const horarioGenerico = {
+    1: [{value:"08:00",label:"08:00 am"},{value:"09:00",label:"09:00 am"},{value:"10:00",label:"10:00 am"},{value:"11:00",label:"11:00 am"}],
+    2: [{value:"08:00",label:"08:00 am"},{value:"09:00",label:"09:00 am"},{value:"14:00",label:"02:00 pm"},{value:"15:00",label:"03:00 pm"}],
+    3: [{value:"10:00",label:"10:00 am"},{value:"11:00",label:"11:00 am"},{value:"16:00",label:"04:00 pm"},{value:"17:00",label:"05:00 pm"}],
+    4: [{value:"08:00",label:"08:00 am"},{value:"09:00",label:"09:00 am"},{value:"14:00",label:"02:00 pm"}],
+    5: [{value:"09:00",label:"09:00 am"},{value:"10:00",label:"10:00 am"},{value:"11:00",label:"11:00 am"}],
+    6: [{value:"08:00",label:"08:00 am"},{value:"09:00",label:"09:00 am"}]
+};
+
+// Busca el horario del médico de forma flexible (ignora acentos y variaciones de prefijo)
+function normalizarNombre(nombre) {
+    return nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/^m[eé]d\.?\s*/i, "").trim();
+}
+
+function obtenerHorariosMedico(doctor) {
+    // Búsqueda exacta primero
+    if (horariosPorMedico[doctor]) return horariosPorMedico[doctor];
+    // Búsqueda flexible por nombre normalizado
+    const docNorm = normalizarNombre(doctor);
+    for (const clave of Object.keys(horariosPorMedico)) {
+        if (normalizarNombre(clave) === docNorm) return horariosPorMedico[clave];
+    }
+    // Fallback: horario genérico para médicos nuevos
+    return horarioGenerico;
+}
+
 function actualizarHorasEditar() {
     const doctor     = document.getElementById("editar-index").dataset.doctor;
     const fechaVal   = document.getElementById("editar-fecha").value;
@@ -67,15 +94,15 @@ function actualizarHorasEditar() {
 
     const [anio, mes, dia] = fechaVal.split("-").map(Number);
     const diaSemana = new Date(anio, mes - 1, dia).getDay();
-    const horarios  = horariosPorMedico[doctor];
+    const horarios  = obtenerHorariosMedico(doctor);
 
-    if (!horarios || !horarios[diaSemana]) {
+    if (!horarios[diaSemana]) {
+        const diasDisponibles = Object.keys(horarios).map(d => NOMBRES_DIA[Number(d)]).join(", ");
+        aviso.textContent = `⚠️ ${doctor} no atiende los ${NOMBRES_DIA[diaSemana]}. Días disponibles: ${diasDisponibles}`;
         const opt = document.createElement("option");
         opt.disabled = true;
-        opt.textContent = `⚠️ ${NOMBRES_DIA[diaSemana]}: el médico no atiende este día`;
+        opt.textContent = "No hay horarios para este día";
         horaSelect.appendChild(opt);
-        const diasDisponibles = Object.keys(horarios || {}).map(d => NOMBRES_DIA[d]).join(", ");
-        aviso.textContent = `⚠️ ${doctor} no atiende los ${NOMBRES_DIA[diaSemana]}. Días disponibles: ${diasDisponibles}`;
         return;
     }
 
@@ -121,10 +148,11 @@ async function guardarEdicion() {
 
     const [anio, mes, dia] = nuevaFecha.split("-").map(Number);
     const diaSemana = new Date(anio, mes - 1, dia).getDay();
-    const horarios  = horariosPorMedico[doctor];
+    const horarios  = obtenerHorariosMedico(doctor);
 
-    if (!horarios || !horarios[diaSemana]) {
-        alert(`El médico no atiende los ${NOMBRES_DIA[diaSemana]}. Elige otra fecha.`);
+    if (!horarios[diaSemana]) {
+        const diasDisponibles = Object.keys(horarios).map(d => NOMBRES_DIA[Number(d)]).join(", ");
+        alert(`El médico no atiende los ${NOMBRES_DIA[diaSemana]}. Días disponibles: ${diasDisponibles}`);
         return;
     }
 
