@@ -1,33 +1,49 @@
-# ProyectoMarcos - Clínica Web App (Spring Boot + PostgreSQL)
+# ProyectoMarcos — Clínica José Pardo (Spring Boot + PostgreSQL)
 
 ## Descripción
-Proyecto web de clínica médica migrado de PHP a **Spring Boot (Java 21)** con base de datos **PostgreSQL**.
+
+Sistema web de gestión de clínica médica desarrollado en **Java 21 con Spring Boot**, migrado desde PHP. Permite a los pacientes registrarse, agendar citas y reprogramarlas; a los doctores revisar y gestionar sus citas; y a los administradores gestionar médicos, especialidades e historial de citas.
+
+La base de datos es **PostgreSQL** y el frontend usa HTML, CSS y JavaScript puro con Bootstrap 5.
 
 ---
 
-## Requisitos
-- Java 21+
-- Maven 3.8+
-- PostgreSQL 13+
-- Tu base de datos `Clinica_JosePardo` ya existente
+## Tecnologías usadas
+
+| Capa | Tecnología |
+|------|-----------|
+| Backend | Java 21, Spring Boot 3, Spring Data JPA |
+| Base de datos | PostgreSQL 13+ |
+| Seguridad | BCryptPasswordEncoder |
+| Frontend | HTML5, CSS3, JavaScript (Fetch API), Bootstrap 5.3 |
+| Build | Maven (Maven Wrapper incluido) |
+
+---
+
+## Requisitos previos
+
+- Java 21 o superior
+- Maven 3.8 o superior (o usar `./mvnw` incluido)
+- PostgreSQL 13 o superior
+- La base de datos `Clinica_JosePardo` creada
 
 ---
 
 ## Configuración de la base de datos
 
-### Paso 1: Crear la base de datos (si no existe)
+### Paso 1 — Crear la base de datos
 ```sql
 CREATE DATABASE "Clinica_JosePardo";
 ```
 
-### Paso 2: Ejecutar el script de tablas
-Abre pgAdmin o psql y ejecuta el archivo:
+### Paso 2 — Ejecutar el script de tablas
+En pgAdmin o psql, ejecutar:
 ```
 src/main/resources/schema.sql
 ```
 
-### Paso 3: Verificar credenciales
-Edita `src/main/resources/application.properties` si tus credenciales son diferentes:
+### Paso 3 — Verificar credenciales
+Editar `src/main/resources/application.properties` si es necesario:
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/Clinica_JosePardo
 spring.datasource.username=postgres
@@ -38,57 +54,131 @@ spring.datasource.password=rodrigo20041998
 
 ## Cómo ejecutar el proyecto
 
-### Opción 1: Con Maven
+### Opción 1 — Maven Wrapper (recomendado)
 ```bash
 cd ProyectoMarcos
 ./mvnw spring-boot:run
 ```
 
-### Opción 2: Con IntelliJ IDEA
-1. Abrir el proyecto
-2. Ejecutar `ProyectoMarcosApplication.java`
+### Opción 2 — VS Code / IntelliJ
+Abrir el proyecto y ejecutar `ProyectoMarcosApplication.java`
 
-### Opción 3: JAR
+### Opción 3 — JAR compilado
 ```bash
 ./mvnw clean package
 java -jar target/ProyectoMarcos-0.0.1-SNAPSHOT.jar
 ```
 
+> **Importante:** cada vez que modifiques archivos estáticos (HTML, CSS, JS), reinicia el servidor para que Spring Boot los copie al `target/`. Alternativamente, copia manualmente el archivo modificado a la misma ruta dentro de `target/classes/static/`.
+
 ---
 
-## Acceder a la aplicación
+## Páginas disponibles
 
-Abre el navegador en:
+Abrir el navegador en `http://localhost:8080`
+
+| Ruta | Descripción |
+|------|-------------|
+| `/` o `/index` | Página principal con formulario de citas |
+| `/login` | Login de paciente y doctor |
+| `/register` | Registro de nuevo paciente |
+| `/mis-citas` | Panel del paciente — ver, reprogramar y cancelar citas |
+| `/doctor` | Panel del doctor — ver citas del día y agregar comentarios |
+| `/nuestros-doctores` | Página pública con lista de médicos |
+| `/nosotros` | Página institucional |
+| `/consejos-de-salud` | Artículos de salud |
+
+**Panel de administrador:** `http://localhost:8080/Clinica/pages/admin.html`
+
+---
+
+## Arquitectura del backend
+
+El proyecto sigue el patrón en capas de Spring Boot:
+
 ```
-http://localhost:8080
+Frontend (HTML/JS)
+      ↓ fetch() HTTP + JSON
+Controller  →  recibe la petición y delega
+      ↓
+Service     →  aplica la lógica de negocio
+      ↓
+Repository  →  habla con la base de datos (JPA)
+      ↓
+PostgreSQL
 ```
 
-Las páginas disponibles:
-- **Inicio:** http://localhost:8080/
-- **Login:** http://localhost:8080/login
-- **Registro:** http://localhost:8080/register
-- **Mis Citas:** http://localhost:8080/mis-citas
-- **Panel Doctor:** http://localhost:8080/doctor
+### Capas del proyecto
+
+- **Model** (`@Entity`) — representa cada tabla de la BD como clase Java
+- **Repository** (`JpaRepository`) — Spring genera el SQL automáticamente; sin una línea de SQL manual
+- **Service** (`@Service`) — lógica de negocio: validaciones, encriptación, reglas
+- **Controller** (`@RestController`) — expone los endpoints HTTP y devuelve JSON
+- **DTO** — objetos de transferencia de datos con validaciones (`@Valid`)
+- **Exception Handler** — captura errores globalmente y devuelve respuestas JSON coherentes
 
 ---
 
 ## Endpoints API REST
 
-Todos los endpoints mantienen la misma URL que usaban los archivos PHP originales:
+### Base URL
+```
+/ProyectoModificado/ProyectoMarcos/Clinica/api
+```
 
-| Método | URL | Descripción |
-|--------|-----|-------------|
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/login.php` | Login paciente o doctor |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/register.php` | Registro de paciente |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/verificar_correo.php` | Verifica si correo existe |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/cambiar_password.php` | Cambia contraseña |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_cita.php` | Crea nueva cita |
-| GET  | `/ProyectoModificado/ProyectoMarcos/Clinica/api/mis_citas.php?correo=...` | Citas del paciente |
-| GET  | `/ProyectoModificado/ProyectoMarcos/Clinica/api/citas_doctor.php?nombre=...` | Citas del doctor |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/actualizar_estado.php` | Cambia estado de cita |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/editar_cita.php` | Edita fecha/hora/motivo |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/eliminar_cita.php` | Elimina cita |
-| POST | `/ProyectoModificado/ProyectoMarcos/Clinica/api/guardar_comentario.php` | Guarda comentario doctor |
+### Autenticación y Pacientes
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/login.php` | Login de paciente o doctor |
+| POST | `/register.php` | Registro de nuevo paciente |
+| POST | `/verificar_correo.php` | Verifica si un correo ya existe |
+| POST | `/cambiar_password.php` | Cambia contraseña del paciente |
+| GET  | `/perfil.php?correo=...` | Obtiene datos del perfil |
+| POST | `/actualizar_perfil.php` | Actualiza datos del perfil |
+
+### Citas (Paciente)
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| POST | `/guardar_cita.php` | Crea una nueva cita |
+| GET  | `/mis_citas.php?correo=...` | Lista citas del paciente |
+| POST | `/editar_cita.php` | Reprograma fecha, hora y motivo |
+| POST | `/eliminar_cita.php` | Cancela una cita |
+
+### Citas (Doctor)
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET  | `/citas_doctor.php?nombre=...` | Lista citas asignadas al doctor |
+| POST | `/actualizar_estado.php` | Cambia estado de una cita |
+| POST | `/guardar_comentario.php` | Agrega comentario médico a una cita |
+
+### Administración de Médicos
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET  | `/listar_medicos.php` | Lista todos los médicos |
+| POST | `/crear_medico.php` | Crea un nuevo médico |
+| POST | `/editar_medico.php` | Edita datos de un médico |
+| POST | `/eliminar_medico.php` | Elimina un médico |
+
+### Administración de Especialidades
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET  | `/listar_especialidades.php` | Lista todas las especialidades |
+| POST | `/crear_especialidad.php` | Crea una nueva especialidad |
+| POST | `/editar_especialidad.php` | Edita una especialidad |
+| POST | `/eliminar_especialidad.php` | Elimina una especialidad |
+
+### Historial (Admin)
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| GET  | `/historial_citas.php` | Historial completo de citas con filtros |
+| POST | `/login_admin.php` | Login del administrador |
+| POST | `/cambiar_password_admin.php` | Cambia contraseña del admin |
 
 ---
 
@@ -96,40 +186,65 @@ Todos los endpoints mantienen la misma URL que usaban los archivos PHP originale
 
 ```
 ProyectoMarcos/
-├── src/
-│   ├── main/
-│   │   ├── java/com/utp/ProyectoMarcos/
-│   │   │   ├── ProyectoMarcosApplication.java   ← Clase principal
-│   │   │   ├── config/
-│   │   │   │   └── WebConfig.java               ← CORS + Recursos estáticos
-│   │   │   ├── controller/
-│   │   │   │   ├── ClinicaController.java        ← Todos los endpoints REST (reemplaza PHP)
-│   │   │   │   └── PageController.java           ← Sirve páginas HTML
-│   │   │   ├── model/
-│   │   │   │   ├── Paciente.java                 ← Entidad tabla pacientes
-│   │   │   │   ├── Medico.java                   ← Entidad tabla medicos
-│   │   │   │   └── Cita.java                     ← Entidad tabla citas
-│   │   │   └── repository/
-│   │   │       ├── PacienteRepository.java
-│   │   │       ├── MedicoRepository.java
-│   │   │       └── CitaRepository.java
-│   │   └── resources/
-│   │       ├── application.properties            ← Configuración BD
-│   │       ├── schema.sql                        ← Script SQL para crear tablas
-│   │       └── static/
-│   │           ├── Clinica/
-│   │           │   ├── pages/   ← HTML (inicio, login, register, etc.)
-│   │           │   ├── css/     ← Estilos
-│   │           │   ├── js/      ← JavaScript del frontend
-│   │           │   └── img/     ← Imágenes
-│   │           └── bootstrap-5.3.8-dist/         ← Bootstrap local
-├── pom.xml                                        ← Dependencias Maven
-└── README.md
+├── src/main/java/com/utp/ProyectoMarcos/
+│   ├── ProyectoMarcosApplication.java     ← Clase principal
+│   ├── config/
+│   │   └── WebConfig.java                 ← CORS y recursos estáticos
+│   ├── controller/
+│   │   ├── ClinicaController.java         ← Endpoints de pacientes y citas
+│   │   ├── AdminController.java           ← Endpoints de administración
+│   │   └── PageController.java            ← Sirve las páginas HTML
+│   ├── model/
+│   │   ├── Paciente.java
+│   │   ├── Medico.java
+│   │   ├── Cita.java
+│   │   ├── Especialidad.java
+│   │   └── Admin.java
+│   ├── repository/
+│   │   ├── PacienteRepository.java
+│   │   ├── MedicoRepository.java
+│   │   ├── CitaRepository.java
+│   │   ├── EspecialidadRepository.java
+│   │   └── AdminRepository.java
+│   ├── service/
+│   │   ├── ClinicaService.java            ← Lógica de pacientes y citas
+│   │   └── AdminService.java              ← Lógica de administración
+│   ├── dto/
+│   │   ├── PacienteRequest.java
+│   │   ├── CitaRequest.java
+│   │   ├── MedicoRequest.java
+│   │   └── EspecialidadRequest.java
+│   └── exception/
+│       └── ApiExceptionHandler.java       ← Manejo global de errores
+│
+└── src/main/resources/
+    ├── application.properties             ← Configuración BD
+    ├── schema.sql                         ← Script SQL de tablas
+    └── static/Clinica/
+        ├── pages/
+        │   ├── index.html                 ← Página principal + formulario de citas
+        │   ├── admin.html                 ← Panel de administración
+        │   └── ...
+        ├── css/                           ← Estilos
+        ├── js/
+        │   ├── medicos.js                 ← Carga especialidades y médicos desde la BD
+        │   ├── modal.js                   ← Lógica del modal de confirmación de cita
+        │   ├── mis-citas.js               ← Panel de citas del paciente
+        │   ├── admin.js                   ← Panel de administración
+        │   ├── doctor.js                  ← Panel del doctor
+        │   ├── login.js
+        │   ├── register.js
+        │   ├── notificaciones.js
+        │   └── mi-perfil.js
+        └── img/emojis/                    ← Íconos PNG usados en la UI
 ```
 
 ---
 
-## Nota sobre contraseñas de médicos
+## Notas importantes
 
-Las contraseñas de los médicos en la BD están encriptadas con **bcrypt** (PHP `password_hash`).  
-Spring Boot usa **BCryptPasswordEncoder** que es 100% compatible, así que los médicos pueden iniciar sesión con la misma contraseña que usaban antes.
+**Contraseñas encriptadas con BCrypt:** tanto las contraseñas de pacientes como de médicos y admins están encriptadas con BCrypt, compatible entre PHP y Spring Boot.
+
+**Especialidades y médicos dinámicos:** el formulario de agendar cita carga las especialidades y médicos directamente desde la base de datos. Cualquier médico o especialidad agregada desde el panel de admin aparece automáticamente en el formulario sin necesidad de tocar el código.
+
+**Rutas con `.php`:** los endpoints mantienen la nomenclatura `.php` para no tener que modificar todos los `fetch()` del frontend, aunque el backend es 100% Java con Spring Boot.

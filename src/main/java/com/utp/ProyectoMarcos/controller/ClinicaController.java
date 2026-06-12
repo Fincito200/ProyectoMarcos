@@ -3,8 +3,10 @@ package com.utp.ProyectoMarcos.controller;
 import com.utp.ProyectoMarcos.dto.CitaRequest;
 import com.utp.ProyectoMarcos.dto.PacienteRequest;
 import com.utp.ProyectoMarcos.model.Cita;
+import com.utp.ProyectoMarcos.model.Especialidad;
 import com.utp.ProyectoMarcos.model.Medico;
 import com.utp.ProyectoMarcos.model.Paciente;
+import com.utp.ProyectoMarcos.repository.EspecialidadRepository;
 import com.utp.ProyectoMarcos.repository.MedicoRepository;
 import com.utp.ProyectoMarcos.service.ClinicaService;
 import jakarta.validation.Valid;
@@ -23,11 +25,44 @@ public class ClinicaController {
 
     private final ClinicaService clinicaService;
     private final MedicoRepository medicoRepo;
+    private final EspecialidadRepository especialidadRepo;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public ClinicaController(ClinicaService clinicaService, MedicoRepository medicoRepo) {
-        this.clinicaService = clinicaService;
-        this.medicoRepo = medicoRepo;
+    public ClinicaController(ClinicaService clinicaService, MedicoRepository medicoRepo,
+                             EspecialidadRepository especialidadRepo) {
+        this.clinicaService      = clinicaService;
+        this.medicoRepo          = medicoRepo;
+        this.especialidadRepo    = especialidadRepo;
+    }
+
+    // ── CATÁLOGOS PÚBLICOS (para el formulario de citas) ──────────
+
+    @GetMapping("/listar_especialidades.php")
+    public ResponseEntity<Map<String, Object>> listarEspecialidadesPublico() {
+        List<Especialidad> lista = especialidadRepo.findAll();
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Especialidad e : lista) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("id",     e.getId());
+            item.put("nombre", e.getNombre());
+            item.put("activa", e.getActiva());
+            resultado.add(item);
+        }
+        return ResponseEntity.ok(Map.of("ok", true, "especialidades", resultado));
+    }
+
+    @GetMapping("/listar_medicos.php")
+    public ResponseEntity<Map<String, Object>> listarMedicosPublico() {
+        List<Medico> lista = medicoRepo.findAll();
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Medico m : lista) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("id",          m.getId());
+            item.put("nombre",      m.getNombre());
+            item.put("especialidad", m.getEspecialidad());
+            resultado.add(item);
+        }
+        return ResponseEntity.ok(Map.of("ok", true, "medicos", resultado));
     }
 
     // ── AUTH ───────────────────────────────────────────────────────
