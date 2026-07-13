@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.utp.ProyectoMarcos.ProyectoMarcosApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.701 s -- in com.utp.ProyectoMarcos.ProyectoMarcosApplicationTests

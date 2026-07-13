@@ -1,7 +1,0 @@
-body { background: #f0f4f8; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        .login-box { background: #fff; border-radius: 16px; box-shadow: 0 8px 32px rgba(14,88,142,0.15); padding: 2.5rem 2rem; max-width: 400px; width: 100%; }
-        .login-box h2 { color: #0E588E; font-weight: 700; }
-        .btn-admin { background-color: #0E588E; color: #fff; font-weight: 600; width: 100%; }
-        .btn-admin:hover { background-color: #0a3f68; color: #fff; }
-        .toggle-pass { background: none; border: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; }
-        .input-pass { position: relative; }
