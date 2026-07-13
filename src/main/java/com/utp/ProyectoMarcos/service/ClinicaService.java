@@ -3,8 +3,12 @@ package com.utp.ProyectoMarcos.service;
 import com.utp.ProyectoMarcos.dto.CitaRequest;
 import com.utp.ProyectoMarcos.dto.PacienteRequest;
 import com.utp.ProyectoMarcos.model.Cita;
+import com.utp.ProyectoMarcos.model.Especialidad;
+import com.utp.ProyectoMarcos.model.Medico;
 import com.utp.ProyectoMarcos.model.Paciente;
 import com.utp.ProyectoMarcos.repository.CitaRepository;
+import com.utp.ProyectoMarcos.repository.EspecialidadRepository;
+import com.utp.ProyectoMarcos.repository.MedicoRepository;
 import com.utp.ProyectoMarcos.repository.PacienteRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,11 +23,18 @@ public class ClinicaService {
 
     private final PacienteRepository pacienteRepo;
     private final CitaRepository citaRepo;
+    private final MedicoRepository medicoRepo;
+    private final EspecialidadRepository especialidadRepo;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public ClinicaService(PacienteRepository pacienteRepo, CitaRepository citaRepo) {
+    public ClinicaService(PacienteRepository pacienteRepo,
+                            CitaRepository citaRepo,
+                            MedicoRepository medicoRepo,
+                            EspecialidadRepository especialidadRepo) {
         this.pacienteRepo = pacienteRepo;
         this.citaRepo = citaRepo;
+        this.medicoRepo = medicoRepo;
+        this.especialidadRepo = especialidadRepo;
     }
 
     // PACIENTES
@@ -103,11 +114,22 @@ public class ClinicaService {
             throw new RuntimeException("El nombre del médico no es válido.");
         }
 
+        // NUEVO: relación real, no solo texto
+        Medico medico = medicoRepo.findAllByOrderByNombreAsc().stream()
+                .filter(m -> m.getNombre().equalsIgnoreCase(medicoNombre))
+                .findFirst()
+                .orElse(null); // puede ser null si el nombre no calza exacto; no rompe el flujo actual
+
+        Especialidad especialidadRef = especialidadRepo.findByNombre(dto.getEspecialidad())
+                .orElse(null);
+
         try {
             Cita cita = new Cita();
             cita.setPaciente(paciente);
             cita.setMedicoNombre(medicoNombre);
             cita.setEspecialidad(dto.getEspecialidad());
+            cita.setMedico(medico);                   // NUEVO
+            cita.setEspecialidadRef(especialidadRef);  // NUEVO
             cita.setFecha(LocalDate.parse(dto.getFecha()));
             cita.setHora(LocalTime.parse(dto.getHora()));
             cita.setMotivo(dto.getMotivo());

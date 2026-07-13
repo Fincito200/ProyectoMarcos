@@ -76,4 +76,18 @@ public class Cita {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "especialidad_id")
+    private Especialidad especialidadRef;
+
+    // getters y setters
+    public Medico getMedico() { return medico; }
+    public void setMedico(Medico medico) { this.medico = medico; }
+    public Especialidad getEspecialidadRef() { return especialidadRef; }
+    public void setEspecialidadRef(Especialidad especialidadRef) { this.especialidadRef = especialidadRef; }
 }

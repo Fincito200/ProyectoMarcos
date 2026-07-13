@@ -3,14 +3,22 @@ package com.utp.ProyectoMarcos.controller;
 import com.utp.ProyectoMarcos.dto.CitaRequest;
 import com.utp.ProyectoMarcos.dto.PacienteRequest;
 import com.utp.ProyectoMarcos.model.Cita;
+import com.utp.ProyectoMarcos.model.Especialidad;
 import com.utp.ProyectoMarcos.model.Medico;
 import com.utp.ProyectoMarcos.model.Paciente;
+import com.utp.ProyectoMarcos.repository.EspecialidadRepository;
 import com.utp.ProyectoMarcos.repository.MedicoRepository;
 import com.utp.ProyectoMarcos.service.ClinicaService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
@@ -23,17 +31,54 @@ public class ClinicaController {
 
     private final ClinicaService clinicaService;
     private final MedicoRepository medicoRepo;
+    private final EspecialidadRepository especialidadRepo;
+    private final AuthenticationManager authenticationManager;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public ClinicaController(ClinicaService clinicaService, MedicoRepository medicoRepo) {
-        this.clinicaService = clinicaService;
-        this.medicoRepo = medicoRepo;
+    public ClinicaController(ClinicaService clinicaService, MedicoRepository medicoRepo,
+                                EspecialidadRepository especialidadRepo,
+                                AuthenticationManager authenticationManager) {
+        this.clinicaService      = clinicaService;
+        this.medicoRepo          = medicoRepo;
+        this.especialidadRepo    = especialidadRepo;
+        this.authenticationManager = authenticationManager;
+    }
+
+    // ── CATÁLOGOS PÚBLICOS (para el formulario de citas) ──────────
+
+    @GetMapping("/listar_especialidades.php")
+    public ResponseEntity<Map<String, Object>> listarEspecialidadesPublico() {
+        List<Especialidad> lista = especialidadRepo.findAll();
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Especialidad e : lista) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("id",     e.getId());
+            item.put("nombre", e.getNombre());
+            item.put("activa", e.getActiva());
+            resultado.add(item);
+        }
+        return ResponseEntity.ok(Map.of("ok", true, "especialidades", resultado));
+    }
+
+    @GetMapping("/listar_medicos.php")
+    public ResponseEntity<Map<String, Object>> listarMedicosPublico() {
+        List<Medico> lista = medicoRepo.findAll();
+        List<Map<String, Object>> resultado = new ArrayList<>();
+        for (Medico m : lista) {
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("id",          m.getId());
+            item.put("nombre",      m.getNombre());
+            item.put("especialidad", m.getEspecialidad());
+            resultado.add(item);
+        }
+        return ResponseEntity.ok(Map.of("ok", true, "medicos", resultado));
     }
 
     // ── AUTH ───────────────────────────────────────────────────────
 
     @PostMapping("/login.php")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> body) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> body,
+                                                        HttpServletRequest request) {
         String correo   = body.getOrDefault("correo", "").trim();
         String password = body.getOrDefault("password", "");
         String tipo     = body.getOrDefault("tipo", "paciente");
@@ -43,6 +88,8 @@ public class ClinicaController {
         if (tipo.equals("doctor")) {
             Optional<Medico> opt = medicoRepo.findByCorreo(correo);
             if (opt.isPresent() && encoder.matches(password, opt.get().getPassword())) {
+                iniciarSesion(correo, password, request);
+
                 resp.put("ok", true);
                 resp.put("tipo", "doctor");
                 resp.put("nombre", opt.get().getNombre());
@@ -56,6 +103,8 @@ public class ClinicaController {
 
         try {
             Paciente p = clinicaService.loginPaciente(correo, password);
+            iniciarSesion(correo, password, request);
+
             resp.put("ok", true);
             resp.put("tipo", "paciente");
             resp.put("nombre", p.getNombres());
@@ -65,6 +114,18 @@ public class ClinicaController {
             resp.put("msg", e.getMessage());
         }
         return ResponseEntity.ok(resp);
+    }
+
+    // Establece la sesión de Spring Security tras validar credenciales
+    // manualmente arriba. Así las siguientes peticiones (mis_citas.php,
+    // citas_doctor.php, etc.) llegan autenticadas.
+    private void iniciarSesion(String correo, String password, HttpServletRequest request) {
+        Authentication authRequest = new UsernamePasswordAuthenticationToken(correo, password);
+        Authentication authResult = authenticationManager.authenticate(authRequest);
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+        request.getSession(true).setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                SecurityContextHolder.getContext());
     }
 
     @PostMapping("/register.php")

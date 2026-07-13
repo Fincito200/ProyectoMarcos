@@ -8,9 +8,15 @@ import com.utp.ProyectoMarcos.model.Medico;
 import com.utp.ProyectoMarcos.model.Paciente;
 import com.utp.ProyectoMarcos.service.AdminService;
 import com.utp.ProyectoMarcos.service.ClinicaService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.format.DateTimeFormatter;
@@ -23,21 +29,36 @@ public class AdminController {
 
     private final AdminService adminService;
     private final ClinicaService clinicaService;
+    private final AuthenticationManager authenticationManager;
 
-    public AdminController(AdminService adminService, ClinicaService clinicaService) {
+    public AdminController(AdminService adminService,
+                            ClinicaService clinicaService,
+                            AuthenticationManager authenticationManager) {
         this.adminService = adminService;
         this.clinicaService = clinicaService;
+        this.authenticationManager = authenticationManager;
     }
 
     // AUTH ADMIN
 
     @PostMapping("/login_admin.php")
-    public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Map<String, String> body) {
+    public ResponseEntity<Map<String, Object>> loginAdmin(@RequestBody Map<String, String> body,
+                                                            HttpServletRequest request) {
         String correo   = body.getOrDefault("correo", "").trim();
         String password = body.getOrDefault("password", "");
         Map<String, Object> resp = new LinkedHashMap<>();
         try {
             var admin = adminService.loginAdmin(correo, password);
+
+            // Establece la sesión de Spring Security para que las siguientes
+            // peticiones a /admin/** pasen la autorización con ROLE_ADMIN.
+            Authentication authRequest = new UsernamePasswordAuthenticationToken(correo, password);
+            Authentication authResult = authenticationManager.authenticate(authRequest);
+            SecurityContextHolder.getContext().setAuthentication(authResult);
+            request.getSession(true).setAttribute(
+                    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                    SecurityContextHolder.getContext());
+
             resp.put("ok", true);
             resp.put("nombre", admin.getNombre());
             resp.put("correo", correo);
