@@ -43,9 +43,13 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // páginas estáticas y catálogos públicos
+                // recursos estáticos reales (HTML, CSS, JS, imágenes) servidos desde /static/Clinica/**
+                .requestMatchers("/Clinica/**").permitAll()
+
+                // páginas "bonitas" que hacen forward a los HTML de arriba
                 .requestMatchers("/", "/index", "/login", "/register", "/nuestros-doctores",
                                     "/nosotros", "/consejos-de-salud", "/doctor", "/mis-citas").permitAll()
+
                 .requestMatchers(BASE + "/login.php", BASE + "/register.php",
                                     BASE + "/verificar_correo.php",
                                     BASE + "/listar_especialidades.php",
