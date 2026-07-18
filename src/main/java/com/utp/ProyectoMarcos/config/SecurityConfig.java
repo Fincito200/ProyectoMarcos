@@ -43,12 +43,16 @@ public class SecurityConfig {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // recursos estáticos reales (HTML, CSS, JS, imágenes) servidos desde /static/Clinica/**
+                // recursos estáticos reales (CSS, JS, imágenes) servidos desde /static/Clinica/**
                 .requestMatchers("/Clinica/**").permitAll()
 
-                // páginas "bonitas" que hacen forward a los HTML de arriba
-                .requestMatchers("/", "/index", "/login", "/register", "/nuestros-doctores",
-                                    "/nosotros", "/consejos-de-salud", "/doctor", "/mis-citas").permitAll()
+                // shell de la SPA de React (index.html + assets del build de Vite)
+                .requestMatchers("/", "/index.html", "/assets/**").permitAll()
+
+                // páginas "bonitas" que hacen forward a index.html (React Router resuelve la vista)
+                .requestMatchers("/index", "/login", "/register", "/nuestros-doctores",
+                                    "/nosotros", "/consejos-de-salud", "/doctor", "/mis-citas",
+                                    "/mi-perfil", "/admin", "/admin-login").permitAll()
 
                 .requestMatchers(BASE + "/login.php", BASE + "/register.php",
                                     BASE + "/verificar_correo.php",

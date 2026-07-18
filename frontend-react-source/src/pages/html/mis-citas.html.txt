@@ -1,0 +1,120 @@
+
+<!-- FRANJA SUPERIOR -->
+<div class="franja-contacto d-none d-md-block">
+<div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+<div class="d-flex gap-4">
+<span><img alt="teléfono" height="20" src="/Clinica/img/emojis/telefono.png" style="vertical-align:middle;" width="20"/> Central: (01) 111-2222</span>
+<span><img alt="reloj" height="20" src="/Clinica/img/emojis/reloj-alarma.png" style="vertical-align:middle;" width="20"/> Lun-Sáb: 7:00 am - 8:00 pm</span>
+<span><img alt="ubicación" height="20" src="/Clinica/img/emojis/ubicacion.png" style="vertical-align:middle;" width="20"/> Av. José Pardo 452, Comas</span>
+</div>
+<div class="d-flex gap-3">
+<a class="text-white text-decoration-none" href="#" style="font-size:0.85rem;"><img alt="email" height="20" src="/Clinica/img/emojis/email.png" style="vertical-align:middle;" width="20"/> atencion@clinicajosepardo.com.pe</a>
+</div>
+</div>
+</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+<div class="container-fluid">
+<a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/index.html">
+<img alt="Logo" class="rounded" height="40" src="/Clinica/img/3063176.png"/>
+<span class="fw-bold">José Pardo</span>
+</a>
+<div class="d-flex align-items-center gap-2 ms-auto">
+<!-- CAMPANA -->
+<div class="position-relative d-none" id="notif-campana-wrapper" style="margin-right:4px;">
+<button id="notif-btn" onclick="toggleBandeja()" style="background:rgba(255,255,255,0.15); border:1.5px solid rgba(255,255,255,0.35);
+                        border-radius:50%; width:40px; height:40px; cursor:pointer;
+                        display:flex; align-items:center; justify-content:center;
+                        position:relative; transition:background 0.2s;" title="Notificaciones">
+<svg fill="none" height="20" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+<span id="notif-badge" style="position:absolute; top:-4px; right:-4px;
+                        background:#e74c3c; color:#fff; font-size:0.65rem;
+                        font-weight:700; border-radius:50%; width:18px; height:18px;
+                        display:none; align-items:center; justify-content:center;
+                        border:2px solid #0E588E; line-height:1;">0
+                    </span>
+</button>
+<div id="notif-bandeja" style="display:none; position:absolute; right:0; top:48px;
+                    width:320px; background:#fff; border-radius:14px;
+                    box-shadow:0 8px 32px rgba(14,88,142,0.18);
+                    border:1px solid #e3eef7; z-index:9999; overflow:hidden;">
+<div style="background:#0E588E; color:#fff; padding:12px 16px;
+                        display:flex; align-items:center; justify-content:space-between;">
+<span style="font-weight:700; font-size:0.92rem;">🔔 Mis Notificaciones</span>
+<span id="notif-count-label" style="background:rgba(255,255,255,0.2); border-radius:20px;
+                            padding:2px 10px; font-size:0.75rem;">
+</span>
+</div>
+<div id="notif-lista" style="max-height:320px; overflow-y:auto; padding:10px 12px;">
+<p class="text-muted text-center small py-3">Cargando...</p>
+</div>
+<div style="border-top:1px solid #e3eef7; padding:10px 16px; text-align:center;">
+<a href="/Clinica/pages/mis-citas.html" style="color:#0E588E; font-size:0.82rem; font-weight:600; text-decoration:none;">
+                        Ver todas mis citas →
+                        </a>
+</div>
+</div>
+</div>
+<!-- FIN CAMPANA -->
+<a class="btn btn-outline-light fw-semibold" href="/Clinica/pages/index.html">
+            ← Volver al Inicio
+            </a>
+<a class="btn btn-outline-light fw-semibold" href="/Clinica/pages/mi-perfil.html">
+<img alt="perfil" height="20" src="/Clinica/img/emojis/perfil.png" width="20"/> Mi Perfil
+            </a>
+<span class="text-white fw-semibold d-none" id="saludo-usuario"></span>
+<button class="btn btn-outline-light fw-semibold d-none" id="btn-cerrar-sesion" onclick="cerrarSesion()">
+<img alt="cerrar sesión" height="20" src="/Clinica/img/emojis/cerrar-sesion.png" style="vertical-align:middle;" width="20"/> Cerrar Sesión
+            </button>
+</div>
+</div>
+</nav>
+<!-- CONTENIDO -->
+<div class="container py-5">
+<h2 class="fw-bold mb-1" style="color: #0E588E;"><img alt="mis citas" height="20" src="/Clinica/img/emojis/mis-citas.png" style="vertical-align:middle;" width="20"/>️ Mis Citas Programadas</h2>
+<p class="text-muted mb-4">Aquí puedes ver todas tus citas médicas registradas.</p>
+<div id="lista-citas"></div>
+</div>
+<!-- MODAL EDITAR CITA -->
+<div aria-hidden="true" class="modal fade" id="modalEditar" tabindex="-1">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header text-white" style="background-color: #0E588E;">
+<h5 class="modal-title"><img alt="editar" height="20" src="/Clinica/img/emojis/editar.png" style="vertical-align:middle;" width="20"/>️ Reprogramar Cita</h5>
+<button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<input id="editar-index" type="hidden"/>
+<p class="fw-semibold text-secondary mb-3" id="editar-doctor-info"></p>
+<div class="mb-3">
+<label class="form-label fw-semibold"><img alt="calendario" height="20" src="/Clinica/img/emojis/calendario.png" style="vertical-align:middle;" width="20"/> Nueva Fecha</label>
+<input class="form-control" id="editar-fecha" onchange="actualizarHorasEditar()" type="date"/>
+<small class="text-danger" id="editar-aviso-dia"></small>
+<div class="form-text text-muted">Solo puedes reprogramar con al menos 3 días de anticipación.</div>
+</div>
+<div class="mb-3">
+<label class="form-label fw-semibold"><img alt="alarma" height="20" src="/Clinica/img/emojis/reloj-alarma.png" style="vertical-align:middle;" width="20"/> Nueva Hora</label>
+<select class="form-select" id="editar-hora">
+<option disabled="" selected="" value="">Selecciona una hora</option>
+</select>
+</div>
+<div class="mb-3">
+<label class="form-label fw-semibold"><img alt="notas" height="20" src="/Clinica/img/emojis/notas.png" style="vertical-align:middle;" width="20"/> Motivo de consulta</label>
+<textarea class="form-control" id="editar-motivo" rows="3"></textarea>
+</div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancelar</button>
+<button class="btn text-white fw-semibold" onclick="guardarEdicion()" style="background-color: #0E588E;" type="button">
+<img alt="guardar" height="20" src="/Clinica/img/emojis/guardar.png" style="vertical-align:middle;" width="20"/> Guardar cambios
+                </button>
+</div>
+</div>
+</div>
+</div>
+
+
+

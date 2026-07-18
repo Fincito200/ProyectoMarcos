@@ -1,0 +1,86 @@
+
+<!-- FRANJA SUPERIOR -->
+<div class="franja-contacto d-none d-md-block">
+<div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+<div class="d-flex gap-4">
+<span><img alt="teléfono" height="20" src="/Clinica/img/emojis/telefono.png" style="vertical-align:middle;" width="20"/> Central: (01) 111-2222</span>
+<span><img alt="reloj" height="20" src="/Clinica/img/emojis/reloj-alarma.png" style="vertical-align:middle;" width="20"/> Lun-Sáb: 7:00 am - 8:00 pm</span>
+<span><img alt="ubicación" height="20" src="/Clinica/img/emojis/ubicacion.png" style="vertical-align:middle;" width="20"/> Av. José Pardo 452, Comas</span>
+</div>
+</div>
+</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0E588E;">
+<div class="container-fluid">
+<a class="navbar-brand d-flex align-items-center gap-2" href="/Clinica/pages/index.html">
+<img alt="Logo" class="rounded" height="40" src="/Clinica/img/3063176.png"/>
+<span class="fw-bold">José Pardo</span>
+</a>
+<div class="d-flex align-items-center gap-2 ms-auto">
+<a class="btn btn-outline-light fw-semibold" href="/Clinica/pages/mis-citas.html">
+                ← Mis Citas
+            </a>
+<span class="text-white fw-semibold d-none" id="saludo-usuario"></span>
+<button class="btn btn-outline-light fw-semibold d-none" id="btn-cerrar-sesion" onclick="cerrarSesion()">
+<img alt="cerrar sesión" height="20" src="/Clinica/img/emojis/cerrar-sesion.png" style="vertical-align:middle;" width="20"/> Cerrar Sesión
+            </button>
+</div>
+</div>
+</nav>
+<!-- CONTENIDO -->
+<div class="container py-5">
+<div class="perfil-card">
+<h2 class="fw-bold mb-1" style="color: #0E588E;"><img alt="perfil" height="20" src="/Clinica/img/emojis/perfil.png" width="20"/> Mi Perfil</h2>
+<p class="text-muted mb-4">Actualiza tu información personal.</p>
+<div class="alert alert-success d-none py-2" id="alerta-exito"></div>
+<div class="alert alert-danger d-none py-2" id="alerta-error"></div>
+<div class="card shadow-sm border-0 p-4">
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">Nombres</label>
+<input class="form-control" id="p-nombres" placeholder="Juan Carlos" type="text"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">Apellidos</label>
+<input class="form-control" id="p-apellidos" placeholder="López Pérez" type="text"/>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">DNI</label>
+<input class="form-control" id="p-dni" maxlength="8" placeholder="12345678" type="text"/>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">Teléfono</label>
+<input class="form-control" id="p-telefono" maxlength="9" placeholder="987654321" type="tel"/>
+</div>
+</div>
+<div class="mb-3">
+<label class="form-label fw-semibold">Correo electrónico</label>
+<input class="form-control" id="p-correo" placeholder="ejemplo@gmail.com" type="email"/>
+</div>
+<hr/>
+<p class="text-muted small mb-3"><img alt="contraseña" height="20" src="/Clinica/img/emojis/contrasena.png" style="vertical-align:middle;" width="20"/> Cambiar contraseña (dejar en blanco para no cambiarla)</p>
+<div class="row">
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">Nueva contraseña</label>
+<div class="input-pass">
+<input class="form-control" id="p-pass-nueva" placeholder="••••••••" type="password"/>
+<button class="toggle-pass" onclick="togglePass('p-pass-nueva', this)" type="button"><img alt="ver" height="20" src="/Clinica/img/emojis/ver-contrasena.png" style="vertical-align:middle;" width="20"/>️</button>
+</div>
+</div>
+<div class="col-md-6 mb-3">
+<label class="form-label fw-semibold">Confirmar contraseña</label>
+<div class="input-pass">
+<input class="form-control" id="p-pass-confirmar" placeholder="••••••••" type="password"/>
+<button class="toggle-pass" onclick="togglePass('p-pass-confirmar', this)" type="button"><img alt="ver" height="20" src="/Clinica/img/emojis/ver-contrasena.png" style="vertical-align:middle;" width="20"/>️</button>
+</div>
+</div>
+</div>
+<button class="btn text-white fw-semibold w-100 mt-2" onclick="guardarPerfil()" style="background-color: #0E588E;">
+<img alt="guardar" height="20" src="/Clinica/img/emojis/guardar.png" style="vertical-align:middle;" width="20"/> Guardar cambios
+            </button>
+</div>
+</div>
+</div>
+

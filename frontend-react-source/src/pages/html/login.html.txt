@@ -1,0 +1,96 @@
+
+<div class="login-wrapper">
+<!-- LOGO -->
+<div class="login-logo">
+<img alt="Logo" src="/Clinica/img/3063176.png"/>
+<h2>Clínica José Pardo</h2>
+<p>Selecciona tu tipo de acceso</p>
+</div>
+<!-- TABS -->
+<div class="login-tabs">
+<button class="login-tab-btn active" id="tab-paciente" onclick="switchTab('paciente')"><img alt="paciente" height="20" src="/Clinica/img/emojis/paciente.png" style="vertical-align:middle;" width="20"/> Paciente</button>
+<button class="login-tab-btn" id="tab-doctor" onclick="switchTab('doctor')"><img alt="doctor" height="20" src="/Clinica/img/emojis/doctor-avatar.png" style="vertical-align:middle;" width="20"/> Doctor</button>
+</div>
+<!-- CARD -->
+<div class="card-login">
+<div class="alert alert-danger d-none py-2 small" id="alerta-error" role="alert">
+<img alt="error" height="20" src="/Clinica/img/emojis/error.png" style="vertical-align:middle;" width="20"/> Correo o contraseña incorrectos.
+        </div>
+<!-- PANEL PACIENTE -->
+<div class="panel-form active" id="panel-paciente">
+<span class="badge-role badge-paciente"><img alt="hospital" height="20" src="/Clinica/img/emojis/hospital.png" style="vertical-align:middle;" width="20"/> Acceso Paciente</span>
+<div class="mb-3">
+<label class="form-label">Correo electrónico</label>
+<input class="form-control" id="correo-paciente" placeholder="usuario@gmail.com" type="email"/>
+</div>
+<div class="mb-3">
+<label class="form-label">Contraseña</label>
+<input class="form-control" id="password-paciente" placeholder="••••••••" type="password"/>
+</div>
+<div class="hint-box"><img alt="llave" height="20" src="/Clinica/img/emojis/llave.png" style="vertical-align:middle;" width="20"/> Prueba: <strong>juan@gmail.com</strong> / <strong>1234</strong></div>
+<br/>
+<button class="btn-login-main" onclick="loginPaciente()">Ingresar como Paciente</button>
+<hr class="divider"/>
+<div class="d-flex justify-content-between align-items-center" style="font-size:0.87rem;">
+<p class="register-link mb-0">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+<a class="text-decoration-none fw-semibold" href="#" onclick="switchTab('recuperar')" style="color:#0E588E;">¿Olvidaste tu contraseña?</a>
+</div>
+</div>
+<!-- PANEL DOCTOR -->
+<div class="panel-form" id="panel-doctor">
+<span class="badge-role badge-doctor"><img alt="médico" height="20" src="/Clinica/img/emojis/estetoscopio.png" style="vertical-align:middle;" width="20"/> Acceso Médico</span>
+<div class="mb-3">
+<label class="form-label">Correo del médico</label>
+<input class="form-control" id="correo-doctor" placeholder="doctor@clinica.com" type="email"/>
+</div>
+<div class="mb-3">
+<label class="form-label">Contraseña</label>
+<input class="form-control" id="password-doctor" placeholder="••••••••" type="password"/>
+</div>
+<div class="hint-box doctor-hint"><img alt="llave" height="20" src="/Clinica/img/emojis/llave.png" style="vertical-align:middle;" width="20"/> Prueba: <strong>joseph@clinica.com</strong> / <strong>doctor123</strong></div>
+<br/>
+<button class="btn-login-main doctor" onclick="loginDoctor()">Ingresar como Doctor</button>
+<hr class="divider"/>
+<p class="register-link text-muted small text-center mb-0">Acceso restringido al personal médico</p>
+</div>
+<!-- PANEL RECUPERAR CONTRASEÑA -->
+<div class="panel-form" id="panel-recuperar">
+<span class="badge-role" style="background:#fff3cd;color:#856404;"><img alt="llave" height="20" src="/Clinica/img/emojis/llave.png" style="vertical-align:middle;" width="20"/> Restablecer Contraseña</span>
+<!-- PASO 1: INGRESAR CORREO -->
+<div id="recuperar-paso1">
+<p class="text-muted small mb-3">Ingresa tu correo registrado y te pediremos una nueva contraseña.</p>
+<div class="mb-3">
+<label class="form-label">Correo electrónico</label>
+<input class="form-control" id="recuperar-correo" placeholder="usuario@gmail.com" type="email"/>
+</div>
+<div class="alert alert-danger d-none py-2 small" id="recuperar-error"></div>
+<button class="btn-login-main" onclick="verificarCorreoRecuperar()" style="background:linear-gradient(135deg,#856404,#b8860b);">
+                    Continuar
+                </button>
+</div>
+<!-- PASO 2: NUEVA CONTRASEÑA -->
+<div class="d-none" id="recuperar-paso2">
+<p class="text-muted small mb-3">Crea una nueva contraseña para tu cuenta.</p>
+<div class="mb-3">
+<label class="form-label">Nueva contraseña</label>
+<input class="form-control" id="recuperar-nueva" placeholder="Mínimo 6 caracteres" type="password"/>
+</div>
+<div class="mb-3">
+<label class="form-label">Confirmar contraseña</label>
+<input class="form-control" id="recuperar-confirmar" placeholder="Repite la contraseña" type="password"/>
+</div>
+<div class="alert alert-danger d-none py-2 small" id="recuperar-error2"></div>
+<div class="alert alert-success d-none py-2 small" id="recuperar-exito"></div>
+<button class="btn-login-main" onclick="guardarNuevaPassword()" style="background:linear-gradient(135deg,#856404,#b8860b);">
+                    Guardar nueva contraseña
+                </button>
+</div>
+<hr class="divider"/>
+<p class="text-center mb-0" style="font-size:0.87rem;">
+<a class="text-decoration-none fw-semibold" href="#" onclick="switchTab('paciente')" style="color:#0E588E;">← Volver al inicio de sesión</a>
+</p>
+</div>
+</div>
+</div>
+
+

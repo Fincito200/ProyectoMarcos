@@ -1,0 +1,24 @@
+
+<div class="login-box">
+<div class="text-center mb-4">
+<img alt="Logo" class="mb-2" height="60" src="/Clinica/img/3063176.png"/>
+<h2>Panel de Administración</h2>
+<p class="text-muted small">Clínica José Pardo</p>
+</div>
+<div class="alert alert-danger d-none py-2 small" id="alerta-error"></div>
+<div class="mb-3">
+<label class="form-label fw-semibold">Correo</label>
+<input class="form-control" id="admin-correo" onkeydown="if(event.key==='Enter') loginAdmin()" placeholder="admin@clinica.com" type="email"/>
+</div>
+<div class="mb-4">
+<label class="form-label fw-semibold">Contraseña</label>
+<div class="input-pass">
+<input class="form-control" id="admin-password" onkeydown="if(event.key==='Enter') loginAdmin()" placeholder="••••••••" type="password"/>
+<button class="toggle-pass" onclick="togglePass()" type="button"><img alt="ver" height="20" src="/Clinica/img/emojis/ver-contrasena.png" style="vertical-align:middle;" width="20"/>️</button>
+</div>
+</div>
+<button class="btn btn-admin" onclick="loginAdmin()"><img alt="acceso seguro" height="20" src="/Clinica/img/emojis/acceso-seguro.png" style="vertical-align:middle;" width="20"/> Ingresar</button>
+<div class="text-center mt-3">
+<a class="text-muted small text-decoration-none" href="/Clinica/pages/index.html">← Volver al inicio</a>
+</div>
+</div>
